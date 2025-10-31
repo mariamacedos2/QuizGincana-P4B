@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/login.css";
-
+import { Link } from "react-router-dom";
+ 
 function Login() {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
@@ -55,7 +56,7 @@ function Login() {
         </form>
 
         <p className="cadastro-text">
-          Não tem cadastro? <a href="#">Cadastrar</a>
+          Não tem cadastro? <Link to="/cadastro">Cadastrar</Link>
         </p>
       </div>
     </div>
