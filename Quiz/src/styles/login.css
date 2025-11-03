@@ -154,3 +154,19 @@ p {
     font-size: 30px;
     color: rgb(97, 97, 97);
 }
+
+.teste{
+    position: relative;
+    width: 20%;
+    padding: 8px 10px; 
+    border-radius: 20px;
+    border: none;
+    background-color: #ffffff;
+    outline: none;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    transition: 0.2s;
+
+    border: 1px solid black
+}
