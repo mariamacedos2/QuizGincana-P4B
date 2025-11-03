@@ -155,18 +155,15 @@ p {
     color: rgb(97, 97, 97);
 }
 
-.teste{
-    position: relative;
-    width: 20%;
-    padding: 8px 10px; 
-    border-radius: 20px;
-    border: none;
-    background-color: #ffffff;
-    outline: none;
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    transition: 0.2s;
-
-    border: 1px solid black
+.teste {
+  display: block; /* ocupa uma linha inteira */
+  width: 20%;
+  margin: 10px auto; /* centraliza e dá espaço */
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid black;
+  background-color: #ffffff;
+  font-size: 14px;
+  color: #333;
+  transition: 0.2s;
 }

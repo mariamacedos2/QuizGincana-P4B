@@ -47,7 +47,7 @@ function Inicio() {
 
           <button type="submit" className="teste">Meus Quizes</button>
 
-          <button type="submit" className="teste">Criar quiz <i class="fa-solid fa-plus fa-flip-horizontal fa-xs"></i></button>
+          <button type="submit" className="teste">Criar Quiz <i class="fa-solid fa-plus fa-flip-horizontal fa-xs"></i></button>
         </form>
 
         {mensagem && <p className="mensagem">{mensagem}</p>}
