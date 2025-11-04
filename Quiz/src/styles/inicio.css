@@ -10,3 +10,19 @@ h1{
   font-weight: 400;
   font-style: normal;
 }
+
+.btn-voltar{
+  position: absolute;   
+  top: 22px;             /* Distância do topo */
+  right:30px;           /* Distância da borda direita */
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 10;           /* Garante que fique acima dos outros elementos */
+  transition: background-color 0.3s ease;
+  
+}

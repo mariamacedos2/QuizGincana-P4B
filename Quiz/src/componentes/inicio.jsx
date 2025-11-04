@@ -19,7 +19,7 @@ function Inicio() {
         
       <div className="login-box">
           <Link to="/">
-          <button className="btn-entrar"><i class="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i></button>
+          <button className="btn-voltar"><i class="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i></button>
           </Link>
         <div className="title-container">
           <h1>Doce Desafio</h1>
