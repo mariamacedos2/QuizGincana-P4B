@@ -52,8 +52,7 @@ function Login() {
 
           
             <Link to="/Inicio">
-              <button type="submit" className="btn-entrar"> Entrar  <i className="fas fa-sign-in-alt"></i></button>
-              
+              <button type="submit" className="btn-entrar"> Entrar  <i className="fas fa-sign-in-alt"></i></button> 
             </Link>
           
         </form>

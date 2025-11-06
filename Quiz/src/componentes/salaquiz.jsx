@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "../styles/login.css"
-import "../styles/inicio.css"
 import { supabase } from "../supabaseClient";
 import { Link } from "react-router-dom"
+import styles from "../styles/salaquiz.module.css"
 
-function Inicio() {
+function SalaQuiz() {
 
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -15,14 +14,14 @@ function Inicio() {
   }
 
   return (
-    <div className="login-container">
+    <div className={"styles.login-container"}>
         
       <div className="login-box">
-          <Link to="/">
+          <Link to="/inicio">
           <button className="btn-voltar"><i class="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i></button>
           </Link>
         <div className="title-container">
-          <h1>Doce Desafio</h1>
+          <h1>Nome da Sala</h1>
 
         </div>
         
@@ -65,4 +64,4 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+export default SalaQuiz;
