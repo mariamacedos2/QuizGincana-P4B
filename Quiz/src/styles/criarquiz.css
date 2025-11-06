@@ -1,0 +1,134 @@
+
+html, body {
+  height: auto !important;
+  overflow: auto !important;
+}
+
+
+.criarquiz-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.criarquiz-container::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../imagens/fundo.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  z-index: -1;
+  pointer-events: none; 
+}
+
+.criarquiz-card {
+  position: relative;
+  z-index: 2; 
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 30px 40px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  max-width: 95%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px; /* evita corte no final */
+}
+
+/* ====== BOTÃO VOLTAR ====== */
+.btn-voltar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 9999; /* 🔥 fica acima de tudo */
+  transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #c83787;
+}
+
+/* ====== TÍTULOS ====== */
+.criarquiz-card h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+
+.criarquiz-card input,
+.criarquiz-card select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: 0.2s ease;
+  background-color: #fff;
+}
+
+.criarquiz-card input:focus,
+.criarquiz-card select:focus {
+  border-color: #6a5acd;
+  outline: none;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.4);
+}
+
+
+.criarquiz-card label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+
+.botao-salvar {
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.2s ease;
+  z-index: 3; 
+}
+
+.botao-salvar:hover {
+  background-color: #5945c0;
+}
+
+/* ====== RESPONSIVIDADE ====== */
+@media (max-width: 500px) {
+  .criarquiz-card {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .btn-voltar {
+    top: 15px;
+    right: 15px;
+  }
+}
