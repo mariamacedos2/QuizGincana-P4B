@@ -29,14 +29,14 @@ function Inicio() {
           </div>
         </div>
 
-        <button className="btn-entrar">
+        <button 
+        className="btn-entrar"
+        onClick={() => navigate("/salaquiz")}
+        >  
           Entrar <i className="fas fa-sign-in-alt"></i>
         </button>
 
-        <button
-          className="teste"
-          onClick={() => navigate("/meusquizes")}
-        >
+        <button className="teste" >
           Meus Quizzes
         </button>
 

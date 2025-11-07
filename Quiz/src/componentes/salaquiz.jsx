@@ -1,77 +1,85 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../styles/login.css"; // mantém o visual igual às outras telas
+import { Link } from "react-router-dom";
+import "../styles/login.css";
+import "../styles/inicio.css";
+import "../styles/salaquiz.css"; 
 
 function SalaQuiz() {
-  const [codigo, setCodigo] = useState("");
-  const [mensagem, setMensagem] = useState("");
-  const navigate = useNavigate();
+  const [categorias, setCategorias] = useState([
+    { nome: "Matemática", qtd: 3 },
+    { nome: "Ciências", qtd: 4 },
+    { nome: "História", qtd: 2 },
+    { nome: "Geografia", qtd: 5 },
+    { nome: "Português", qtd: 6 },
+  ]);
 
-  const handleEntrar = (e) => {
-    e.preventDefault();
-    if (codigo.trim() === "") {
-      setMensagem("Digite o código da sala!");
-      return;
-    }
-    navigate("/inicio"); 
+  const totalPerguntas = categorias.reduce((acc, c) => acc + c.qtd, 0);
+
+  const alterarQtd = (index, delta) => {
+    setCategorias((prev) =>
+      prev.map((cat, i) =>
+        i === index
+          ? { ...cat, qtd: Math.max(0, cat.qtd + delta) }
+          : cat
+      )
+    );
   };
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        
+      <div className="salaquiz-box">
         <Link to="/inicio">
           <button className="btn-voltar">
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
         </Link>
 
-        <div className="title-container">
-          <h1 className="login-title">Sala do Quiz</h1>
-        </div>
+        <div className="salaquiz-content">
+          {/* ESQUERDA */}
+          <div className="salaquiz-left">
+            <h1>Nome da sala</h1>
 
-        <form onSubmit={handleEntrar}>
-          <div className="input-group">
-            <div className="input-wrapper">
-              <i className="fas fa-lock icon"></i>
-              <input
-                type="text"
-                placeholder="Digite o código do quiz"
-                value={codigo}
-                onChange={(e) => setCodigo(e.target.value)}
-              />
+            <div className="info-item">
+              <label>Código da sala:</label>
+              <div className="codigo">
+                <i className="fas fa-lock icon"></i> 888-777
+              </div>
+            </div>
+
+            <div className="info-item">
+              <label>Jogador:</label>
+              <div className="jogador">Maria_macedoS2</div>
             </div>
           </div>
 
-          {/* Botão entrar */}
-          <button type="submit" className="btn-entrar">
-            Entrar <i className="fas fa-sign-in-alt"></i>
-          </button>
+          {/* DIREITA */}
+          <div className="salaquiz-right">
+            <p className="instrucao">
+              Antes de iniciar, selecione a quantidade de perguntas por categoria:
+            </p>
 
-          {/* Botão Meus Quizzes */}
-          <button
-            type="button"
-            className="teste"
-            onClick={() => alert("Em breve: lista dos seus quizzes!")}
-          >
-            Meus Quizzes
-          </button>
+            <div className="categorias-lista">
+              {categorias.map((cat, index) => (
+                <div key={index} className="categoria-item">
+                  <span>{cat.nome}</span>
+                  <div className="controles">
+                    <button onClick={() => alterarQtd(index, -1)}>-</button>
+                    <span>{cat.qtd}</span>
+                    <button onClick={() => alterarQtd(index, +1)}>+</button>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-          {/* Botão Criar Quiz */}
-          <button
-            type="button"
-            className="teste"
-            onClick={() => navigate("/criarquiz")}
-          >
-            Criar Quiz <i className="fa-solid fa-plus fa-flip-horizontal fa-xs"></i>
-          </button>
-        </form>
+            <p className="total">
+              (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
+            </p>
 
-        {mensagem && <p className="mensagem">{mensagem}</p>}
-
-        <p className="cadastro-text">
-          Crie quizzes interativos e cativantes 💡
-        </p>
+            <button className="btn-salvar">
+              Salvar <i className="fa-solid fa-floppy-disk"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -94,7 +94,7 @@ function CriarQuiz() {
         </div>
 
         <div className="botoes">
-          <button className="voltar" onClick={() => navigate("/salaquiz")}>
+          <button className="voltar" onClick={() => navigate("/inicio")}>
             Voltar
           </button>
           <button className="salvar" onClick={salvarPergunta}>

@@ -1,0 +1,115 @@
+.salaquiz-box {
+    background: #fbffd7a9;
+    border-radius: 40px;
+    padding: 40px;
+    width: 85%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .salaquiz-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+  }
+  
+  .salaquiz-left,
+  .salaquiz-right {
+    flex: 1;
+  }
+  
+  .salaquiz-title {
+    font-size: 36px;
+    color: #b30074;
+    text-shadow: 2px 2px 4px #fff;
+    margin-bottom: 30px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+  }
+  
+  .info-item {
+    margin-bottom: 25px;
+  }
+  
+  .codigo,
+  .jogador {
+    background: #fff;
+    border-radius: 20px;
+    padding: 8px 15px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #000;
+  }
+  
+  .salaquiz-right {
+    background: #ffffffa9;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    border: 2px solid #999;
+  }
+  
+  .instrucao {
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  
+  .categorias-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .categoria-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f5ce;
+    padding: 8px 15px;
+    border-radius: 15px;
+    border: 1px solid #b30074;
+  }
+  
+  .controles button {
+    background: #b30074;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .controles span {
+    margin: 0 10px;
+    font-weight: bold;
+  }
+  
+  .total {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .btn-salvar {
+    background: #2f9e44;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 25px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .btn-salvar:hover {
+    background: #238636;
+  }
+  
