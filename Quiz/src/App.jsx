@@ -5,6 +5,7 @@ import Inicio from "./componentes/inicio.jsx";
 import SalaQuiz from "./componentes/salaquiz.jsx";
 import CriarQuiz from "./componentes/criarquiz.jsx";
 import "./App.css";
+import SalaJogando from "./componentes/salajogando.jsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/salaquiz" element={<SalaQuiz />} />
         <Route path="/criarquiz" element={<CriarQuiz />} />
+        <Route path="/salajogando" element={<SalaJogando />} />
       </Routes>
     </Router>
   );

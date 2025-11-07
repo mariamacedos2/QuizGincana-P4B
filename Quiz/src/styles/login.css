@@ -22,7 +22,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(209, 209, 209, 0.384);
+    background-color: rgba(243, 242, 242, 0.418);
     z-index: 0;
 }
   
@@ -30,7 +30,7 @@
 .login-box {
     position: relative;
     z-index: 1;
-    background: #fbffd7a9;
+    background: #fbffd7ad;
     padding: 40px;
     border-radius: 60px;
     width: 700px;

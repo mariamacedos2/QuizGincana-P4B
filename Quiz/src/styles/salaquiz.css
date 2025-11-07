@@ -71,19 +71,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f9f5ce;
+    background: #fffce4;
     padding: 8px 15px;
     border-radius: 15px;
-    border: 1px solid #b30074;
+    border: 1px solid #000000;
   }
   
   .controles button {
-    background: #b30074;
+    background: #e4459b;
     color: white;
     border: none;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 19px;
+    height: 19px;
     font-weight: bold;
     cursor: pointer;
   }
@@ -100,16 +100,18 @@
   }
   
   .btn-salvar {
-    background: #2f9e44;
-    color: white;
+    background: #ffffff;
+    color: green;
     border: none;
     border-radius: 20px;
     padding: 8px 25px;
     cursor: pointer;
     margin-top: 10px;
+    border: 2px solid green;
   }
   
   .btn-salvar:hover {
     background: #238636;
+    color: white;
   }
   

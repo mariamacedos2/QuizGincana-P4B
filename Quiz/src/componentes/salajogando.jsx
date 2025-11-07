@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/login.css";
 import "../styles/inicio.css";
 import "../styles/salaquiz.css"; 
 
-function SalaQuiz() {
-  const navigate = useNavigate();
-
+function SalaJogando() {
   const [categorias, setCategorias] = useState([
     { nome: "Matemática", qtd: 3 },
     { nome: "Ciências", qtd: 4 },
@@ -30,7 +28,7 @@ function SalaQuiz() {
   return (
     <div className="login-container">
       <div className="salaquiz-box">
-        <Link to="/inicio">
+        <Link to="/">
           <button className="btn-voltar">
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
@@ -59,7 +57,7 @@ function SalaQuiz() {
           {/* DIREITA */}
           <div className="salaquiz-right">
             <p className="instrucao">
-              Antes de iniciar, selecione a quantidade de perguntas por categoria:
+              Escolha sua resposta
             </p>
 
             <div className="categorias-lista">
@@ -78,11 +76,8 @@ function SalaQuiz() {
             <p className="total">
               (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
             </p>
-            
-             <button className="btn-salvar" onClick={() => navigate("/salajogando")}>
-               Iniciar Quiz
-            </button>
-            
+
+           
           </div>
         </div>
       </div>
@@ -90,4 +85,4 @@ function SalaQuiz() {
   );
 }
 
-export default SalaQuiz;
+export default SalaJogando;
