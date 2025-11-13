@@ -77,20 +77,33 @@
     border: 1px solid #000000;
   }
   
-  .controles button {
-    background: #e4459b;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 19px;
-    height: 19px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+ .controles {
+  display: flex;
+  align-items: center; /* centraliza verticalmente */
+  gap: 10px; /* distância entre os botões e número */
+}
+
+.controles button {
+  background: #e4459b;
+  color: white;
+  border: none;
+  border-radius: 50%; 
+  width: 10px;
+  height: 10px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;          /* para centralizar o conteúdo */
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  font-size: 18px;
+}
+
   
   .controles span {
-    margin: 0 10px;
+    min-width: 20px;
     font-weight: bold;
+    text-align: center;
   }
   
   .total {

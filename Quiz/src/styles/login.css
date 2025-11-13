@@ -22,7 +22,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(243, 242, 242, 0.418);
+    background-color: rgba(236, 232, 232, 0.582);
     z-index: 0;
 }
   
@@ -39,7 +39,6 @@
     text-align: center;
     backdrop-filter: blur(10px);
 }
-  
 
 body {
     position: relative;
@@ -52,23 +51,6 @@ body {
     overflow: hidden;
 }
   
-
-  
-.login-box {
-    position: relative;
-    z-index: 1; /* garante que o formulário fique por cima */
-}
-
-.login-box {
-    background: #fbffd7a9;
-    padding: 40px;
-    border-radius: 60px;
-    width: 700px;
-    height: 420px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    backdrop-filter: blur(10px);
-}
     
 .login-avatar i {
     font-size: 70px;
@@ -191,4 +173,30 @@ p {
   color: #333;
   transition: 0.2s;
 
+}
+
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* espaço pro ícone de olho */
+}
+
+/* Ícone do olho (mostrar/ocultar senha) */
+.icon-olho {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.icon-olho:hover {
+  color: #333;
 }

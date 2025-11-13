@@ -28,7 +28,7 @@ function SalaJogando() {
   return (
     <div className="login-container">
       <div className="salaquiz-box">
-        <Link to="/">
+        <Link to="/salaquiz">
           <button className="btn-voltar">
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
