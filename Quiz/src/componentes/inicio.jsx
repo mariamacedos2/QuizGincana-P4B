@@ -1,26 +1,26 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../styles/inicio.css";
+import styles from "../styles/inicio.module.css"; // ✅ CSS Module
 
 function Inicio() {
   const navigate = useNavigate();
 
   return (
-    <div className="login-container">
-      <div className="login-box">
+    <div className={styles.loginContainer}>
+      <div className={styles.loginBox}>
         <Link to="/">
-          <button className="btn-voltar">
+          <button className={styles.btnEntrar}>
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
         </Link>
 
-        <div className="title-container">
+        <div className={styles.titleContainer}>
           <h1>Doce Desafio</h1>
         </div>
 
-        <div className="input-group">
-          <div className="input-wrapper">
-            <i className="fas fa-lock icon"></i>
+        <div className={styles.inputGroup}>
+          <div className={styles.inputWrapper}>
+            <i className={`fas fa-lock ${styles.icon}`}></i>
             <input
               type="text"
               placeholder="Digite o código do quiz"
@@ -30,24 +30,19 @@ function Inicio() {
         </div>
 
         <button 
-        className="btn-entrar"
-        onClick={() => navigate("/salaquiz")}
+          className={styles.btnEntrar}
+          onClick={() => navigate("/salaquiz")}
         >  
           Entrar <i className="fas fa-sign-in-alt"></i>
         </button>
 
-        <button className="teste" >
-          Meus Quizzes
-        </button>
-
-        <button
-          className="teste"
-          onClick={() => navigate("/criarquiz")}
-        >
+        <button className={styles.btnQuiz}>Meus Quizzes</button>
+        <button className={styles.btnQuiz} onClick={() => navigate("/criarquiz")}>
           Criar Quiz <i className="fa-solid fa-plus fa-flip-horizontal fa-xs"></i>
         </button>
 
-        <p className="cadastro-text">Crie quizzes interativos e cativantes</p>
+
+        <p className={styles.cadastroText}>Crie quizzes interativos e cativantes</p>
       </div>
     </div>
   );

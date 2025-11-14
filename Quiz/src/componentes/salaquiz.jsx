@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import "../styles/login.css";
-import "../styles/inicio.css";
-import "../styles/salaquiz.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import styles from "../styles/salaquiz.module.css";
 
 function SalaQuiz() {
   const navigate = useNavigate();
@@ -20,53 +18,50 @@ function SalaQuiz() {
   const alterarQtd = (index, delta) => {
     setCategorias((prev) =>
       prev.map((cat, i) =>
-        i === index
-          ? { ...cat, qtd: Math.max(0, cat.qtd + delta) }
-          : cat
+        i === index ? { ...cat, qtd: Math.max(0, cat.qtd + delta) } : cat
       )
     );
   };
 
   return (
-    <div className="login-container">
-      <div className="salaquiz-box">
+    <div className={styles.loginContainer}>
+      <div className={styles.salaquizBox}>
         <Link to="/inicio">
-          <button className="btn-voltar">
+          <button className={styles.btnVoltar}>
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
         </Link>
 
-        <div className="salaquiz-content">
+        <div className={styles.salaquizContent}>
           {/* ESQUERDA */}
-          <div className="salaquiz-left">
-            <h1>Nome da sala</h1>
+          <div className={styles.salaquizLeft}>
+            <h1 className={styles.salaquizTitle}>Nome da sala</h1>
 
             <label>Código da sala:</label>
-            <div className="info-item">
-              <div className="codigo">
+            <div className={styles.infoItem}>
+              <div className={styles.codigo}>
                 <i className="fas fa-lock icon"></i> 888-777
               </div>
             </div>
 
-             <label>Jogador:</label>
-            <div className="info-item">
-              <i class="fa-solid fa-circle-user fa-2xl"></i>
-              <div className="jogador">
-                Maria_macedoS2</div>
+            <label>Jogador:</label>
+            <div className={styles.infoItem}>
+              <i className="fa-solid fa-circle-user fa-2xl"></i>
+              <div className={styles.jogador}>Maria_macedoS2</div>
             </div>
           </div>
 
           {/* DIREITA */}
-          <div className="salaquiz-right">
-            <p className="instrucao">
+          <div className={styles.salaquizRight}>
+            <p className={styles.instrucao}>
               Antes de iniciar, selecione a quantidade de perguntas por categoria:
             </p>
 
-            <div className="categorias-lista">
+            <div className={styles.categoriasLista}>
               {categorias.map((cat, index) => (
-                <div key={index} className="categoria-item">
+                <div key={index} className={styles.categoriaItem}>
                   <span>{cat.nome}</span>
-                  <div className="controles">
+                  <div className={styles.controles}>
                     <button onClick={() => alterarQtd(index, -1)}>-</button>
                     <span>{cat.qtd}</span>
                     <button onClick={() => alterarQtd(index, +1)}>+</button>
@@ -75,14 +70,16 @@ function SalaQuiz() {
               ))}
             </div>
 
-            <p className="total">
+            <p className={styles.total}>
               (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
             </p>
-            
-             <button className="btn-salvar" onClick={() => navigate("/salajogando")}>
-               Iniciar Quiz
+
+            <button
+              className={styles.btnSalvar}
+              onClick={() => navigate("/salajogando")}
+            >
+              Iniciar Quiz
             </button>
-            
           </div>
         </div>
       </div>

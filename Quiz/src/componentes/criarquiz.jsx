@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/criarquiz.css";
+import styles from "../styles/criarquiz.module.css"; // CSS Module
 import { useNavigate } from "react-router-dom";
 
 function CriarQuiz() {
@@ -20,13 +20,13 @@ function CriarQuiz() {
   };
 
   return (
-    <div className="criarquiz-container">
-      <div className="criarquiz-card">
+    <div className={styles.criarquizContainer}>
+      <div className={styles.criarquizCard}>
         {/* Lado esquerdo */}
-        <div className="form-left">
-          <h1 className="titulo">Doce Desafio</h1>
+        <div className={styles.formLeft}>
+          <h1 className={styles.titulo}>Doce Desafio</h1>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Digite o nome da sala:</label>
             <input
               type="text"
@@ -36,7 +36,7 @@ function CriarQuiz() {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <input
               type="text"
               placeholder="Comece a digitar a pergunta..."
@@ -46,7 +46,7 @@ function CriarQuiz() {
           </div>
 
           {alternativas.map((alt, index) => (
-            <div key={index} className="form-group">
+            <div key={index} className={styles.formGroup}>
               <input
                 type="text"
                 placeholder={`Digite a alternativa ${String.fromCharCode(65 + index)}...`}
@@ -60,19 +60,19 @@ function CriarQuiz() {
             </div>
           ))}
 
-          <div className="botoes">
-            <button className="voltar" onClick={() => navigate("/inicio")}>
+          <div className={styles.botoes}>
+            <button className={styles.voltar} onClick={() => navigate("/inicio")}>
               Voltar
             </button>
-            <button className="salvar" onClick={salvarPergunta}>
+            <button className={styles.salvar} onClick={salvarPergunta}>
               Salvar pergunta 💾
             </button>
           </div>
         </div>
 
         {/* Lado direito */}
-        <div className="form-right">
-          <div className="form-group inline">
+        <div className={styles.formRight}>
+          <div className={`${styles.formGroup} ${styles.inline}`}>
             <label>Pontos:</label>
             <input
               type="number"
@@ -82,7 +82,7 @@ function CriarQuiz() {
             />
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Resposta correta:</label>
             <select
               value={respostaCorreta}
@@ -97,7 +97,7 @@ function CriarQuiz() {
             </select>
           </div>
 
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label>Categoria:</label>
             <input
               type="text"

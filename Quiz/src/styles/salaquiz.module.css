@@ -1,0 +1,136 @@
+.salaquizBox {
+  background: #fbffd7a9;
+  border-radius: 40px;
+  padding: 40px;
+  width: 85%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.salaquizContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+.salaquizLeft,
+.salaquizRight {
+  flex: 1;
+}
+
+.salaquizTitle {
+  font-size: 36px;
+  color: #b30074;
+  text-shadow: 2px 2px 4px #fff;
+  margin-bottom: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+}
+
+.infoItem {
+  margin-bottom: 25px;
+}
+
+.codigo,
+.jogador {
+  background: #fff;
+  border-radius: 20px;
+  padding: 8px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+}
+
+.salaquizRight {
+  background: #ffffffa9;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  border: 2px solid #999;
+}
+
+.instrucao {
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.categoriasLista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.categoriaItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fffce4;
+  padding: 8px 15px;
+  border-radius: 15px;
+  border: 1px solid #000000;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controles button {
+  background: #e4459b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  font-weight: bold;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.controles span {
+  min-width: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.total {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.btnSalvar {
+  background: #ffffff;
+  color: green;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 2px solid green;
+}
+
+.btnSalvar:hover {
+  background: #238636;
+  color: white;
+}
+
+.btnVoltar {
+  background: #e0e0e0;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}

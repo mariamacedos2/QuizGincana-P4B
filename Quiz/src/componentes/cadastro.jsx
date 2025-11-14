@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/login.css";
+import styles from "../styles/login.module.css";
 import { supabase } from "../supabaseClient";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ function Cadastro() {
   const [usuario, setUsuario] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +20,8 @@ function Cadastro() {
       email,
       password: senha,
       options: {
-        data: { username: usuario }, // 🔹 armazena o nome no perfil do Supabase
-        emailRedirectTo: window.location.origin, // redireciona após confirmar e-mail
+        data: { username: usuario },
+        emailRedirectTo: window.location.origin,
       },
     });
 
@@ -37,21 +38,20 @@ function Cadastro() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="title-container">
-          <i className="fas fa-user-plus title-icon"></i>
-          <h2 className="login-title">Cadastro</h2>
+    <div className={styles.loginContainer}>
+      <div className={styles.loginBox}>
+        <div className={styles.titleContainer}>
+          <i className={`fas fa-user-plus ${styles.titleIcon}`}></i>
+          <h2 className={styles.loginTitle}>Cadastro</h2>
         </div>
 
         <form onSubmit={handleSubmit}>
           {/* Email */}
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label>Email</label>
-            <div className="input-wrapper">
-              <i className="fas fa-envelope icon"></i>
+            <div className={styles.inputWrapper}>
+              <i className={`fas fa-envelope ${styles.icon}`}></i>
               <input
-                id="email"
                 type="email"
                 placeholder="Digite seu e-mail"
                 value={email}
@@ -62,46 +62,49 @@ function Cadastro() {
           </div>
 
           {/* Usuário */}
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label>Usuário</label>
-            <div className="input-wrapper">
-              <i className="fas fa-user icon"></i>
+            <div className={styles.inputWrapper}>
+              <i className={`fas fa-user ${styles.icon}`}></i>
               <input
-                id="usuario"
                 type="text"
                 placeholder="Digite seu nome de usuário"
                 value={usuario}
-                onChange={(e) => setUsuario(e.target.value)} // ✅ corrigido
+                onChange={(e) => setUsuario(e.target.value)}
                 required
               />
             </div>
           </div>
 
           {/* Senha */}
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label>Senha</label>
-            <div className="input-wrapper">
-              <i className="fas fa-lock icon"></i>
+            <div className={styles.inputWrapper}>
+              <i className={`fas fa-lock ${styles.icon}`}></i>
               <input
-                id="senha"
-                type="password"
+                type={mostrarSenha ? "text" : "password"}
                 placeholder="Crie uma senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 required
               />
+              <i
+                className={`fas ${mostrarSenha ? "fa-eye-slash" : "fa-eye"} ${styles.iconOlho}`}
+                onClick={() => setMostrarSenha(!mostrarSenha)}
+                title={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
+              ></i>
             </div>
           </div>
 
           {/* Botão */}
-          <button type="submit" className="btn-entrar" disabled={carregando}>
+          <button type="submit" className={styles.btnEntrar} disabled={carregando}>
             {carregando ? "Cadastrando..." : "Cadastrar"}
           </button>
         </form>
 
-        {mensagem && <p className="mensagem">{mensagem}</p>}
+        {mensagem && <p className={styles.mensagem}>{mensagem}</p>}
 
-        <p className="cadastro-text">
+        <p className={styles.cadastroText}>
           Já tem uma conta? <Link to="/">Voltar ao Login</Link>
         </p>
       </div>

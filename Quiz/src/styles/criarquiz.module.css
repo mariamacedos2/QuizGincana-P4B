@@ -1,5 +1,5 @@
 /* Fundo geral */
-.criarquiz-container {
+.criarquizContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@
 }
 
 /* Card principal */
-.criarquiz-card {
+.criarquizCard {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -25,13 +25,13 @@
 }
 
 /* Coluna esquerda */
-.form-left {
+.formLeft {
   flex: 1;
   padding: 40px;
 }
 
 /* Coluna direita */
-.form-right {
+.formRight {
   width: 320px;
   background-color: #f0eef0;
   border-radius: 30px;
@@ -50,19 +50,19 @@
 }
 
 /* Formulário */
-.form-group {
+.formGroup {
   margin-bottom: 30px;
 }
 
-.form-group label {
+.formGroup label {
   display: block;
   font-weight: 600;
   margin-bottom: 5px;
   color: #333;
 }
 
-.form-group input,
-.form-group select {
+.formGroup input,
+.formGroup select {
   width: 100%;
   padding: 10px 14px;
   border-radius: 10px;
@@ -72,8 +72,8 @@
   transition: 0.2s;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.formGroup input:focus,
+.formGroup select:focus {
   border-color: #d182c3;
   box-shadow: 0 0 5px rgba(209, 130, 195, 0.4);
 }
@@ -121,11 +121,11 @@ button.salvar:hover {
 
 /* Responsividade */
 @media (max-width: 850px) {
-  .criarquiz-card {
+  .criarquizCard {
     flex-direction: column;
     align-items: center;
   }
-  .form-right {
+  .formRight {
     width: 90%;
     margin: 20px 0;
   }

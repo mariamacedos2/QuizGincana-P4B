@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/login.css";
+import styles from "../styles/login.module.css"; 
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../supabaseClient";
 
@@ -16,7 +16,6 @@ function Login() {
     e.preventDefault();
     setCarregando(true);
     setErro("");
-    console.log("Enviando login..."); // debug
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email: usuario,
@@ -26,29 +25,27 @@ function Login() {
     setCarregando(false);
 
     if (error) {
-      console.error(error);
       setErro("Email ou senha incorretos.");
       return;
     }
 
-    console.log("Usuário autenticado:", data.user);
     navigate("/Inicio");
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <div className="login-avatar">
+    <div className={styles.loginContainer}>
+      <div className={styles.loginBox}>
+        <div className={styles.loginAvatar}>
           <i className="fas fa-user-circle"></i>
         </div>
-        <h2 className="login-title">Login</h2>
+        <h2 className={styles.loginTitle}>Login</h2>
 
         <form onSubmit={handleSubmit}>
           {/* Email */}
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label htmlFor="usuario">Email</label>
-            <div className="input-wrapper">
-              <i className="fas fa-user icon"></i>
+            <div className={styles.inputWrapper}>
+              <i className={`fas fa-user ${styles.icon}`}></i>
               <input
                 id="usuario"
                 type="email"
@@ -61,10 +58,10 @@ function Login() {
           </div>
 
           {/* Senha com olho */}
-          <div className="input-group">
+          <div className={styles.inputGroup}>
             <label htmlFor="senha">Senha</label>
-            <div className="input-wrapper">
-              <i className="fas fa-lock icon"></i>
+            <div className={styles.inputWrapper}>
+              <i className={`fas fa-lock ${styles.icon}`}></i>
               <input
                 id="senha"
                 type={mostrarSenha ? "text" : "password"}
@@ -74,7 +71,7 @@ function Login() {
                 required
               />
               <i
-                className={`fas ${mostrarSenha ? "fa-eye-slash" : "fa-eye"} icon-olho`}
+                className={`fas ${mostrarSenha ? "fa-eye-slash" : "fa-eye"} ${styles.iconOlho}`}
                 onClick={() => setMostrarSenha(!mostrarSenha)}
                 title={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
               ></i>
@@ -82,15 +79,15 @@ function Login() {
           </div>
 
           {/* Erro */}
-          {erro && <p className="erro-text">{erro}</p>}
+          {erro && <p className={styles.erroText}>{erro}</p>}
 
           {/* Botão */}
-          <button type="submit" className="btn-entrar" disabled={carregando}>
+          <button type="submit" className={styles.btnEntrar} disabled={carregando}>
             {carregando ? "Entrando..." : <>Entrar <i className="fas fa-sign-in-alt"></i></>}
           </button>
         </form>
 
-        <p className="cadastro-text">
+        <p className={styles.cadastroText}>
           Não tem cadastro? <Link to="/cadastro">Cadastrar</Link>
         </p>
       </div>
