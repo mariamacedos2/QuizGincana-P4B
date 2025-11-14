@@ -1,115 +1,98 @@
 import React, { useState } from "react";
-import styles from "../styles/criarquiz.module.css"; // CSS Module
-import { useNavigate } from "react-router-dom";
+import styles from "../styles/criarquiz.module.css"; // nome do arquivo CSS abaixo
 
-function CriarQuiz() {
-  const navigate = useNavigate();
+export default function CriarQuiz() {
   const [sala, setSala] = useState("");
   const [pergunta, setPergunta] = useState("");
   const [alternativas, setAlternativas] = useState(["", "", "", ""]);
+  const [pontos, setPontos] = useState(5);
   const [respostaCorreta, setRespostaCorreta] = useState("");
   const [categoria, setCategoria] = useState("");
-  const [pontos, setPontos] = useState(5);
+
+  const handleAlternativaChange = (i, v) => {
+    const copy = [...alternativas];
+    copy[i] = v;
+    setAlternativas(copy);
+  };
 
   const salvarPergunta = () => {
-    if (!sala || !pergunta || alternativas.some((a) => !a) || !respostaCorreta || !categoria) {
+    if (!sala.trim() || !pergunta.trim() || alternativas.some(a => !a.trim()) || respostaCorreta === "" || !categoria.trim()) {
       alert("Preencha todos os campos!");
       return;
     }
-    alert("Pergunta salva com sucesso!");
+    const nova = { sala, pergunta, alternativas, pontos, respostaCorreta, categoria };
+    const q = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
+    q.push(nova);
+    localStorage.setItem("questoesQuiz", JSON.stringify(q));
+    alert("Pergunta salva!");
+    setSala(""); setPergunta(""); setAlternativas(["","","",""]); setPontos(5); setRespostaCorreta(""); setCategoria("");
   };
 
   return (
     <div className={styles.criarquizContainer}>
       <div className={styles.criarquizCard}>
-        {/* Lado esquerdo */}
+
+        {/* ESQUERDA */}
         <div className={styles.formLeft}>
           <h1 className={styles.titulo}>Doce Desafio</h1>
 
           <div className={styles.formGroup}>
             <label>Digite o nome da sala:</label>
-            <input
-              type="text"
-              placeholder="Digite o nome da sala..."
-              value={sala}
-              onChange={(e) => setSala(e.target.value)}
-            />
+            <input value={sala} onChange={e => setSala(e.target.value)} placeholder="Digite o nome da sala..." />
           </div>
 
           <div className={styles.formGroup}>
-            <input
-              type="text"
-              placeholder="Comece a digitar a pergunta..."
-              value={pergunta}
-              onChange={(e) => setPergunta(e.target.value)}
-            />
+            <input value={pergunta} onChange={e => setPergunta(e.target.value)} placeholder="Comece a digitar a pergunta..." />
           </div>
 
-          {alternativas.map((alt, index) => (
-            <div key={index} className={styles.formGroup}>
+          {alternativas.map((alt, idx) => (
+            <div key={idx} className={styles.formGroup}>
               <input
-                type="text"
-                placeholder={`Digite a alternativa ${String.fromCharCode(65 + index)}...`}
                 value={alt}
-                onChange={(e) => {
-                  const novaLista = [...alternativas];
-                  novaLista[index] = e.target.value;
-                  setAlternativas(novaLista);
-                }}
+                onChange={e => handleAlternativaChange(idx, e.target.value)}
+                placeholder={`Digite a alternativa ${String.fromCharCode(65 + idx)}...`}
               />
             </div>
           ))}
 
           <div className={styles.botoes}>
-            <button className={styles.voltar} onClick={() => navigate("/inicio")}>
-              Voltar
-            </button>
-            <button className={styles.salvar} onClick={salvarPergunta}>
-              Salvar pergunta 💾
-            </button>
+            <button className={styles.voltar} type="button" onClick={() => window.history.back()}>Voltar</button>
+            <button className={styles.salvar} type="button" onClick={salvarPergunta}>Salvar pergunta 💾</button>
           </div>
         </div>
 
-        {/* Lado direito */}
+        {/* DIREITA (FUNDO COM PADRÃO + CAIXA CINZA POR CIMA) */}
         <div className={styles.formRight}>
-          <div className={`${styles.formGroup} ${styles.inline}`}>
-            <label>Pontos:</label>
-            <input
-              type="number"
-              value={pontos}
-              onChange={(e) => setPontos(e.target.value)}
-              min="1"
-            />
-          </div>
+          {/* A imagem de fundo está na própria .formRight (cover). A caixa interna (painelBox) fica SOBRE essa imagem */}
+          <div className={styles.painelBox}>
+            <div className={styles.formGroup}>
+              <label>Pontos:</label>
+              <input type="number" min="1" value={pontos} onChange={e => setPontos(e.target.value === "" ? "" : Number(e.target.value))} />
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Resposta correta:</label>
-            <select
-              value={respostaCorreta}
-              onChange={(e) => setRespostaCorreta(e.target.value)}
-            >
-              <option value="">Selecione</option>
-              {alternativas.map((_, index) => (
-                <option key={index} value={index}>
-                  Alternativa {String.fromCharCode(65 + index)}
-                </option>
-              ))}
-            </select>
-          </div>
+            <div className={styles.formGroup}>
+              <label>Resposta correta:</label>
+              <select value={respostaCorreta} onChange={e => setRespostaCorreta(e.target.value)}>
+                <option value="">Selecione</option>
+                <option value="0">Alternativa A</option>
+                <option value="1">Alternativa B</option>
+                <option value="2">Alternativa C</option>
+                <option value="3">Alternativa D</option>
+              </select>
+            </div>
 
-          <div className={styles.formGroup}>
-            <label>Categoria:</label>
-            <input
-              type="text"
-              placeholder="Categoria..."
-              value={categoria}
-              onChange={(e) => setCategoria(e.target.value)}
-            />
+            <div className={styles.formGroup}>
+              <label>Categoria:</label>
+              <input value={categoria} onChange={e => setCategoria(e.target.value)} placeholder="Categoria..." />
+            </div>
+
+            <button className={`${styles.salvar} ${styles.salvarFull}`} type="button" onClick={salvarPergunta}>
+              Salvar pergunta
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   );
 }
-
-export default CriarQuiz;

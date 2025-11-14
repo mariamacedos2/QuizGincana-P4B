@@ -1,3 +1,5 @@
+/* criarquiz.module.css */
+
 /* Fundo geral */
 .criarquizContainer {
   display: flex;
@@ -5,128 +7,137 @@
   align-items: center;
   min-height: 100vh;
   background-color: #fff9d9;
-
-  background-repeat: repeat;
-  background-size: 250px;
   padding: 30px;
 }
 
 /* Card principal */
 .criarquizCard {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: #fffbe8;
-  border-radius: 30px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  width: 900px;
+  width: 1100px;
   max-width: 95%;
+  background: #fffbe8;
+  border-radius: 30px;
   overflow: hidden;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.12);
 }
 
 /* Coluna esquerda */
 .formLeft {
   flex: 1;
-  padding: 40px;
-}
-
-/* Coluna direita */
-.formRight {
-  width: 320px;
-  background-color: #f0eef0;
-  border-radius: 30px;
-  margin: 30px;
-  padding: 30px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 48px;
 }
 
 /* Título */
 .titulo {
   font-family: "Brush Script MT", cursive;
-  text-align: left;
-  font-size: 36px;
+  font-size: 44px;
   color: #e05591;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
-/* Formulário */
+/* Form groups (esquerda e dentro da caixa) */
 .formGroup {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .formGroup label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 5px;
+  font-weight: 700;
+  margin-bottom: 6px;
   color: #333;
 }
 
-.formGroup input,
-.formGroup select {
+/* Inputs comuns */
+input[type="text"],
+input[type="number"],
+select {
   width: 100%;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
+  padding: 12px 16px;
+  border-radius: 18px;
+  border: 1px solid #d2cfc1;
+  background: #fff;
   font-size: 15px;
   outline: none;
-  transition: 0.2s;
+  box-sizing: border-box;
 }
 
-.formGroup input:focus,
-.formGroup select:focus {
-  border-color: #d182c3;
-  box-shadow: 0 0 5px rgba(209, 130, 195, 0.4);
+input[type="text"]::placeholder {
+  color: #9a9a9a;
 }
 
-/* Inline (pontos) */
-.inline {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Botões */
+/* BOTOES (esquerda e direita) */
 .botoes {
   display: flex;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 18px;
+  gap: 12px;
 }
 
 button {
   cursor: pointer;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  padding: 10px 20px;
-  transition: all 0.3s ease;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-weight: 700;
 }
 
-button.voltar {
-  background-color: #e0e0e0;
-  color: #333;
+.voltar {
+  background: #e6e6e6;
+  color: #222;
 }
 
-button.voltar:hover {
-  background-color: #d2d2d2;
+.salvar {
+  background: #bfe9b9;
+  color: #114f11;
 }
 
-button.salvar {
-  background-color: #9be29b;
-  color: #155a15;
+.salvarFull {
+  width: 100%;
+  margin-top: 8px;
 }
 
-button.salvar:hover {
-  background-color: #7ddc7d;
+/* --- COLUNA DIREITA: PADRÃO DE FUNDO + CAIXA INTERNA --- */
+.formRight {
+  width: 450px;
+  padding: 36px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  /* imagem de fundo: ajuste a url se quiser outra */
+  background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
+  background-repeat: repeat;
+  background-size: 300px;
+  background-position: center;
 }
 
-/* Responsividade */
-@media (max-width: 850px) {
+/* Caixa interna (essa deve ficar sobre a imagem) */
+.painelBox {
+  width: 88%;
+  background-color: rgba(244, 238, 247, 0.98); /* cinza clarinho */
+  border-radius: 6px;
+  padding: 62px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 5; /* garante ficar sobre a imagem */
+}
+
+
+.painelBox .formGroup label {
+  margin-bottom: 30px;
+  color: #2f2f2f;
+}
+
+/* responsividade */
+@media (max-width: 920px) {
   .criarquizCard {
     flex-direction: column;
-    align-items: center;
+    width: 95%;
   }
   .formRight {
-    width: 90%;
-    margin: 20px 0;
+    width: 100%;
+    padding: 26px;
+  }
+  .formLeft {
+    padding: 22px;
   }
 }
