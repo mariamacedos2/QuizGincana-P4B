@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "../styles/inicio.module.css"; // ✅ CSS Module
+import styles from "../styles/inicio.module.css"; 
 
 function Inicio() {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ function Inicio() {
     <div className={styles.loginContainer}>
       <div className={styles.loginBox}>
         <Link to="/">
-          <button className={styles.btnEntrar}>
+          <button className={styles.btnVoltar}>
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
         </Link>
@@ -23,7 +23,7 @@ function Inicio() {
             <i className={`fas fa-lock ${styles.icon}`}></i>
             <input
               type="text"
-              placeholder="Digite o código do quiz"
+              placeholder="Digite o código "
               required
             />
           </div>

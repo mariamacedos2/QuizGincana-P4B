@@ -35,7 +35,7 @@ function SalaQuiz() {
         <div className={styles.salaquizContent}>
           {/* ESQUERDA */}
           <div className={styles.salaquizLeft}>
-            <h1 className={styles.salaquizTitle}>Nome da sala</h1>
+            <h1>Nome da sala</h1>
 
             <label>Código da sala:</label>
             <div className={styles.infoItem}>

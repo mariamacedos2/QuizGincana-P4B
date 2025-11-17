@@ -26,7 +26,7 @@ function SalaQuiz() {
   return (
     <div className={styles.loginContainer}>
       <div className={styles.salaquizBox}>
-        <Link to="/inicio">
+        <Link to="/salaquiz">
           <button className={styles.btnVoltar}>
             <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
           </button>
