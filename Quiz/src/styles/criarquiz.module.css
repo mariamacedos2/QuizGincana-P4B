@@ -1,92 +1,85 @@
 /* criarquiz.module.css */
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap'); /*Fonte do titulo*/
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-/* Fundo geral */
+/* Reseta tudo pra ficar igual no Figma */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Container geral */
 .criarquizContainer {
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Ocupa a tela inteira */
+  display: flex;
   margin: 0;
   padding: 0;
 }
 
-
+/* O card ocupa a tela inteira, em duas colunas */
 .criarquizCard {
   display: flex;
   width: 100%;
-  height: 100%;
-  background: none; /* remove caixa */
-  box-shadow: none; /* remove borda */
-  border-radius: 0; /* remove cantos */
-  padding: 0;
+  height: 100vh; /* Altura fixa igual pros dois lados */
+  overflow: hidden; /* Impede que o conteúdo escape */
 }
 
-/* Coluna esquerda */
+/* ESQUERDA */
 .formLeft {
-  flex: 1;
-  padding: 48px;
-}
-
-/* Título */
-.titulo {
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 60px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
-
- font-family: "Lobster", sans-serif;
- font-weight: 400;
- font-style: normal;
-}
-
-/* Form groups (esquerda e dentro da caixa) */
-.formGroup {
-  margin-bottom: 20px;
-}
-
-.formGroup label {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: #333;
-}
-
-/* Inputs comuns */
-input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 18px;
-  border: 1px solid #d2cfc1;
-  background: #fff;
-  font-size: 15px;
-  outline: none;
+  width: 50%;
+  background-color: #fff9d9;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;      /* Mesmo tamanho da direita */
+  overflow-y: auto;  /* Scroll interno se o conteúdo for maior */
   box-sizing: border-box;
+
 }
 
-input[type="text"]::placeholder {
-  color: #fdfcfc;
+/* TÍTULO */
+.titulo {
+  -webkit-text-stroke: 1.5px white;
+  font-size: 62px;                 /* maior como no Figma */
+  color: #e4459b;
+  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.4);
+  font-family: "Lobster", sans-serif;
+  margin-bottom: 40px;
 }
 
-/* BOTOES (esquerda e direita) */
+/* Inputs */
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 80%;               /* 🔥 AUMENTEI PRA FICAR IGUAL AO FIGMA */
+  padding: 14px 18px;
+  border-radius: 20px;
+  border: 1px solid #e6e4de;
+  background: white;
+  font-size: 17px;          /* 🔥 maior */
+}
+
+/* Botões da esquerda */
 .botoes {
   display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 20px;
 }
 
 button {
-  cursor: pointer;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 14px;
+  padding: 14px 20px;
+  border-radius: 18px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .voltar {
   background: #e6e6e6;
-  color: #222;
 }
 
 .salvar {
@@ -94,63 +87,42 @@ button {
   color: #114f11;
 }
 
-.salvarFull {
-  width: 100%;
-  margin-top: 8px;
-}
-
-/* --- COLUNA DIREITA: PADRÃO DE FUNDO + CAIXA INTERNA --- */
+/* DIREITA */
 .formRight {
-  width: 700px;
-  padding: 36px 40px;
+  width: 50%;
+  background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
+  background-size: 300px;
+  background-repeat: repeat;
+  padding: 50px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  position: relative;
-  /* imagem de fundo: ajuste a url se quiser outra */
-  background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
-  background-repeat: repeat;
-  background-size: 300px;
-  background-position: center;
-}
+  height: 100%;       /* Mesmo tamanho da esquerda */
+  overflow-y: auto;   /* Scroll interno */
+  box-sizing: border-box }
 
-.formLeft {
-  flex: 1;
-  background-color: rgba(251, 255, 215, 0.7);  /* amarelo */
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100vh;
-}
-
-/* Caixa interna */
+/* Painel cinza */
 .painelBox {
-  width: 88%;
-  background-color: rgba(244, 238, 247, 0.98); /* cinza clarinho */
-  border-radius: 6px;
-  padding: 62px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-  z-index: 5; /* garante ficar sobre a imagem */
+  width: 85%;
+  background: rgba(244, 238, 247, 0.98);
+  border-radius: 40px;
+  padding: 60px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
 }
 
-
-.painelBox .formGroup label {
-  margin-bottom: 30px;
-  color: #2f2f2f;
+.painelBox input,
+.painelBox select {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  border: 1px solid #d2cfc1;
+  font-size: 17px;
 }
 
-/* responsividade */
-@media (max-width: 920px) {
-  .criarquizCard {
-    flex-direction: column;
-    width: 95%;
-  }
-  .formRight {
-    width: 100%;
-    padding: 26px;
-  }
-  .formLeft {
-    padding: 22px;
-  }
+/* Botão salvar grande */
+.salvarFull {
+  width: 100%;
+  margin-top: 20px;
 }
