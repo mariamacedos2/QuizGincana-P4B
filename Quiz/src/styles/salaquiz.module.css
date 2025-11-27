@@ -1,35 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
-h1{
- -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 60px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
-
-font-family: "Lobster", sans-serif;
- font-weight: 400;
- font-style: normal;
-}
-
 .salaquizBox {
   background: #fbffd7a9;
-  border-radius: 40px;
   padding: 40px;
-  width: 85%;
-  height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   z-index: 1;
+
+  width: 50%;
 }
 
-.salaquizContent {
+.Container{
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 40px;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
 }
 
 .salaquizLeft,
@@ -67,6 +53,8 @@ font-family: "Lobster", sans-serif;
   padding: 25px;
   text-align: center;
   border: 2px solid #999;
+
+  width: 50%;
 }
 
 .instrucao {
@@ -146,4 +134,43 @@ font-family: "Lobster", sans-serif;
   border-radius: 10px;
   padding: 6px 10px;
   cursor: pointer;
+}
+
+.colunaDireita {
+  width: 45%;
+  background-color: #f2e9d6;
+  padding: 40px;
+  text-align: center;
+
+  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
+  background-size: cover;       /* cobre toda a coluna */
+  background-position: center;  /* centraliza a imagem */
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+.colunaDireita::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(236, 232, 232, 0.58); /* preto com 50% de transparência */
+  z-index: 1;
+
+  border-radius: 12px;
+}
+
+.colunaDireita > *:not(.imagemContainer) {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+/*--- Não permite q o fundo escuro da imagem sobreponha-lo --- */
+.Container > *:not(.imagemContainer) {
+  position: relative;
+  z-index: 2;
 }

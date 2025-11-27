@@ -24,7 +24,9 @@ font-family: "Lobster", sans-serif;
   align-items: center;
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
   overflow: hidden;           /* remove scroll */
-  z-index: -1;
+  z-index: 0;
+
+  padding-right: 42px; 
 }
 
 .loginContainer::before {
@@ -88,7 +90,6 @@ font-family: "Lobster", sans-serif;
 }
 
 .inputWrapper input {
-  width: 100%;
   padding: 10px 40px 10px 40px; /* espaço para ícones */
   border-radius: 20px;
   border: 1px solid black;
@@ -98,8 +99,8 @@ font-family: "Lobster", sans-serif;
   color: #333;
   box-sizing: border-box;
   transition: 0.2s;
+  
   padding-right: 42px; 
-
 }
 
 .inputWrapper input:focus {
@@ -121,38 +122,19 @@ font-family: "Lobster", sans-serif;
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
+  color: #888;
+  cursor: pointer;
+
   width: 24px;      /* ← TRAVA o espaço do ícone */
   height: 24px;     /* ← mantém tamanho constante */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px; 
-  color: #888;
-  cursor: pointer;
+  font-size: 16px;
 }
-
 
 .iconOlho:hover {
   color: #333;
-}
-
-.btnEntrar {
-  background-color: #e4459b;
-  color: white;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  height: 25px;
-  width: 20%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  transition: 0.2s;
-  margin: 10px auto;
 }
 
 .btnVoltar {
@@ -171,6 +153,25 @@ font-family: "Lobster", sans-serif;
 }
 .btnVoltar:hover {
   background-color: #c83787;
+}
+
+.btnEntrar {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: 0.2s;
+  margin: 10px auto;
+  height: 25px;
+  width: 20%;
 }
 
 .btnEntrar:hover {
@@ -230,4 +231,3 @@ font-family: "Lobster", sans-serif;
 .btnQuiz:hover {
   background-color: #e4e4e4;
 }
-  

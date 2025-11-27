@@ -4,7 +4,9 @@ import Cadastro from "./componentes/cadastro.jsx";
 import Inicio from "./componentes/inicio.jsx";
 import SalaQuiz from "./componentes/salaquiz.jsx";
 import CriarQuiz from "./componentes/criarquiz.jsx";
-import SalaJogando from "./componentes/salajogando.jsx";
+import Resposta from "./componentes/Perguntas/resposta.jsx"
+import "./App.css";
+import SalaJogando from "./componentes/Perguntas/salajogando.jsx";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/salaquiz" element={<SalaQuiz />} />
         <Route path="/criarquiz" element={<CriarQuiz />} />
         <Route path="/salajogando" element={<SalaJogando />} />
+        <Route path="/resposta" element={<Resposta />} />
       </Routes>
     </Router>
   );

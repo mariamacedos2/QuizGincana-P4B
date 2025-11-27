@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import styles from "../styles/inicio.module.css"; 
+import styles from "../styles/inicio.module.css"; // ✅ CSS Module
 
 function Inicio() {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Inicio() {
             <i className={`fas fa-lock ${styles.icon}`}></i>
             <input
               type="text"
-              placeholder="Digite o código "
+              placeholder="Digite o código do quiz"
               required
             />
           </div>

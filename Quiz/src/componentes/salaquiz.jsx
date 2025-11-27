@@ -24,7 +24,7 @@ function SalaQuiz() {
   };
 
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.Container}>
       <div className={styles.salaquizBox}>
         <Link to="/inicio">
           <button className={styles.btnVoltar}>
@@ -51,8 +51,12 @@ function SalaQuiz() {
             </div>
           </div>
 
-          {/* DIREITA */}
-          <div className={styles.salaquizRight}>
+        </div>
+      </div>
+
+      {/* DIREITA */}
+      <div className={styles.colunaDireita}>
+        <div className={styles.salaquizRight}>
             <p className={styles.instrucao}>
               Antes de iniciar, selecione a quantidade de perguntas por categoria:
             </p>
@@ -81,8 +85,8 @@ function SalaQuiz() {
               Iniciar Quiz
             </button>
           </div>
-        </div>
       </div>
+          
     </div>
   );
 }
