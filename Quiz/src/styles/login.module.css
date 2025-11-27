@@ -11,7 +11,7 @@
     align-items: center;
     background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat fixed;
     overflow: hidden;              /* evita barra de rolagem */
-    z-index: -1;
+    z-index: 0;
   }
   
   .loginContainer::before {
@@ -28,7 +28,7 @@
 
 .loginBox {
     position: relative;
-    z-index: 1;
+    z-index: 0;
     background: #fbffd7ad;
     padding: 40px;
     border-radius: 60px;

@@ -62,7 +62,9 @@ export default function CriarQuiz() {
         </div>
 
         {/* DIREITA (FUNDO COM PADRÃO + CAIXA CINZA POR CIMA) */}
+
         <div className={styles.formRight}>
+          <div className={styles.imagemContainer}></div>
           {/* A imagem de fundo está na própria .formRight (cover). A caixa interna (painelBox) fica SOBRE essa imagem */}
           <div className={styles.painelBox}>
             <div className={styles.formGroup}>
