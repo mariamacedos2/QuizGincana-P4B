@@ -1,39 +1,36 @@
-.salaquizBox {
-  background: #fbffd7a9;
-  padding: 40px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-
-  width: 50%;
-}
-
-.Container{
+/* CONTAINER GERAL (divide a tela ao meio) */
+.Container {
   display: flex;
   height: 100vh;
+  width: 100%;
   font-family: "Arial", sans-serif;
+  overflow: hidden;
 }
 
-.salaquizLeft,
-.salaquizRight {
+/* --------------------- LADO ESQUERDO --------------------- */
+.salaquizLeft {
   flex: 1;
+  background: #f9fbd8; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.salaquizTitle {
-  font-size: 36px;
+/* Caixinha principal da esquerda */
+
+
+/* Título */
+h1 {
+  font-size: 38px;
   color: #b30074;
   text-shadow: 2px 2px 4px #fff;
-  margin-bottom: 30px;
   font-family: "Poppins", sans-serif;
   font-weight: 700;
 }
 
+/* Código da sala / Jogador */
 .infoItem {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .codigo,
@@ -47,37 +44,84 @@
   border: 1px solid #000;
 }
 
-.salaquizRight {
-  background: #ffffffa9;
-  border-radius: 20px;
-  padding: 25px;
-  text-align: center;
-  border: 2px solid #999;
+.btnVoltar {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
 
-  width: 50%;
+/* --------------------- LADO DIREITO --------------------- */
+.salaquizRight {
+  flex: 1;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+
+  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg")
+    center/cover no-repeat;
+}
+
+/* Overlay rosado transparente */
+.salaquizRight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 240, 250, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* Conteúdo fica acima do overlay */
+.salaquizRight > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Caixa branca interna da direita */
+.categoriasLista,
+.instrucao,
+.total,
+.btnSalvar {
+  z-index: 2;
 }
 
 .instrucao {
   margin-bottom: 15px;
   font-weight: 500;
+  font-size: 16px;
 }
 
+/* Lista de categorias */
 .categoriasLista {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
 }
 
 .categoriaItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fffce4;
+  background: #eda3f0;
   padding: 8px 15px;
   border-radius: 15px;
-  border: 1px solid #000000;
+  border: 1px solid #000;
 }
 
+/* Controles de + e - */
 .controles {
   display: flex;
   align-items: center;
@@ -112,10 +156,10 @@
   margin-top: 10px;
 }
 
+/* Botão iniciar */
 .btnSalvar {
-  background: #ffffff;
+  background: white;
   color: green;
-  border: none;
   border-radius: 20px;
   padding: 8px 25px;
   cursor: pointer;
@@ -128,49 +172,3 @@
   color: white;
 }
 
-.btnVoltar {
-  background: #e0e0e0;
-  border: none;
-  border-radius: 10px;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-.colunaDireita {
-  width: 45%;
-  background-color: #f2e9d6;
-  padding: 40px;
-  text-align: center;
-
-  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
-  background-size: cover;       /* cobre toda a coluna */
-  background-position: center;  /* centraliza a imagem */
-  background-repeat: no-repeat;
-
-  overflow: hidden;
-}
-
-.colunaDireita::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(236, 232, 232, 0.58); /* preto com 50% de transparência */
-  z-index: 1;
-
-  border-radius: 12px;
-}
-
-.colunaDireita > *:not(.imagemContainer) {
-  position: relative;
-  z-index: 2;
-  color: #fff;
-}
-
-/*--- Não permite q o fundo escuro da imagem sobreponha-lo --- */
-.Container > *:not(.imagemContainer) {
-  position: relative;
-  z-index: 2;
-}

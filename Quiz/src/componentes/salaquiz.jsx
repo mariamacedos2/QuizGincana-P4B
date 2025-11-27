@@ -25,68 +25,66 @@ function SalaQuiz() {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.salaquizBox}>
-        <Link to="/inicio">
-          <button className={styles.btnVoltar}>
-            <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
-          </button>
-        </Link>
 
-        <div className={styles.salaquizContent}>
-          {/* ESQUERDA */}
-          <div className={styles.salaquizLeft}>
-            <h1>Nome da sala</h1>
+      {/* LADO ESQUERDO */}
+      <div className={styles.salaquizLeft}>
 
-            <label>Código da sala:</label>
-            <div className={styles.infoItem}>
-              <div className={styles.codigo}>
-                <i className="fas fa-lock icon"></i> 888-777
+        <div className={styles.salaquizBox}>
+          <Link to="/inicio">
+            <button className={styles.btnVoltar}>
+              <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
+            </button>
+          </Link>
+
+          <h1>Nome da sala</h1>
+
+          <label>Código da sala:</label>
+          <div className={styles.infoItem}>
+            <div className={styles.codigo}>
+              <i className="fas fa-lock icon"></i> 888-777
+            </div>
+          </div>
+
+          <label>Jogador:</label>
+          <div className={styles.infoItem}>
+            <i className="fa-solid fa-circle-user fa-2xl"></i>
+            <div className={styles.jogador}>Maria_macedoS2</div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* LADO DIREITO */}
+      <div className={styles.salaquizRight}>
+        <p className={styles.instrucao}>
+          Antes de iniciar, selecione a quantidade de perguntas por categoria:
+        </p>
+
+        <div className={styles.categoriasLista}>
+          {categorias.map((cat, index) => (
+            <div key={index} className={styles.categoriaItem}>
+              <span>{cat.nome}</span>
+              <div className={styles.controles}>
+                <button onClick={() => alterarQtd(index, -1)}>-</button>
+                <span>{cat.qtd}</span>
+                <button onClick={() => alterarQtd(index, +1)}>+</button>
               </div>
             </div>
-
-            <label>Jogador:</label>
-            <div className={styles.infoItem}>
-              <i className="fa-solid fa-circle-user fa-2xl"></i>
-              <div className={styles.jogador}>Maria_macedoS2</div>
-            </div>
-          </div>
-
+          ))}
         </div>
+
+        <p className={styles.total}>
+          (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
+        </p>
+
+        <button
+          className={styles.btnSalvar}
+          onClick={() => navigate("/salajogando")}
+        >
+          Iniciar Quiz
+        </button>
       </div>
 
-      {/* DIREITA */}
-      <div className={styles.colunaDireita}>
-        <div className={styles.salaquizRight}>
-            <p className={styles.instrucao}>
-              Antes de iniciar, selecione a quantidade de perguntas por categoria:
-            </p>
-
-            <div className={styles.categoriasLista}>
-              {categorias.map((cat, index) => (
-                <div key={index} className={styles.categoriaItem}>
-                  <span>{cat.nome}</span>
-                  <div className={styles.controles}>
-                    <button onClick={() => alterarQtd(index, -1)}>-</button>
-                    <span>{cat.qtd}</span>
-                    <button onClick={() => alterarQtd(index, +1)}>+</button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <p className={styles.total}>
-              (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
-            </p>
-
-            <button
-              className={styles.btnSalvar}
-              onClick={() => navigate("/salajogando")}
-            >
-              Iniciar Quiz
-            </button>
-          </div>
-      </div>
-          
     </div>
   );
 }
