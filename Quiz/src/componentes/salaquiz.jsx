@@ -77,9 +77,17 @@ function SalaQuiz() {
           (Selecione <b>20</b> perguntas) — Atual: {totalPerguntas}
         </p>
 
+        {/* BOTÃO ARRUMADO */}
         <button
-          className={styles.btnSalvar}
-          onClick={() => navigate("/salajogando")}
+          className={`${styles.btnSalvar} ${totalPerguntas < 20 ? styles.btnDesabilitado : ""}`}
+          disabled={totalPerguntas < 20}
+          onClick={() => {
+            if (totalPerguntas < 20) {
+              alert("Você precisa selecionar pelo menos 20 perguntas para iniciar o quiz!");
+              return;
+            }
+            navigate("/salajogando");
+          }}
         >
           Iniciar Quiz
         </button>

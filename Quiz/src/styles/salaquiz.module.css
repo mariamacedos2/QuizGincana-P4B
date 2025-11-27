@@ -78,7 +78,7 @@ h1 {
   position: absolute;
   inset: 0;
   background: rgba(255, 240, 250, 0.55);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(px);
   z-index: 1;
 }
 
@@ -170,5 +170,10 @@ h1 {
 .btnSalvar:hover {
   background: #238636;
   color: white;
+}
+
+.btnDesabilitado {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
