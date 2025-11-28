@@ -1,7 +1,10 @@
 import React, { useState } from "react";
-import styles from "../styles/criarquiz.module.css"; // nome do arquivo CSS abaixo
+import { useNavigate } from "react-router-dom";
+import styles from "../styles/criarquiz.module.css";
 
 export default function CriarQuiz() {
+  const navigate = useNavigate();
+
   const [sala, setSala] = useState("");
   const [pergunta, setPergunta] = useState("");
   const [alternativas, setAlternativas] = useState(["", "", "", ""]);
@@ -20,19 +23,65 @@ export default function CriarQuiz() {
       alert("Preencha todos os campos!");
       return;
     }
+
     const nova = { sala, pergunta, alternativas, pontos, respostaCorreta, categoria };
+
     const q = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
     q.push(nova);
     localStorage.setItem("questoesQuiz", JSON.stringify(q));
+
     alert("Pergunta salva!");
-    setSala(""); setPergunta(""); setAlternativas(["","","",""]); setPontos(5); setRespostaCorreta(""); setCategoria("");
+
+    setPergunta("");
+    setAlternativas(["", "", "", ""]);
+    setPontos(5);
+    setRespostaCorreta("");
+    setCategoria("");
   };
+
+  // >>> FINALIZAR QUIZ — AGORA SALVANDO TUDO CORRETAMENTE
+  const finalizarQuiz = () => {
+    const questoes = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
+
+    if (!sala.trim()) {
+      alert("Digite o nome da sala para finalizar!");
+      return;
+    }
+
+    if (questoes.length === 0) {
+      alert("Você precisa criar pelo menos 1 pergunta!");
+      return;
+    }
+
+    const codigo = Math.floor(100000 + Math.random() * 900000).toString(); // gera PIN
+
+    // Monta o objeto do quiz completo
+    const quizCompleto = {
+      codigo,
+      sala,
+      questoes
+    };
+
+    // Salva na lista geral de quizzes com código
+    const lista = JSON.parse(localStorage.getItem("quizzesComCodigo") || "[]");
+    lista.push(quizCompleto);
+    localStorage.setItem("quizzesComCodigo", JSON.stringify(lista));
+
+    // Limpa perguntas temporárias
+    localStorage.removeItem("questoesQuiz");
+
+    // Salva código atual para exibição
+    localStorage.setItem("codigoQuiz", codigo);
+
+    // Vai para a página que mostra o código
+    navigate("/quizcodigo");
+  };
+  // >>> FIM FINALIZAR QUIZ
 
   return (
     <div className={styles.criarquizContainer}>
       <div className={styles.criarquizCard}>
 
-        {/* ESQUERDA */}
         <div className={styles.formLeft}>
           <h1 className={styles.titulo}>Doce Desafio</h1>
 
@@ -56,20 +105,32 @@ export default function CriarQuiz() {
           ))}
 
           <div className={styles.botoes}>
-            <button className={styles.voltar} type="button" onClick={() => window.history.back()}>Voltar</button>
-            <button className={styles.salvar} type="button" onClick={salvarPergunta}>Salvar pergunta 💾</button>
+            <button className={styles.voltar} type="button" onClick={() => window.history.back()}>
+              Voltar
+            </button>
+
+            <button className={styles.salvar} type="button" onClick={salvarPergunta}>
+              Salvar pergunta 💾
+            </button>
+
+            <button className={styles.salvarFull} type="button" onClick={finalizarQuiz}>
+              Finalizar Quiz ✔️
+            </button>
           </div>
         </div>
 
-        {/* DIREITA (FUNDO COM PADRÃO + CAIXA CINZA POR CIMA) */}
-
         <div className={styles.formRight}>
           <div className={styles.imagemContainer}></div>
-          {/* A imagem de fundo está na própria .formRight (cover). A caixa interna (painelBox) fica SOBRE essa imagem */}
+
           <div className={styles.painelBox}>
             <div className={styles.formGroup}>
               <label>Pontos:</label>
-              <input type="number" min="1" value={pontos} onChange={e => setPontos(e.target.value === "" ? "" : Number(e.target.value))} />
+              <input
+                type="number"
+                min="1"
+                value={pontos}
+                onChange={e => setPontos(e.target.value === "" ? "" : Number(e.target.value))}
+              />
             </div>
 
             <div className={styles.formGroup}>
