@@ -57,10 +57,13 @@
 
 /* Coluna direita com resposta */
 .colunaDireita {
-  width: 45%;
+  width: 50%;
   background-color: #f2e9d6;
   padding: 40px;
   text-align: center;
+   display: flex;
+  justify-content: center;
+  align-items: center;
 
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
   background-size: cover;       /* cobre toda a coluna */
@@ -96,9 +99,12 @@
 
 /* Bloco cinza para botões de alternativa */
 .blocoCinza {
-  background-color: #e7e7e7;
+  background-color: rgba(216, 213, 213, 0.7);
   border-radius: 10px;
   padding: 25px;
+
+  height: 20%;
+  width: 50%;
 }
 
 .grid {
@@ -131,6 +137,13 @@
   background-color: #bdc3c7;
 }
 
+.btngeral{
+  background-color: rgba(251, 255, 215, 0.7);
+}
+.btngeral:hover{
+  background-color: #e4e4e4;
+}
+
 .msg {
   margin-top: 20px;
   font-size: 18px;
@@ -152,3 +165,30 @@
   background-color: #732d91;
 }
 
+.caixa{
+  background-color: #fdfdfd;
+  width: 65%;
+  height: 70%;
+  border-radius: 25px;
+  box-shadow: 0 0 30px 15px rgba(12, 12, 12, 0.5);
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3{
+  color: #000000;
+}
+
+.btnVoltar {
+  top: 25px;
+  left: 25px;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 18px;
+}

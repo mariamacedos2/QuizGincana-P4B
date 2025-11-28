@@ -36,7 +36,8 @@ function Inicio() {
           Entrar <i className="fas fa-sign-in-alt"></i>
         </button>
 
-        <button className={styles.btnQuiz}>Meus Quizzes</button>
+        <button className={styles.btnQuiz} onClick={() => navigate("/meusquizzes")}>Meus Quizzes</button>
+
         <button className={styles.btnQuiz} onClick={() => navigate("/criarquiz")}>
           Criar Quiz <i className="fa-solid fa-plus fa-flip-horizontal fa-xs"></i>
         </button>

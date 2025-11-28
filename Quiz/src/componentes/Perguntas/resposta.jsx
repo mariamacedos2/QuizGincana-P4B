@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "../../styles/resposta.module.css";
+import styles from "./resposta.module.css";
 import { perguntas } from "./perguntas";
 
 import { useEffect } from "react";
@@ -66,7 +66,8 @@ export default function Resposta() {
       <div className={styles.colunaDireita}>
               {/* container da imagem */}
         <div className={styles.imagemContainer}></div>
-        <h3 className={styles.tituloResposta}>Alternativa Certa</h3>
+        <div className={styles.caixa}>
+            <h3 className={styles.tituloResposta}>Alternativa Certa</h3>
 
         <div className={styles.blocoCinza}>
           <div className={styles.grid}>
@@ -96,6 +97,8 @@ export default function Resposta() {
         <button onClick={proximaQuestao} className={styles.btnProxima}>
           Próxima Questão
         </button>
+        </div>
+        
       </div>
     </div>
   );

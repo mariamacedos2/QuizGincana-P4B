@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import styles from "../../styles/salajogando.module.css";
+import styles from "./salajogando.module.css";
 import { perguntas } from "./perguntas";
 
 
@@ -43,19 +43,21 @@ export default function Pergunta() {
       </div>
 
       <div className={styles.colunaDireita}>
-        <h3>Escolha sua resposta</h3>
+        <div className={styles.caixa}>
+           <h3>Escolha sua resposta</h3>
 
-        <div className={styles.blocoCinza}>
+          <div className={styles.blocoCinza}>
 
-          <div className={styles.grid}>
-          {question.alternativas.map((_, i) => (
-            <button key={i} onClick={() => selecionarResposta(i)}>
-              {["A", "B", "C", "D"][i]}
-            </button>
-          ))}
+            <div className={styles.grid}>
+            {question.alternativas.map((_, i) => (
+              <button key={i} onClick={() => selecionarResposta(i)} className={styles.btngeral}>
+                {["A", "B", "C", "D"][i]}
+              </button>
+            ))}
+            </div>
+          </div>
         </div>
-        </div>
-        
+       
       </div>
     </div>
   );

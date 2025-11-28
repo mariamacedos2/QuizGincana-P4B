@@ -29,7 +29,7 @@ html, body {
 /* ESQUERDA */
 .formLeft {
   width: 50%;
-  background-color: #fff9d9;
+  background-color: rgba(251, 255, 215, 0.7);
   padding: 50px;
   display: flex;
   flex-direction: column;

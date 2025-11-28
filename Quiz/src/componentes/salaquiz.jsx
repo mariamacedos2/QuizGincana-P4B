@@ -56,7 +56,9 @@ function SalaQuiz() {
 
       {/* LADO DIREITO */}
       <div className={styles.salaquizRight}>
-        <p className={styles.instrucao}>
+        <div className={styles.boxdireita}>
+
+          <p className={styles.instrucao}>
           Antes de iniciar, selecione a quantidade de perguntas por categoria:
         </p>
 
@@ -91,6 +93,8 @@ function SalaQuiz() {
         >
           Iniciar Quiz
         </button>
+
+        </div>
       </div>
 
     </div>
