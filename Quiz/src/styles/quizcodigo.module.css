@@ -1,107 +1,116 @@
-/* src/styles/quizcodigo.module.css */
+/* CONTAINER GERAL */
 .quizCodigoContainer {
   position: relative;
   min-height: 100vh;
-  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 
   background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
 
-/* overlay rosa transparente — ajuste a opacidade aqui (0.25 mais transparente → 0.6 mais forte) */
+/* OVERLAY ROSA TRANSPARENTE */
 .quizCodigoContainer::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(219, 184, 202, 0.28);
+  background: rgba(250, 246, 248, 0.45);
   z-index: 0;
 }
 
-.quizContent {
-  position: relative;
-  background: rgba(255, 255, 255, 0.94);
-  padding: 30px;
-  border-radius: 18px;
-  width: 420px;
-  max-width: 92%;
-  text-align: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-  z-index: 1;
-}
+/* BOTÃO SAIR — IGUAL AO FIGMA */
+.botaoSair {
+  position: absolute;
+  top: 25px;
+  right: 25px;
 
-.titulo {
-  font-size: 28px;
-  color: #d63384;
-  margin-bottom: 6px;
-  font-weight: 700;
-}
-
-.sala {
-  margin: 6px 0 14px 0;
-  font-size: 16px;
-  color: #444;
-}
-
-.sala span { color: #b30074; font-weight: 700; }
-
-.infoText {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 12px;
-}
-
-.infoTextSmall {
-  margin-top: 14px;
-  font-size: 13px;
-  color: #666;
-}
-
-.codigoBox {
-  font-size: 30px;
-  font-weight: 800;
-  background: #fff0f6;
-  border: 2px dashed #ff4f86;
-  border-radius: 12px;
-  padding: 14px 20px;
-  margin: 14px 0 18px 0;
-  letter-spacing: 3px;
-  color: #333;
-}
-.voltarBtn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 12px;
-  background: #ff9ac2;
-  color: white;
+  background: #f8aed7;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
+
+  width: 70px;
+  height: 50px;
+
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   cursor: pointer;
   transition: 0.2s;
-  font-weight: 600;
+  z-index: 10;
 }
 
-.voltarBtn:hover {
-  background: #ff6fa4;
+.botaoSair:hover {
+  filter: brightness(0.9);
+}
+
+.iconeSair {
+  width: 22px;      /* tamanho pequeno */
+  height: 22px;
+  filter: brightness(0) invert(1); /* deixa o ícone branco */
 }
 
 
-.btnCopiar {
-  width: 100%;
-  padding: 12px 16px;
-  background: #ff4f86;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
+/* CARD PRINCIPAL */
+.quizContent {
+  position: relative;
+  z-index: 1;
+  background: #FAFBD8;
+  width: 700px;
+  max-width: 100%;
+  padding: 45px 40px;
+  border-radius: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* TÍTULO */
+.titulo {
+  font-size: 50px;
+  font-weight: 400;
+  color: #d63384;
+  text-shadow: 0px 2px 8px rgba(255, 130, 190, 0.7);
+  margin-bottom: 60px;
+}
+
+/* SUBTÍTULO */
+.infoText {
   font-size: 16px;
-  cursor: pointer;
+  color: #444;
+  margin-bottom: 8px;
 }
-.btnCopiar:hover { background: #e63a73; }
 
-  
+/* CÓDIGO */
+.codigoBox {
+  background: #ffeef5;
+  border: 2px dashe #ff7fb3;
+  padding: 16px 20px;
+  border-radius: 25px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  width: 280px;
+  margin: 0 auto 22px auto;
+  color: #333;
+}
 
+/* BOTÃO COPIAR */
+.btnCopiar {
+  background: #ff8db7;
+  color: white;
+  border: none;
+  padding: 12px 45px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.btnCopiar:hover {
+  background: #ff6aa5;
+}

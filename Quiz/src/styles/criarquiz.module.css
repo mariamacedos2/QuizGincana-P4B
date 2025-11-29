@@ -1,7 +1,7 @@
 /* criarquiz.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
-/* Reseta tudo pra ficar igual no Figma */
+/* RESET */
 html, body {
   margin: 0;
   padding: 0;
@@ -9,46 +9,47 @@ html, body {
   height: 100%;
 }
 
-/* Container geral */
+/* CONTAINER GERAL */
 .criarquizContainer {
   width: 100vw;
-  height: 100vh; /* Ocupa a tela inteira */
+  height: 100vh;
   display: flex;
-  margin: 0;
-  padding: 0;
 }
 
-/* O card ocupa a tela inteira, em duas colunas */
+/* CARD PRINCIPAL */
 .criarquizCard {
   display: flex;
   width: 100%;
-  height: 100vh; /* Altura fixa igual pros dois lados */
-  overflow: hidden; /* Impede que o conteúdo escape */
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* ESQUERDA */
+/* ====================== */
+/*        ESQUERDA        */
+/* ====================== */
+
 .formLeft {
   width: 50%;
   background-color: rgba(251, 255, 215, 0.7);
-  padding: 50px;
+  padding: 48px;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;      /* Mesmo tamanho da direita */
-  overflow-y: auto;  /* Scroll interno se o conteúdo for maior */
-
+  overflow-y: auto;
   flex: 1;
-  padding: 48px;
 }
 
-/* Título */
+/* TÍTULO */
 .titulo {
-  font-family: "Brush Script MT", cursive;
-  font-size: 44px;
-  color: #e05591;
-  margin-bottom: 28px;
+  -webkit-text-stroke: 1.5px white;
+  font-size: 62px;
+  color: #e4459b;
+  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.4);
+  font-family: "Lobster", cursive;
+  margin-bottom: 40px;
 }
 
-/* Form groups (esquerda e dentro da caixa) */
+/* FORM GROUP GERAL */
 .formGroup {
   margin-bottom: 20px;
 }
@@ -60,121 +61,93 @@ html, body {
   color: #333;
 }
 
-/* Inputs comuns */
-input[type="text"],
-input[type="number"],
-select {
-  width: 100%;
-  padding: 12px 16px;
-  border-radius: 18px;
-  border: 1px solid #d2cfc1;
-  background: #fff;
-  font-size: 15px;
-  outline: none;
-
-  box-sizing: border-box;
-
-}
-
-/* TÍTULO */
-.titulo {
-  -webkit-text-stroke: 1.5px white;
-  font-size: 62px;                 /* maior como no Figma */
-  color: #e4459b;
-  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.4);
-  font-family: "Lobster", sans-serif;
-  margin-bottom: 40px;
-}
-
-/* Inputs */
-.formGroup {
-  margin-bottom: 15px;
-}
-
+/* INPUTS */
 .formGroup input,
 .formGroup select {
-  width: 80%;               /* 🔥 AUMENTEI PRA FICAR IGUAL AO FIGMA */
+  width: 80%;
   padding: 14px 18px;
   border-radius: 20px;
   border: 1px solid #e6e4de;
   background: white;
-  font-size: 17px;          /* 🔥 maior */
+  font-size: 17px;
+  outline: none;
+  box-sizing: border-box;
 }
 
-/* Botões da esquerda */
+/* BOTÕES DA ESQUERDA */
 .botoes {
   display: flex;
-  gap: 16px;
-  margin-top: 20px;
+  flex-wrap: wrap;  /* deixa quebrar linha sem bugar */
+  gap: 12px;
+  justify-content: center;
+
+  width: 80%;  /* mesmo tamanho dos inputs da esquerda */
 }
 
+
 button {
-  padding: 14px 20px;
+  padding: 12px 18px;
   border-radius: 18px;
   font-weight: 700;
   cursor: pointer;
+  border: none;
 }
 
+/* BOTÃO VOLTAR MENOR (versão refinada) */
 .voltar {
   background: #e6e6e6;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 14px;
 }
 
+/* BOTÕES SALVAR */
 .salvar {
   background: #bfe9b9;
   color: #114f11;
 }
 
-/* DIREITA */
+.salvarFull {
+  width: 100%;
+  margin-top: 10px;
+  justify-content: center;
+
+}
+
+
+/* ====================== */
+/*        DIREITA         */
+/* ====================== */
+
 .formRight {
-   width: 45%;
-  background-color: #f2e9d6;
+  width: 45%;
   padding: 40px;
+  position: relative;
   text-align: center;
 
-  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
-  background-size: cover;       /* cobre toda a coluna */
-  background-position: center;  /* centraliza a imagem */
-  background-repeat: no-repeat;
+  /* Fundo da imagem */
+  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg")
+    center center / cover no-repeat;
 
   overflow: hidden;
 }
 
+/* Camada branca transparente por cima da imagem */
 .formRight::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(236, 232, 232, 0.58); /* preto com 50% de transparência */
+  inset: 0;
+  background-color: rgba(236, 232, 232, 0.58);
   z-index: 1;
-
-  border-radius: 12px;
 }
 
-
-/*--- Não permite q o fundo escuro da imagem sobreponha-lo --- */
-.formRight > *:not(.imagemContainer) {
-  position: relative;
-  z-index: 2;
-}
-.formLeft > *:not(.imagemContainer) {
+/* Todo conteúdo acima da camada */
+.formRight > * {
   position: relative;
   z-index: 2;
 }
 
-/* Painel cinza */
-.formLeft {
-  flex: 1;
-  background-color:  rgba(251, 255, 215, 0.7);  ; /* amarelo */
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 100vh;
-}
-
-/* Caixa interna (essa deve ficar sobre a imagem) */
+/* Caixa interna da direita */
 .painelBox {
   width: 85%;
   background: rgba(244, 238, 247, 0.98);
@@ -182,9 +155,10 @@ button {
   padding: 60px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-
+  margin: 0 auto;
 }
 
+/* Inputs da caixa da direita */
 .painelBox input,
 .painelBox select {
   width: 100%;
@@ -194,8 +168,24 @@ button {
   font-size: 17px;
 }
 
-/* Botão salvar grande */
-.salvarFull {
-  width: 100%;
-  margin-top: 20px;
+/* Grupo especial apenas para o nome da sala */
+.salaGroup {
+  margin-bottom: 40px; /* dá mais espaço */
+  width: 80%; /* mesmo alinhamento dos outros inputs */
 }
+
+.salaGroup label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.salaGroup input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 20px;
+  border: 1px solid #e6e4de;
+  background: white;
+  font-size: 17px;
+}
+

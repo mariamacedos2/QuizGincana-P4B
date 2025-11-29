@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/criarquiz.module.css";
 
@@ -12,34 +12,72 @@ export default function CriarQuiz() {
   const [respostaCorreta, setRespostaCorreta] = useState("");
   const [categoria, setCategoria] = useState("");
 
+  // controla se já existe pergunta salva
+  const [temPergunta, setTemPergunta] = useState(false);
+
+  // Carrega perguntas existentes para exibir o botão
+  useEffect(() => {
+    const q = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
+    if (q.length > 0) setTemPergunta(true);
+  }, []);
+
   const handleAlternativaChange = (i, v) => {
     const copy = [...alternativas];
     copy[i] = v;
     setAlternativas(copy);
   };
 
-  const salvarPergunta = () => {
-    if (!sala.trim() || !pergunta.trim() || alternativas.some(a => !a.trim()) || respostaCorreta === "" || !categoria.trim()) {
-      alert("Preencha todos os campos!");
+  const salvarEProxima = () => {
+    // VALIDAÇÕES CORRIGIDAS
+    if (!sala.trim()) {
+      alert("Digite o nome da sala!");
       return;
     }
 
-    const nova = { sala, pergunta, alternativas, pontos, respostaCorreta, categoria };
+    if (!pergunta.trim()) {
+      alert("Digite a pergunta!");
+      return;
+    }
+
+    if (alternativas.some((a) => !a.trim())) {
+      alert("Preencha todas as alternativas!");
+      return;
+    }
+
+    if (respostaCorreta === "") {
+      alert("Selecione a alternativa correta!");
+      return;
+    }
+
+    if (!categoria.trim()) {
+      alert("Digite a categoria!");
+      return;
+    }
+
+    const nova = {
+      sala,
+      pergunta,
+      alternativas,
+      pontos,
+      respostaCorreta,
+      categoria,
+    };
 
     const q = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
     q.push(nova);
     localStorage.setItem("questoesQuiz", JSON.stringify(q));
 
-    alert("Pergunta salva!");
-
+    // limpa campos
     setPergunta("");
     setAlternativas(["", "", "", ""]);
     setPontos(5);
     setRespostaCorreta("");
     setCategoria("");
+
+    // Agora funciona 100%
+    setTemPergunta(true);
   };
 
-  // >>> FINALIZAR QUIZ — AGORA SALVANDO TUDO CORRETAMENTE
   const finalizarQuiz = () => {
     const questoes = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
 
@@ -53,89 +91,103 @@ export default function CriarQuiz() {
       return;
     }
 
-    const codigo = Math.floor(100000 + Math.random() * 900000).toString(); // gera PIN
+    const codigo = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Monta o objeto do quiz completo
     const quizCompleto = {
       codigo,
       sala,
-      questoes
+      questoes,
     };
 
-    // Salva na lista geral de quizzes com código
     const lista = JSON.parse(localStorage.getItem("quizzesComCodigo") || "[]");
     lista.push(quizCompleto);
     localStorage.setItem("quizzesComCodigo", JSON.stringify(lista));
 
-    // Limpa perguntas temporárias
     localStorage.removeItem("questoesQuiz");
-
-    // Salva código atual para exibição
     localStorage.setItem("codigoQuiz", codigo);
 
-    // Vai para a página que mostra o código
     navigate("/quizcodigo");
   };
-  // >>> FIM FINALIZAR QUIZ
 
   return (
     <div className={styles.criarquizContainer}>
       <div className={styles.criarquizCard}>
 
+        {/* ESQUERDA */}
         <div className={styles.formLeft}>
           <h1 className={styles.titulo}>Doce Desafio</h1>
 
+          {/* Nome da sala */}
           <div className={styles.formGroup}>
             <label>Digite o nome da sala:</label>
-            <input value={sala} onChange={e => setSala(e.target.value)} placeholder="Digite o nome da sala..." />
+            <input
+              value={sala}
+              onChange={(e) => setSala(e.target.value)}
+              placeholder="Digite o nome da sala..."
+            />
           </div>
 
+          {/* Pergunta */}
           <div className={styles.formGroup}>
-            <input value={pergunta} onChange={e => setPergunta(e.target.value)} placeholder="Comece a digitar a pergunta..." />
+            <input
+              value={pergunta}
+              onChange={(e) => setPergunta(e.target.value)}
+              placeholder="Comece a digitar a pergunta..."
+            />
           </div>
 
+          {/* Alternativas */}
           {alternativas.map((alt, idx) => (
             <div key={idx} className={styles.formGroup}>
               <input
                 value={alt}
-                onChange={e => handleAlternativaChange(idx, e.target.value)}
+                onChange={(e) => handleAlternativaChange(idx, e.target.value)}
                 placeholder={`Digite a alternativa ${String.fromCharCode(65 + idx)}...`}
               />
             </div>
           ))}
 
+          {/* BOTÕES */}
           <div className={styles.botoes}>
-            <button className={styles.voltar} type="button" onClick={() => window.history.back()}>
+            <button className={styles.voltar} onClick={() => window.history.back()}>
               Voltar
             </button>
 
-            <button className={styles.salvar} type="button" onClick={salvarPergunta}>
-              Salvar pergunta 💾
+            <button className={styles.salvar} onClick={salvarEProxima}>
+              Próxima ➜
             </button>
 
-            <button className={styles.salvarFull} type="button" onClick={finalizarQuiz}>
-              Finalizar Quiz ✔️
-            </button>
+            {/* Agora funciona */}
+            {temPergunta && (
+              <button className={styles.salvarFull} onClick={finalizarQuiz}>
+                Finalizar Quiz ✔️
+              </button>
+            )}
           </div>
         </div>
 
+        {/* DIREITA */}
         <div className={styles.formRight}>
-          <div className={styles.imagemContainer}></div>
-
           <div className={styles.painelBox}>
+
             <div className={styles.formGroup}>
               <label>Pontos:</label>
               <input
                 type="number"
                 min="1"
                 value={pontos}
-                onChange={e => setPontos(e.target.value === "" ? "" : Number(e.target.value))}
+                onChange={(e) =>
+                  setPontos(e.target.value === "" ? "" : Number(e.target.value))
+                }
               />
             </div>
 
             <div className={styles.formGroup}>
               <label>Resposta correta:</label>
-              <select value={respostaCorreta} onChange={e => setRespostaCorreta(e.target.value)}>
+              <select
+                value={respostaCorreta}
+                onChange={(e) => setRespostaCorreta(e.target.value)}
+              >
                 <option value="">Selecione</option>
                 <option value="0">Alternativa A</option>
                 <option value="1">Alternativa B</option>
@@ -146,12 +198,13 @@ export default function CriarQuiz() {
 
             <div className={styles.formGroup}>
               <label>Categoria:</label>
-              <input value={categoria} onChange={e => setCategoria(e.target.value)} placeholder="Categoria..." />
+              <input
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+                placeholder="Categoria..."
+              />
             </div>
 
-            <button className={`${styles.salvar} ${styles.salvarFull}`} type="button" onClick={salvarPergunta}>
-              Salvar pergunta
-            </button>
           </div>
         </div>
 
