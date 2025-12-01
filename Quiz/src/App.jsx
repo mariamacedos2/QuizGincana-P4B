@@ -24,7 +24,6 @@ function App() {
         <Route path="/resposta" element={<Resposta />} />
         <Route path="/meusquizzes" element={<MeusQuizzes />} />
         <Route path="/quizcodigo" element={<QuizCodigo />} />
-        <Route path="/quizcodigo" element={<QuizCodigo />} />
 
       </Routes>
     </Router>

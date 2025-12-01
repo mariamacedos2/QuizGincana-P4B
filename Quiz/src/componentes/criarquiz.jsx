@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/criarquiz.module.css";
+import { supabase } from "../supabaseClient"
 
 export default function CriarQuiz() {
   const navigate = useNavigate();
@@ -27,87 +28,98 @@ export default function CriarQuiz() {
     setAlternativas(copy);
   };
 
-  const salvarEProxima = () => {
-    // VALIDAÇÕES CORRIGIDAS
-    if (!sala.trim()) {
-      alert("Digite o nome da sala!");
+  const salvarEProxima = async () => {
+  if (!sala.trim()) return alert("Digite o nome da sala!");
+  if (!pergunta.trim()) return alert("Digite a pergunta!");
+  if (alternativas.some((a) => !a.trim())) return alert("Preencha todas as alternativas!");
+  if (respostaCorreta === "") return alert("Selecione a alternativa correta!");
+  if (!categoria.trim()) return alert("Digite a categoria!");
+
+  let quizId = localStorage.getItem("quizId");
+
+  //pega o usuário logado
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData.user) {
+    console.error(userError);
+    alert("Erro ao obter usuário logado.");
+    return;
+  }
+
+  const userId = userData.user.id;
+
+  // cria quiz
+  if (!quizId) {
+    const codigoAcesso = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const { data: quizCriado, error: quizError } = await supabase
+      .from("quizzes")
+      .insert([
+        {
+          user_id: userId,
+          nome_sala: sala,
+          categoria: categoria,
+          codigo_acesso: codigoAcesso
+        }
+      ])
+      .select()
+      .single();
+
+    if (quizError) {
+      console.error("Erro ao criar quiz:", quizError);
+      alert("Erro ao criar quiz.");
       return;
     }
 
-    if (!pergunta.trim()) {
-      alert("Digite a pergunta!");
-      return;
-    }
+    quizId = quizCriado.id;
 
-    if (alternativas.some((a) => !a.trim())) {
-      alert("Preencha todas as alternativas!");
-      return;
-    }
+    // salvamos no localStorage
+    localStorage.setItem("quizId", quizId);
+    localStorage.setItem("codigoQuiz", codigoAcesso);
+  }
 
-    if (respostaCorreta === "") {
-      alert("Selecione a alternativa correta!");
-      return;
-    }
+  // salva as perguntas no supabase
+  const { error: perguntaError } = await supabase
+    .from("perguntas")
+    .insert([
+      {
+        quiz_id: quizId,
+        pergunta: pergunta,
+        alternativa_a: alternativas[0],
+        alternativa_b: alternativas[1],
+        alternativa_c: alternativas[2],
+        alternativa_d: alternativas[3],
+        resposta_correta: respostaCorreta, // sua coluna é TEXT
+        pontos: pontos
+      }
+    ]);
 
-    if (!categoria.trim()) {
-      alert("Digite a categoria!");
-      return;
-    }
+  if (perguntaError) {
+    console.error("Erro ao salvar pergunta:", perguntaError);
+    alert("Erro ao salvar a pergunta.");
+    return;
+  }
 
-    const nova = {
-      sala,
-      pergunta,
-      alternativas,
-      pontos,
-      respostaCorreta,
-      categoria,
-    };
+  //limpa os campos para próxima pergunta
+  setPergunta("");
+  setAlternativas(["", "", "", ""]);
+  setRespostaCorreta("");
+  setPontos(5);
 
-    const q = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
-    q.push(nova);
-    localStorage.setItem("questoesQuiz", JSON.stringify(q));
-
-    // limpa campos
-    setPergunta("");
-    setAlternativas(["", "", "", ""]);
-    setPontos(5);
-    setRespostaCorreta("");
-    setCategoria("");
-
-    // Agora funciona 100%
-    setTemPergunta(true);
-  };
+  setTemPergunta(true);
+};
 
   const finalizarQuiz = () => {
-    const questoes = JSON.parse(localStorage.getItem("questoesQuiz") || "[]");
+  const codigo = localStorage.getItem("codigoQuiz");
 
-    if (!sala.trim()) {
-      alert("Digite o nome da sala para finalizar!");
-      return;
-    }
+  if (!codigo) {
+    alert("Erro: o código não foi gerado!");
+    return;
+  }
 
-    if (questoes.length === 0) {
-      alert("Você precisa criar pelo menos 1 pergunta!");
-      return;
-    }
+  navigate("/quizcodigo");
+};
 
-    const codigo = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const quizCompleto = {
-      codigo,
-      sala,
-      questoes,
-    };
-
-    const lista = JSON.parse(localStorage.getItem("quizzesComCodigo") || "[]");
-    lista.push(quizCompleto);
-    localStorage.setItem("quizzesComCodigo", JSON.stringify(lista));
-
-    localStorage.removeItem("questoesQuiz");
-    localStorage.setItem("codigoQuiz", codigo);
-
-    navigate("/quizcodigo");
-  };
 
   return (
     <div className={styles.criarquizContainer}>

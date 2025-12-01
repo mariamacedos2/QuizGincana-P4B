@@ -130,6 +130,11 @@ button {
     center center / cover no-repeat;
 
   overflow: hidden;
+
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Camada branca transparente por cima da imagem */
@@ -156,6 +161,7 @@ button {
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   margin: 0 auto;
+  
 }
 
 /* Inputs da caixa da direita */

@@ -68,35 +68,35 @@ export default function Resposta() {
         <div className={styles.imagemContainer}></div>
         <div className={styles.caixa}>
             <h3 className={styles.tituloResposta}>Alternativa Certa</h3>
-
-        <div className={styles.blocoCinza}>
-          <div className={styles.grid}>
-            {["A", "B", "C", "D"].map((letra, i) => (
-              <button
-                key={i}
-                className={
-                  i === question.correta
-                    ? styles.btnCerto
-                    : i === indiceEscolhido
-                    ? styles.btnErrado
-                    : styles.btnNeutro
-                }
-              >
-                {letra}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <p className={styles.msg}>
-          {acertou
-            ? "Você acertou!"
-            : `A resposta correta é a letra ${["A", "B", "C", "D"][question.correta]}`}
-        </p>
-
-        <button onClick={proximaQuestao} className={styles.btnProxima}>
-          Próxima Questão
-        </button>
+              
+            <div className={styles.blocoCinza}>
+              <div className={styles.grid}>
+                {["A", "B", "C", "D"].map((letra, i) => (
+                  <button
+                    key={i}
+                    className={
+                      i === question.correta
+                        ? styles.btnCerto
+                        : i === indiceEscolhido
+                        ? styles.btnErrado
+                        : styles.btnNeutro
+                    }
+                  >
+                    {letra}
+                  </button>
+                ))}
+              </div>
+            </div>
+              
+            <p className={styles.msg}>
+              {acertou
+                ? "Você acertou!"
+                : `A resposta correta é a letra ${["A", "B", "C", "D"][question.correta]}`}
+            </p>
+              
+            <button onClick={proximaQuestao} className={styles.btnProxima}>
+              Próxima Questão
+            </button>
         </div>
         
       </div>

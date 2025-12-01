@@ -1,26 +1,42 @@
 // src/pages/QuizCodigo.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/quizcodigo.module.css";
 
 export default function QuizCodigo() {
-  const codigo = localStorage.getItem("codigoQuiz") || "-----";
-  const sala = localStorage.getItem("salaQuiz") || "";
+  const [codigo, setCodigo] = useState("-----");
+  const [sala, setSala] = useState("");
   const [copiado, setCopiado] = useState(false);
+
+  // Carrega o código e a sala quando a página abre
+  useEffect(() => {
+    const codigoLS = localStorage.getItem("codigoQuiz");
+    const salaLS = localStorage.getItem("salaQuiz");
+
+    if (codigoLS) setCodigo(codigoLS);
+    if (salaLS) setSala(salaLS);
+
+    return () => {
+      // limpa APENAS quando sair da página
+      localStorage.removeItem("quizId");
+      localStorage.removeItem("questoesQuiz");
+    };
+  }, []);
 
   const copiarCodigo = async () => {
     try {
       await navigator.clipboard.writeText(codigo);
       setCopiado(true);
-      setTimeout(() => setCopiado(false), 1500);
+
+      setTimeout(() => setCopiado(false), 1200);
     } catch {
-      alert("Não foi possível copiar. Copie manualmente.");
+      alert("Erro ao copiar. Copie manualmente.");
     }
   };
 
   return (
     <div className={styles.quizCodigoContainer}>
       
-      {/* BOTÃO SAIR NO CANTO SUPERIOR — IGUAL AO FIGMA */}
+      {/* botão de voltar */}
       <button className={styles.botaoSair} onClick={() => window.history.back()}>
         <img
           className={styles.iconeSair}

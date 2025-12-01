@@ -1,31 +1,35 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "../styles/inicio.module.css";
+import { supabase } from "../supabaseClient";
 
 function Inicio() {
   const navigate = useNavigate();
   const [codigoDigitado, setCodigoDigitado] = useState("");
 
-  const entrarNoQuiz = () => {
+  const entrarNoQuiz = async () => {
     if (!codigoDigitado.trim()) {
       alert("Digite um código!");
       return;
     }
 
-    // Lista com TODOS os quizzes criados
-    const quizzes = JSON.parse(localStorage.getItem("quizzesComCodigo") || "[]");
+    // 🔎 BUSCA O QUIZ DIRETAMENTE NO SUPABASE
+    const { data: quiz, error } = await supabase
+      .from("quizzes")
+      .select("*")
+      .eq("codigo_acesso", codigoDigitado.toUpperCase())
+      .maybeSingle(); // evita erro caso não exista
 
-    // Busca se o código existe
-    const quizEncontrado = quizzes.find(q => q.codigo === codigoDigitado);
-
-    if (!quizEncontrado) {
+    if (error || !quiz) {
+      console.error("Erro ou quiz não encontrado:", error);
       alert("Código inválido!");
       return;
     }
 
-    // Salva o quiz atual para ser carregado na sala
-    localStorage.setItem("quizAtual", JSON.stringify(quizEncontrado));
+    // 💾 Salva o quiz atual no localStorage
+    localStorage.setItem("quizAtual", JSON.stringify(quiz));
 
+    // 🚀 Vai para a sala do quiz
     navigate("/salaquiz");
   };
 
@@ -49,7 +53,8 @@ function Inicio() {
               type="text"
               placeholder="Digite o código do quiz"
               value={codigoDigitado}
-              onChange={e => setCodigoDigitado(e.target.value)}
+              onChange={(e) => setCodigoDigitado(e.target.value)}
+              maxLength={6}
               required
             />
           </div>
@@ -58,11 +63,13 @@ function Inicio() {
         <button 
           className={styles.btnEntrar}
           onClick={entrarNoQuiz}
-        >  
+        >
           Entrar <i className="fas fa-sign-in-alt"></i>
         </button>
 
-        <button className={styles.btnQuiz} onClick={() => navigate("/meusquizzes")}>Meus Quizzes</button>
+        <button className={styles.btnQuiz} onClick={() => navigate("/meusquizzes")}>
+          Meus Quizzes
+        </button>
 
         <button className={styles.btnQuiz} onClick={() => navigate("/criarquiz")}>
           Criar Quiz <i className="fa-solid fa-plus fa-flip-horizontal fa-xs"></i>

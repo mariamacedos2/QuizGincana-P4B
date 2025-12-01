@@ -1,64 +1,127 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import styles from "./salajogando.module.css";
-import { perguntas } from "./perguntas";
+import { supabase } from "../../supabaseClient";
 
-
-export default function Pergunta() {
+export default function SalaJogando() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // índice recebido da tela anterior (ou 0 se for a primeira vez)
   const indice = location.state?.indice ?? 0;
+
+  const [perguntas, setPerguntas] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+
+  // 🔹 Quiz salvo no início
+  const quizAtual = JSON.parse(localStorage.getItem("quizAtual") || "{}");
+  const quizId = quizAtual?.id; // <-- usa o ID do quiz resgatado pelo código
+
+  // 🔹 Carrega perguntas da sala correta
+  useEffect(() => {
+    async function carregarPerguntas() {
+      if (!quizId) {
+        alert("Erro: quizId não encontrado.");
+        setCarregando(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("perguntas")
+        .select("*")
+        .eq("quiz_id", quizId)
+        .order("id", { ascending: true });
+
+      if (error) {
+        console.error("Erro ao carregar perguntas:", error);
+        setCarregando(false);
+        return;
+      }
+
+      setPerguntas(data);
+      setCarregando(false);
+    }
+
+    carregarPerguntas();
+  }, [quizId]);
+
+  // 🔹 Enquanto carrega
+  if (carregando) {
+    return <h2>Carregando perguntas...</h2>;
+  }
+
+  // 🔹 Fim das perguntas
+  if (!perguntas[indice]) {
+    return <h2>Fim das perguntas.</h2>;
+  }
 
   const question = perguntas[indice];
 
+  // 🔹 Alternativas
+  const alternativas = [
+    question.alternativa_a,
+    question.alternativa_b,
+    question.alternativa_c,
+    question.alternativa_d
+  ];
+
+  // 🔹 Selecionar resposta
   function selecionarResposta(indiceEscolhido) {
     navigate("/resposta", {
       state: {
         indicePergunta: indice,
         indiceEscolhido,
-      },
+        correta: Number(question.resposta_correta),
+        pontos: question.pontos
+      }
     });
   }
 
   return (
     <div className={styles.container}>
-      <Link to="/salaquiz">
-          <button className={styles.btnVoltar}>
-            <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
-          </button>
-        </Link>
-      <div className={styles.colunaEsquerda}>
-        <h1>Nome da Sala</h1>
-        <h2>Matemática</h2>
 
-        <p className={styles.enunciado}>{question.enunciado}</p>
+      {/* 🔙 VOLTAR */}
+      <Link to="/salaquiz">
+        <button className={styles.btnVoltar}>
+          <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
+        </button>
+      </Link>
+
+      {/* 🔹 ESQUERDA */}
+      <div className={styles.colunaEsquerda}>
+        <h1>{quizAtual?.nome_sala || "Doce Desafio"}</h1>
+        <h2>{question.categoria || "Categoria"}</h2>
+
+        <p className={styles.enunciado}>{question.pergunta}</p>
 
         <ul>
-          {question.alternativas.map((t, i) => (
+          {alternativas.map((t, i) => (
             <li key={i}>{t}</li>
           ))}
         </ul>
       </div>
 
+      {/* 🔹 DIREITA */}
       <div className={styles.colunaDireita}>
         <div className={styles.caixa}>
-           <h3>Escolha sua resposta</h3>
+          <h3>Escolha sua resposta</h3>
 
           <div className={styles.blocoCinza}>
-
             <div className={styles.grid}>
-            {question.alternativas.map((_, i) => (
-              <button key={i} onClick={() => selecionarResposta(i)} className={styles.btngeral}>
-                {["A", "B", "C", "D"][i]}
-              </button>
-            ))}
+              {alternativas.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => selecionarResposta(i)}
+                  className={styles.btngeral}
+                >
+                  {["A", "B", "C", "D"][i]}
+                </button>
+              ))}
             </div>
           </div>
+
         </div>
-       
       </div>
+
     </div>
   );
 }
