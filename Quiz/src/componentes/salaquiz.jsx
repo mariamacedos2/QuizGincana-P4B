@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/salaquiz.module.css";
+import { supabase } from "../supabaseClient"
 
 function SalaQuiz() {
   const navigate = useNavigate();
 
   const [quiz, setQuiz] = useState(null);
+  const [nomeJogador, setNomeJogador] = useState("");
 
   const [categorias, setCategorias] = useState([
     { nome: "Matemática", qtd: 3 },
@@ -40,6 +42,18 @@ function SalaQuiz() {
 
     // Salva o quizId para a página de perguntas
     localStorage.setItem("quizId", obj.id);
+
+    async function buscarUsuario() {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (user) {
+        // Se você salvou username no signup:
+        setNomeJogador(user.user_metadata.username || user.email);
+      }
+   }
+
+   buscarUsuario();
+
   }, []);
 
   if (!quiz) {
@@ -71,7 +85,7 @@ function SalaQuiz() {
           <label>Jogador:</label>
           <div className={styles.infoItem}>
             <i className="fa-solid fa-circle-user fa-2xl"></i>
-            <div className={styles.jogador}>Maria_macedoS2</div>
+            <div className={styles.jogador}>{nomeJogador || "Carregando..."}</div>
           </div>
         </div>
       </div>

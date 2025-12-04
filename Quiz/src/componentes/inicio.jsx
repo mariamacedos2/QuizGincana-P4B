@@ -28,6 +28,8 @@ function Inicio() {
 
     // 💾 Salva o quiz atual no localStorage
     localStorage.setItem("quizAtual", JSON.stringify(quiz));
+    localStorage.setItem("quizId", quiz.id);
+
 
     // 🚀 Vai para a sala do quiz
     navigate("/salaquiz");

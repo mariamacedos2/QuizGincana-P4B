@@ -1,0 +1,116 @@
+/* CONTAINER GERAL */
+.RankingContainer {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* OVERLAY ROSA TRANSPARENTE */
+.RankingContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 246, 248, 0.45);
+  z-index: 0;
+}
+
+/* BOTÃO SAIR — IGUAL AO FIGMA */
+.botaoSair {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+
+  background: #f8aed7;
+  border: none;
+
+  width: 70px;
+  height: 50px;
+
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: 0.2s;
+  z-index: 10;
+}
+
+.botaoSair:hover {
+  filter: brightness(0.9);
+}
+
+.iconeSair {
+  width: 22px;      /* tamanho pequeno */
+  height: 22px;
+  filter: brightness(0) invert(1); /* deixa o ícone branco */
+}
+
+
+/* CARD PRINCIPAL */
+.quizContent {
+  position: relative;
+  z-index: 1;
+  background: #FAFBD8;
+  width: 700px;
+  max-width: 100%;
+  padding: 45px 40px;
+  border-radius: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+/* TÍTULO */
+.titulo {
+  font-size: 50px;
+  font-weight: 400;
+  color: #d63384;
+  text-shadow: 0px 2px 8px rgba(255, 130, 190, 0.7);
+  margin-bottom: 60px;
+}
+
+/* SUBTÍTULO */
+.infoText {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+/* CÓDIGO */
+.codigoBox {
+  background: #ffeef5;
+  border: 2px dashe #ff7fb3;
+  padding: 16px 20px;
+  border-radius: 25px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  width: 280px;
+  margin: 0 auto 22px auto;
+  color: #333;
+}
+
+/* BOTÃO COPIAR */
+.btnCopiar {
+  background: #ff8db7;
+  color: white;
+  border: none;
+  padding: 12px 45px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.btnCopiar:hover {
+  background: #ff6aa5;
+}

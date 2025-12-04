@@ -57,7 +57,6 @@ export default function CriarQuiz() {
         {
           user_id: userId,
           nome_sala: sala,
-          categoria: categoria,
           codigo_acesso: codigoAcesso
         }
       ])
@@ -89,7 +88,8 @@ export default function CriarQuiz() {
         alternativa_c: alternativas[2],
         alternativa_d: alternativas[3],
         resposta_correta: respostaCorreta, // sua coluna é TEXT
-        pontos: pontos
+        pontos: pontos,
+        categoria: categoria
       }
     ]);
 

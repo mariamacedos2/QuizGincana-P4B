@@ -3,6 +3,7 @@ import styles from "../styles/login.module.css";
 import { supabase } from "../supabaseClient";
 import { Link } from "react-router-dom";
 
+
 function Cadastro() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -10,6 +11,7 @@ function Cadastro() {
   const [mensagem, setMensagem] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,6 +36,10 @@ function Cadastro() {
       setEmail("");
       setSenha("");
       setUsuario("");
+
+   /*  setTimeout(() => {*/
+   /*  navigate("/inicio");*/
+   /*}, 2500);*/
     }
   };
 

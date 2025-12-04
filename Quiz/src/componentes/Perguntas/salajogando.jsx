@@ -51,7 +51,7 @@ export default function SalaJogando() {
 
   // 🔹 Fim das perguntas
   if (!perguntas[indice]) {
-    return <h2>Fim das perguntas.</h2>;
+     navigate("/ranking")
   }
 
   const question = perguntas[indice];
