@@ -199,3 +199,8 @@ font-family: "Lobster", sans-serif;
 
   margin-top: 1px;
 }
+
+ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}

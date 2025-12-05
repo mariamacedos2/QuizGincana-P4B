@@ -130,34 +130,42 @@ export default function CriarQuiz() {
           <h1 className={styles.titulo}>Doce Desafio</h1>
 
           {/* Nome da sala */}
-          <div className={styles.formGroup}>
+          <div className={styles.salaBox}>
             <label>Digite o nome da sala:</label>
             <input
-              value={sala}
-              onChange={(e) => setSala(e.target.value)}
-              placeholder="Digite o nome da sala..."
+            value={sala}
+            onChange={(e) => setSala(e.target.value)}
+            placeholder="Digite o nome da sala..."
             />
-          </div>
+            </div>
 
-          {/* Pergunta */}
+
+        <div className={styles.perguntaBox}>
+          <label></label>
           <div className={styles.formGroup}>
             <input
-              value={pergunta}
-              onChange={(e) => setPergunta(e.target.value)}
-              placeholder="Comece a digitar a pergunta..."
+            value={pergunta}
+            onChange={(e) => setPergunta(e.target.value)}
+            placeholder="Comece a digitar a pergunta..."
             />
-          </div>
+            </div>
+            </div>
 
           {/* Alternativas */}
-          {alternativas.map((alt, idx) => (
-            <div key={idx} className={styles.formGroup}>
-              <input
+          <div className={styles.alternativasBox}>
+            <label></label>
+            {alternativas.map((alt, idx) => (
+              <div key={idx} className={styles.formGroup}>
+                <input
                 value={alt}
                 onChange={(e) => handleAlternativaChange(idx, e.target.value)}
                 placeholder={`Digite a alternativa ${String.fromCharCode(65 + idx)}...`}
-              />
-            </div>
-          ))}
+                />
+                </div>
+              ))}
+              </div>
+
+          
 
           {/* BOTÕES */}
           <div className={styles.botoes}>

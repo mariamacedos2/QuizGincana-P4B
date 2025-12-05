@@ -149,12 +149,14 @@ export default function SalaJogando() {
         <h2>{question.categoria}</h2>
 
         <p className={styles.enunciado}>{question.pergunta}</p>
-
         <ul>
           {alternativas.map((t, i) => (
-            <li key={i}>{t}</li>
-          ))}
-        </ul>
+            <li key={i}>
+              <strong>{["A", "B", "C", "D"][i]})</strong> {t}
+              </li>
+            ))}
+            </ul>
+
       </div>
 
       <div className={styles.colunaDireita}>

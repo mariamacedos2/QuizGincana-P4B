@@ -21,7 +21,7 @@ html, body {
   display: flex;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+
 }
 
 /* ====================== */
@@ -32,12 +32,15 @@ html, body {
   width: 50%;
   background-color: rgba(251, 255, 215, 0.7);
   padding: 48px;
-  height: 100%;
+
+  max-height: 100vh;   /* limita na tela */
+  overflow-y: auto;    /* ativa rolagem */
+
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   flex: 1;
 }
+
 
 /* TÍTULO */
 .titulo {
@@ -63,16 +66,16 @@ html, body {
 
 /* INPUTS */
 .formGroup input,
-.formGroup select {
-  width: 80%;
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
   padding: 14px 18px;
   border-radius: 20px;
-  border: 1px solid #e6e4de;
-  background: white;
+  border: 1px solid #d9d9d9;
   font-size: 17px;
   outline: none;
-  box-sizing: border-box;
 }
+
 
 /* BOTÕES DA ESQUERDA */
 .botoes {
@@ -177,7 +180,7 @@ button {
 /* Grupo especial apenas para o nome da sala */
 .salaGroup {
   margin-bottom: 40px; /* dá mais espaço */
-  width: 80%; /* mesmo alinhamento dos outros inputs */
+  width: 80%; 
 }
 
 .salaGroup label {
@@ -193,5 +196,54 @@ button {
   border: 1px solid #e6e4de;
   background: white;
   font-size: 17px;
+}
+
+/* BLOCO ESPECIAL PARA O NOME DA SALA */
+.salaBox {
+  width: 62%;
+  margin-bottom: 70px; /* mantém o espaçamento */
+}
+
+
+.salaBox label {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.salaBox input {
+  width:80%;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid #d9d9d9;
+  font-size: 17px;
+  outline: none;
+}
+
+.perguntaBox {
+  width: 80%;
+  margin-bottom: 30px;
+}
+
+.perguntaBox label {
+  font-size: 17px;
+  font-weight: bold;
+  margin-left: 5px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.alternativasBox {
+  width: 80%;
+  margin-bottom: 35px;
+}
+
+.alternativasBox label {
+  font-size: 17px;
+  font-weight: bold;
+  margin-left: 5px;
+  display: block;
+  margin-bottom: 6px;
 }
 

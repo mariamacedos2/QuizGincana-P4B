@@ -1,25 +1,29 @@
-/* Container principal igual à tela da pergunta */
+/* ======================= */
+/*  LAYOUT PRINCIPAL       */
+/* ======================= */
 .container {
   display: flex;
-  background-color: rgba(251, 255, 215, 0.7);
   height: 100vh;
+  width: 100%;
   font-family: "Arial", sans-serif;
-}
-/*--- Não permite q o fundo escuro da imagem sobreponha-lo --- */
-.container > *:not(.imagemContainer) {
-  position: relative;
-  z-index: 2;
+  background: #fbffd7; /* fundo clarinho igual ao Figma */
 }
 
-/* Coluna esquerda com questão */
+/* ======================= */
+/* COLUNA ESQUERDA         */
+/* ======================= */
 .colunaEsquerda {
-  margin-top: 50px;
   flex: 1;
+  padding: 40px;
 }
 
 .materia {
   margin-top: -10px;
   font-size: 22px;
+}
+
+.questaoBox {
+  margin-top: 30px;
 }
 
 .numero {
@@ -32,8 +36,8 @@
 }
 
 .enunciado {
-  margin-top: 10px;
-  font-size: 18px;
+  margin-top: 20px;
+  white-space: pre-line;
 }
 
 .listaAlternativas li {
@@ -51,153 +55,125 @@
   font-weight: bold;
 }
 
-/* Coluna direita com resposta */
+
+/* ======================= */
+/* COLUNA DIREITA          */
+/* ======================= */
 .colunaDireita {
   width: 50%;
-  background-color: #f2e9d6;
-  padding: 40px;
-  text-align: center;
+  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
-  background-size: cover;       /* cobre toda a coluna */
-  background-position: center;  /* centraliza a imagem */
-  background-repeat: no-repeat;
-
-  overflow: hidden;
 }
+
+/* SOBREPOSIÇÃO CLARA */
 .colunaDireita::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(236, 232, 232, 0.58); /* preto com 50% de transparência */
-  z-index: 1;
-
-  border-radius: 12px;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
 }
 
-.colunaDireita > *:not(.imagemContainer) {
+/* EVITA FICAR ESCURO */
+.colunaDireita > * {
   position: relative;
   z-index: 2;
-  color: #fff;
 }
 
-.tituloResposta {
-  font-size: 22px;
-  margin-bottom: 30px;
-  color: #000000;
-}
-
-/* Bloco cinza para botões de alternativa */
-.blocoCinza {
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  padding: 25px;
-  height: 20%;
-  width: 50%;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-}
-
-.btnNeutro,
-.btnCerto,
-.btnErrado {
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 20px;
-  border: none;
-  cursor: default;
-}
-
-.btnCerto {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.btnErrado {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.btnNeutro {
-  background-color: #bdc3c7;
-}
-
-.btngeral{
-  border: 1px solid black;
-  background-color: rgba(251, 255, 215, 0.7);
-}
-.btngeral:hover{
-  background-color: #e4e4e4;
-}
-
-.msg {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #000000;
-}
-
-.btnProxima {
-  margin-top: 25px;
-  padding: 12px 25px;
-  background-color: #8e44ad;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.btnProxima:hover {
-  background-color: #732d91;
-}
-
-.caixa{
-  background-color: #fdfdfd;
+/* ======================= */
+/* CAIXA CENTRAL (CARD)    */
+/* ======================= */
+.caixa {
   width: 65%;
   height: 70%;
-  border-radius: 25px;
-  box-shadow: 0 0 30px 15px rgba(12, 12, 12, 0.5);
-  
+  background: #ffffff;
+  border-radius: 30px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-h3{
-  color: #000000;
+/* ======================= */
+/* TÍTULO ESCOLHA          */
+/* ======================= */
+.tituloResposta {
+  font-size: 32px;
+  font-family: "Sigmar", sans-serif;
+  color: #e4459b;
+  margin-top: 15px;
+
+  -webkit-text-stroke: 1.5px white;
+  text-shadow: 4px 4px 3px rgba(0,0,0,0.45);
 }
 
+/* ======================= */
+/* BLOCO CINZA DOS BOTÕES  */
+/* ======================= */
+.blocoCinza {
+  background: rgba(255,255,255,0.85);
+  margin-top: 25px;
+  padding: 35px;
+  width: 60%;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.btngeral {
+  border: 2px solid #e4459b;
+  background: #fff1f9;
+  border-radius: 12px;
+  padding: 18px 0;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-family: "Arial", sans-serif;
+}
+
+.btngeral:hover {
+  background: #ffd9ec;
+}
+
+/* ======================= */
+/* BOTÃO VOLTAR            */
+/* ======================= */
 .btnVoltar {
+  position: absolute;
   top: 25px;
   left: 25px;
-  border: none;
   background: white;
+  border: none;
+  padding: 12px;
   border-radius: 50%;
-  padding: 12px 15px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-.tituloResposta{
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 30px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+.btnVoltar:hover {
+  background: #ffe9f5;
+}
 
-  font-family: "Sigmar", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-
-  margin-top: 1px;
+.colunaEsquerda ul {
+  list-style: none;
+  padding-left: 0;
 }

@@ -118,18 +118,19 @@ export default function Resposta() {
 
           <ul className={styles.listaAlternativas}>
             {alternativas.map((alt, i) => (
-              <li
-                key={i}
-                className={
-                  i === Number(question.resposta_correta)
-                    ? styles.alternativaCorreta
-                    : i === indiceEscolhido
-                    ? styles.alternativaErrada
-                    : ""
-                }
-              >
-                {alt}
-              </li>
+         <li
+         key={i}
+         className={
+          i === Number(question.resposta_correta)
+          ? styles.alternativaCorreta
+          : i === indiceEscolhido
+          ? styles.alternativaErrada
+          : ""
+          }
+          >
+            <strong>{["A", "B", "C", "D"][i]})</strong> {alt}
+            </li>
+
             ))}
           </ul>
         </div>
