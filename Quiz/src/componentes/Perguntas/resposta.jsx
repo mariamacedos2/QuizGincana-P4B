@@ -10,19 +10,17 @@ export default function Resposta() {
 
   const indice = location.state?.indicePergunta;
   const indiceEscolhido = location.state?.indiceEscolhido;
-  const correta = location.state?.correta;
-  const pontos = location.state?.pontos;
 
   const [question, setQuestion] = useState(null);
   const [quizInfo, setQuizInfo] = useState(null);
 
-  // recuperar quiz salvo
+  // Recupera quiz salvo
   useEffect(() => {
     const quiz = JSON.parse(localStorage.getItem("quizAtual") || "{}");
     setQuizInfo(quiz);
   }, []);
 
-  // busca pergunta do banco de dados
+  // Carrega pergunta correta
   useEffect(() => {
     async function carregarPergunta() {
       if (indice === undefined) return;
@@ -52,13 +50,7 @@ export default function Resposta() {
     carregarPergunta();
   }, [indice]);
 
-  if (indice === undefined || indiceEscolhido === undefined) {
-    return <h2>Erro: dados não recebidos.</h2>;
-  }
-
-  if (!question) {
-    return <h2>Carregando resposta...</h2>;
-  }
+  if (!question) return <h2>Carregando resposta...</h2>;
 
   const alternativas = [
     question.alternativa_a,
@@ -69,9 +61,47 @@ export default function Resposta() {
 
   const acertou = indiceEscolhido === Number(question.resposta_correta);
 
-  function proximaQuestao() {
-    const proximo = indice + 1;
-    navigate("/salajogando", { state: { indice: proximo } });
+  async function salvarPontuacao() {
+    const { data: userData } = await supabase.auth.getUser();
+    const userId = userData?.user?.id;
+
+    if (!userId) return;
+
+    const quizId = quizInfo?.id;
+    if (!quizId) return;
+
+    const pontosGanhos = acertou ? Number(question.pontos) : 0;
+
+    // Procurar se já existe registro
+    const { data: existente } = await supabase
+      .from("pontuacoes")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("quiz_id", quizId);
+
+    // Se já existe → atualizar
+    if (existente?.length > 0) {
+      const atual = existente[0];
+      await supabase
+        .from("pontuacoes")
+        .update({
+          pontos_totais: atual.pontos_totais + pontosGanhos
+        })
+        .eq("id", atual.id);
+      return;
+    }
+
+    // Criar novo
+    await supabase.from("pontuacoes").insert({
+      user_id: userId,
+      quiz_id: quizId,
+      pontos_totais: pontosGanhos
+    });
+  }
+
+  async function proximaQuestao() {
+    await salvarPontuacao();
+    navigate("/salajogando", { state: { indice: indice + 1 } });
   }
 
   return (
@@ -106,8 +136,6 @@ export default function Resposta() {
       </div>
 
       <div className={styles.colunaDireita}>
-        <div className={styles.imagemContainer}></div>
-
         <div className={styles.caixa}>
           <h3 className={styles.tituloResposta}>Alternativa Certa</h3>
 

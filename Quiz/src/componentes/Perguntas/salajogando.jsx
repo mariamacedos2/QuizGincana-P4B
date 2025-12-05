@@ -12,11 +12,12 @@ export default function SalaJogando() {
   const [perguntas, setPerguntas] = useState([]);
   const [carregando, setCarregando] = useState(true);
 
-  // 🔹 Quiz salvo no início
   const quizAtual = JSON.parse(localStorage.getItem("quizAtual") || "{}");
-  const quizId = quizAtual?.id; // <-- usa o ID do quiz resgatado pelo código
+  const quizId = quizAtual?.id;
 
-  // 🔹 Carrega perguntas da sala correta
+  // -----------------------------------------
+  // 1. Carregar perguntas do quiz
+  // -----------------------------------------
   useEffect(() => {
     async function carregarPerguntas() {
       if (!quizId) {
@@ -44,19 +45,76 @@ export default function SalaJogando() {
     carregarPerguntas();
   }, [quizId]);
 
-  // 🔹 Enquanto carrega
-  if (carregando) {
-    return <h2>Carregando perguntas...</h2>;
+  // -----------------------------------------
+  // 2. Função para pegar pontuação total salva
+  // -----------------------------------------
+  function pontosAtuaisNoLocalStorage() {
+    return Number(localStorage.getItem("pontosTotais") || 0);
   }
 
-  // 🔹 Fim das perguntas
-  if (!perguntas[indice]) {
-     navigate("/ranking")
+  // -----------------------------------------
+  // 3. SALVAR PONTUAÇÃO FINAL quando quiz acabar
+  // -----------------------------------------
+  async function salvarPontuacaoFinal() {
+    const { data: userData } = await supabase.auth.getUser();
+    const userId = userData?.user?.id;
+
+    if (!userId || !quizId) {
+      console.log("Erro: userId ou quizId faltando");
+      return;
+    }
+
+    // Verifica se já existe pontuação salva
+    const { data: existente, error: erroSelect } = await supabase
+      .from("pontuacoes")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("quiz_id", quizId);
+
+    if (erroSelect) {
+      console.error("Erro SELECT:", erroSelect);
+      return;
+    }
+
+    if (existente?.length > 0) {
+      console.log("Pontuação já existente, não vou inserir novamente.");
+      return;
+    }
+
+    const pontosTotais = pontosAtuaisNoLocalStorage();
+
+    const { error: erroInsert } = await supabase
+      .from("pontuacoes")
+      .insert({
+        user_id: userId,
+        quiz_id: quizId,
+        pontos_totais: pontosTotais
+      });
+
+    if (erroInsert) console.error("Erro INSERT:", erroInsert);
+    else console.log("Pontuação salva com sucesso!");
   }
+
+  // -----------------------------------------
+  // 4. QUANDO O QUIZ TERMINAR → salva e vai pro ranking
+  // -----------------------------------------
+  useEffect(() => {
+    if (!carregando && perguntas.length > 0 && !perguntas[indice]) {
+      (async () => {
+        await salvarPontuacaoFinal();
+        navigate("/ranking");
+      })();
+    }
+  }, [carregando, perguntas, indice, navigate]);
+
+  // -----------------------------------------
+  // 5. Tela da PERGUNTA atual
+  // -----------------------------------------
+  if (carregando) return <h2>Carregando perguntas...</h2>;
+  if (!perguntas[indice]) return null; // evita crash
 
   const question = perguntas[indice];
 
-  // 🔹 Alternativas
   const alternativas = [
     question.alternativa_a,
     question.alternativa_b,
@@ -64,7 +122,6 @@ export default function SalaJogando() {
     question.alternativa_d
   ];
 
-  // 🔹 Selecionar resposta
   function selecionarResposta(indiceEscolhido) {
     navigate("/resposta", {
       state: {
@@ -76,20 +133,20 @@ export default function SalaJogando() {
     });
   }
 
+  // -----------------------------------------
+  // 6. RENDERIZAÇÃO
+  // -----------------------------------------
   return (
     <div className={styles.container}>
-
-      {/* 🔙 VOLTAR */}
       <Link to="/salaquiz">
         <button className={styles.btnVoltar}>
           <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
         </button>
       </Link>
 
-      {/* 🔹 ESQUERDA */}
       <div className={styles.colunaEsquerda}>
-        <h1>{quizAtual?.nome_sala || "Doce Desafio"}</h1>
-        <h2>{question.categoria || "Categoria"}</h2>
+        <h1>{quizAtual?.nome_sala}</h1>
+        <h2>{question.categoria}</h2>
 
         <p className={styles.enunciado}>{question.pergunta}</p>
 
@@ -100,7 +157,6 @@ export default function SalaJogando() {
         </ul>
       </div>
 
-      {/* 🔹 DIREITA */}
       <div className={styles.colunaDireita}>
         <div className={styles.caixa}>
           <h3>Escolha sua resposta</h3>
@@ -118,10 +174,8 @@ export default function SalaJogando() {
               ))}
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
