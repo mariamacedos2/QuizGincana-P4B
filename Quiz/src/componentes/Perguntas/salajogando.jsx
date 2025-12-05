@@ -159,7 +159,8 @@ export default function SalaJogando() {
 
       <div className={styles.colunaDireita}>
         <div className={styles.caixa}>
-          <h3>Escolha sua resposta</h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#e4459b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile-icon lucide-smile"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+          <h3 className={styles.tituloResposta}>Escolha sua resposta</h3>
 
           <div className={styles.blocoCinza}>
             <div className={styles.grid}>

@@ -95,7 +95,7 @@
 
 /* Bloco cinza para botões de alternativa */
 .blocoCinza {
-  background-color: rgba(216, 213, 213, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   padding: 25px;
   height: 20%;
@@ -133,6 +133,7 @@
 }
 
 .btngeral{
+  border: 1px solid black;
   background-color: rgba(251, 255, 215, 0.7);
 }
 .btngeral:hover{
@@ -186,4 +187,17 @@ h3{
   padding: 12px 15px;
   cursor: pointer;
   font-size: 18px;
+}
+
+.tituloResposta{
+  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+ font-size: 30px;
+ color:#e4459b;/* #b30074*/
+ text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+
+  font-family: "Sigmar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  margin-top: 1px;
 }
