@@ -9,6 +9,14 @@ function SalaQuiz() {
   const [quiz, setQuiz] = useState(null);
   const [nomeJogador, setNomeJogador] = useState("");
 
+  const [mostrarModal, setMostrarModal] = useState(false);
+  const [novoUsername, setNovoUsername] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
+  const [carregandoEdicao, setCarregandoEdicao] = useState(false);
+  const [erroEdicao, setErroEdicao] = useState("");
+  const [sucessoEdicao, setSucessoEdicao] = useState("");
+
+
   const [categorias, setCategorias] = useState([
     { nome: "Matemática", qtd: 3 },
     { nome: "Ciências", qtd: 4 },
@@ -26,6 +34,42 @@ function SalaQuiz() {
       )
     );
   };
+
+  async function salvarEdicoes() {
+  setErroEdicao("");
+  setSucessoEdicao("");
+
+  if (!novoUsername && !novaSenha) {
+    setErroEdicao("Preencha pelo menos um campo.");
+    return;
+  }
+
+  setCarregandoEdicao(true);
+
+  const updates = {};
+
+  if (novoUsername) updates.data = { username: novoUsername };
+  if (novaSenha) updates.password = novaSenha;
+
+  const { error } = await supabase.auth.updateUser(updates);
+
+  setCarregandoEdicao(false);
+
+  if (error) {
+    setErroEdicao(error.message);
+    return;
+  }
+
+  setSucessoEdicao("Dados atualizados com sucesso!");
+  setNomeJogador(novoUsername || nomeJogador);
+
+  // Atualiza localStorage se quiser
+  const quizSalvo = JSON.parse(localStorage.getItem("quizAtual"));
+  localStorage.setItem("quizAtual", JSON.stringify(quizSalvo));
+
+  setTimeout(() => setMostrarModal(false), 1500);
+}
+
 
   // 🔥 CARREGA O QUIZ SALVO NO LOCAL STORAGE
   useEffect(() => {
@@ -85,7 +129,17 @@ function SalaQuiz() {
           <label>Jogador:</label>
           <div className={styles.infoItem}>
             <i className="fa-solid fa-circle-user fa-2xl"></i>
-            <div className={styles.jogador}>{nomeJogador || "Carregando..."}</div>
+            <div 
+                className={styles.jogador}
+                onClick={() => {
+                  setNovoUsername(nomeJogador);
+                  setMostrarModal(true);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                {nomeJogador || "Carregando..."}
+              </div>
+
           </div>
         </div>
       </div>
@@ -116,7 +170,7 @@ function SalaQuiz() {
           </p>
 
           <button
-            className={`${styles.btnSalvar} ${totalPerguntas < 20 ? styles.btnDesabilitado : ""}`}
+            className={`${styles.btnIniciar} ${totalPerguntas < 20 ? styles.btnDesabilitado : ""}`}
             disabled={totalPerguntas < 20}
             onClick={() => {
               if (totalPerguntas < 20) {
@@ -131,6 +185,49 @@ function SalaQuiz() {
 
         </div>
       </div>
+
+      {mostrarModal && (
+  <div className={styles.modalFundo}>
+    <div className={styles.modalBox}>
+      <h2 className={styles.tituloModal}>Editar Perfil<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487"/><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/><circle cx="10" cy="8" r="5"/></svg></h2>
+
+
+      <label>Novo usuário:</label>
+      <input 
+        type="text" 
+        value={novoUsername} 
+        onChange={(e) => setNovoUsername(e.target.value)} 
+        placeholder="Digite o novo nome de usuário"
+      />
+
+      <label>Nova senha:</label>
+      <input 
+        type="password" 
+        value={novaSenha} 
+        onChange={(e) => setNovaSenha(e.target.value)} 
+        placeholder="Digite a nova senha"
+      />
+
+      {erroEdicao && <p className={styles.erro}>{erroEdicao}</p>}
+      {sucessoEdicao && <p className={styles.sucesso}>{sucessoEdicao}</p>}
+
+      <div className={styles.modalBotoes}>
+        <button onClick={() => setMostrarModal(false)} className={styles.btnCancelar}>
+          Cancelar
+        </button>
+
+        <button 
+          onClick={salvarEdicoes}
+          disabled={carregandoEdicao}
+          className={styles.btnSalvar}
+        >
+          {carregandoEdicao ? "Salvando..." : "Salvar"}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
     </div>
   );

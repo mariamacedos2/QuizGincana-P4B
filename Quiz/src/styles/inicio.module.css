@@ -1,6 +1,8 @@
 /* login.module.css */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+
 
 h1{
  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
@@ -137,24 +139,6 @@ font-family: "Lobster", sans-serif;
   color: #333;
 }
 
-.btnVoltar {
-  background-color: #e4459b;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 6px 10px;
-  cursor: pointer;
-
-  font-weight: bold;
-  margin-top: 15px;
-  align-items: center;
-  gap: 8px;
-  transition: 0.2s;
-}
-.btnVoltar:hover {
-  background-color: #c83787;
-}
-
 .btnEntrar {
   background-color: #e4459b;
   color: white;
@@ -230,4 +214,158 @@ font-family: "Lobster", sans-serif;
   
 .btnQuiz:hover {
   background-color: #e4e4e4;
+}
+
+
+/* MODAL */
+.modalFundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modalBox {
+  background: white;
+  padding: 25px;
+  width: 330px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalBox input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  background-color: #fbffd7;
+}
+
+.modalBotoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btnSalvar {
+  color: #4caf50;
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #4caf50;
+
+  height: 25px; /* mesma altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnSalvar:hover {
+  color: #ffffff;
+  background-color: #8dc98e;
+}
+
+.btnCancelar {
+  background: white;
+  border: 2px solid #d9534f;
+  color: #d9534f;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  height: 25px; /* mesma altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnCancelar:hover{
+  color: white;
+  background-color: #d87f7b;
+}
+
+.erro {
+  color: red;
+  font-size: 14px;
+}
+
+.sucesso {
+  color: green;
+  font-size: 14px;
+}
+
+.jogador{
+  background: #fff;
+  border-radius: 20px;
+  padding: 7px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+
+  cursor: pointer;
+}
+
+.topoDireita {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espaço entre voltar e jogador */
+}
+
+
+.btnVoltarMini {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnVoltarMini:hover {
+  background-color: #c83787;
+}
+
+.jogadorBoxMini {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff20;
+  padding: 8px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.jogadorBoxMini:hover {
+  background: #ffffff40;
+}
+
+.jogadorNomeMini {
+  font-weight: bold;
+}
+
+.tituloModal{
+  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+ font-size: 30px;
+ color:#e4459b;/* #b30074*/
+ text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+
+  font-family: "Sigmar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  justify-content: center;
+  display: flex;
 }

@@ -1,4 +1,6 @@
 /* CONTAINER GERAL (divide a tela ao meio) */
+@import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+
 .Container {
   display: flex;
   height: 100vh;
@@ -160,7 +162,7 @@ h1 {
 }
 
 /* Botão iniciar */
-.btnSalvar {
+.btnIniciar {
   background: white;
   color: green;
   border-radius: 20px;
@@ -168,9 +170,10 @@ h1 {
   cursor: pointer;
   margin-top: 10px;
   border: 2px solid green;
+  
 }
 
-.btnSalvar:hover {
+.btnIniciar:hover {
   background: #238636;
   color: white;
 }
@@ -191,4 +194,101 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+/*------- Modal editar perfil ------- */
+.modalFundo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modalBox {
+  background: #fff;
+  padding: 25px;
+  width: 350px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modalBox input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  background-color: #fbffd7;
+}
+
+.modalBotoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btnSalvar {
+  color: #4caf50;
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #4caf50;
+
+  height: 25px; /* mesma altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnSalvar:hover {
+  color: #ffffff;
+  background-color: #8dc98e;
+}
+
+.btnCancelar {
+  background: white;
+  border: 2px solid #d9534f;
+  color: #d9534f;
+  padding: 10px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  height: 25px; /* mesma altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btnCancelar:hover{
+  color: white;
+  background-color: #d87f7b;
+}
+
+.erro {
+  color: red;
+  font-size: 14px;
+}
+
+.sucesso {
+  color: green;
+  font-size: 14px;
+}
+
+.tituloModal{
+  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+ font-size: 30px;
+ color:#e4459b;/* #b30074*/
+ text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+
+  font-family: "Sigmar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  justify-content: center;
+  display: flex;
 }
