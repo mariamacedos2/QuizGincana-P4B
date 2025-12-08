@@ -3,14 +3,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
 
-
 h1{
  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
  font-size: 60px;
  color:#e4459b;/* #b30074*/
  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
 
-font-family: "Lobster", sans-serif;
+ font-family: "Lobster", sans-serif;
  font-weight: 400;
  font-style: normal;
 }
@@ -27,7 +26,6 @@ font-family: "Lobster", sans-serif;
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
   overflow: hidden;           /* remove scroll */
   z-index: 0;
-
   padding-right: 42px; 
 }
 
@@ -70,6 +68,7 @@ font-family: "Lobster", sans-serif;
   padding-bottom: 5px;
 }
 
+/* ------------ input digitar código ------------*/
 .inputGroup {
   margin: 15px auto;
   width: 80%;
@@ -101,7 +100,6 @@ font-family: "Lobster", sans-serif;
   color: #333;
   box-sizing: border-box;
   transition: 0.2s;
-  
   padding-right: 42px; 
 }
 
@@ -119,26 +117,7 @@ font-family: "Lobster", sans-serif;
   pointer-events: none;
 }
 
-.iconOlho {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #888;
-  cursor: pointer;
-
-  width: 24px;      /* ← TRAVA o espaço do ícone */
-  height: 24px;     /* ← mantém tamanho constante */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
-.iconOlho:hover {
-  color: #333;
-}
-
+/* ------------ botão entrar ------------*/
 .btnEntrar {
   background-color: #e4459b;
   color: white;
@@ -162,42 +141,11 @@ font-family: "Lobster", sans-serif;
   background-color: #c83787;
 }
 
-.cadastroText {
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-.cadastroText a {
-  color: #b30074;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.erroText {
-  color: red;
-  font-size: 13px;
-  margin-top: 10px;
-  text-align: center;
-}
-
-.titleContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.titleIcon {
-  font-size: 30px;
-  color: rgb(97, 97, 97);
-}
-
+/* ------------ botão Criar Quiz e Meus Quizzes ------------*/
 .btnQuiz {
   background-color: #ffffff;
   border: 1px solid black;
   color: rgb(51, 51, 51);
-
   padding: 8px 10px;
   border-radius: 50px;
   cursor: pointer;
@@ -216,8 +164,41 @@ font-family: "Lobster", sans-serif;
   background-color: #e4e4e4;
 }
 
+/*----------- texto abaixo ------------*/
+.cadastroText {
+  margin-top: 15px;
+  font-size: 14px;
+}
 
-/* MODAL */
+.cadastroText a {
+  color: #b30074;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* ------------ MODAL ------------ */
+.tituloModal{
+  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
+ font-size: 30px;
+ color:#e4459b;/* #b30074*/
+ text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+
+  font-family: "Sigmar", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+
+  justify-content: center;
+  display: flex;
+}
+
 .modalFundo {
   position: fixed;
   top: 0;
@@ -308,8 +289,10 @@ font-family: "Lobster", sans-serif;
   align-items: center;
   gap: 10px;
   border: 1px solid #000;
-
   cursor: pointer;
+}
+.jogador:hover{
+  background: #dadadab0;
 }
 
 .topoDireita {
@@ -322,7 +305,7 @@ font-family: "Lobster", sans-serif;
   gap: 6px; /* espaço entre voltar e jogador */
 }
 
-
+/* ------------ botão voltar ------------*/
 .btnVoltarMini {
   background-color: #e4459b;
   color: white;
@@ -332,40 +315,11 @@ font-family: "Lobster", sans-serif;
   cursor: pointer;
   transition: 0.2s;
 }
-
 .btnVoltarMini:hover {
   background-color: #c83787;
-}
-
-.jogadorBoxMini {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: #ffffff20;
-  padding: 8px 12px;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.jogadorBoxMini:hover {
-  background: #ffffff40;
 }
 
 .jogadorNomeMini {
   font-weight: bold;
 }
 
-.tituloModal{
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 30px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
-
-  font-family: "Sigmar", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-
-  justify-content: center;
-  display: flex;
-}

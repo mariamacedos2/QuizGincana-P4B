@@ -114,3 +114,58 @@
 .btnCopiar:hover {
   background: #ff6aa5;
 }
+
+.container {
+  width: 100%;
+  height: 100vh;
+  padding: 40px;
+  background: #fbe6ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.titulo {
+  font-size: 48px;
+  font-weight: bold;
+  color: #d62ca0;
+  margin-bottom: 40px;
+}
+
+.grafico {
+  display: flex;
+  gap: 50px;
+  align-items: flex-end;
+  margin-top: 40px;
+}
+
+.coluna {
+  text-align: center;
+}
+
+.barra {
+  width: 80px;
+  border-radius: 10px;
+  transition: .4s;
+}
+
+.nome {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.posicao {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btnDesempenho {
+  margin-top: 40px;
+  padding: 12px 30px;
+  background: #e77ed3;
+  border-radius: 20px;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: white;
+}
