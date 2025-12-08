@@ -49,22 +49,7 @@ export default function SalaJogando() {
   }, [carregando, perguntas, indice]);
 
   // SALVA NO SUPABASE APENAS UMA VEZ
-  async function salvarPontuacaoFinal() {
-    const { data: userData } = await supabase.auth.getUser();
-    const userId = userData?.user?.id;
-    if (!userId) return;
-
-    const pontosTotais = Number(localStorage.getItem("pontosTotais") || 0);
-
-    await supabase.from("pontuacoes").insert({
-      user_id: userId,
-      quiz_id: quizId,
-      pontos_totais: pontosTotais
-    });
-
-    navigate("/ranking");
-  }
-
+  
   // -----------------------------------------
   // RENDERIZAÇÃO
   // -----------------------------------------
