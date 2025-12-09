@@ -10,7 +10,7 @@ function MeusQuizzes() {
         {/* Botão voltar */}
         <Link to="/inicio">
           <button className={styles.btnVoltar}>
-            <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
+            <i className="fa-solid fa-right-from-bracket"></i>
           </button>
         </Link>
 
@@ -19,17 +19,18 @@ function MeusQuizzes() {
 
         <div className={styles.cardsRow}>
           <div className={styles.quizcaixa}>
-            <h3>oioi</h3>
+            <h3>Quiz 1</h3>
+          </div>
+
+          <div className={styles.quizcaixa}>
+            <h3>Quiz 2</h3>
           </div>
 
           <Link to="/criarquiz" className={styles.quizLink}>
-          <div className={styles.quizcaixa}>
-            <h3 style={{ color: "#e4459b", fontSize: "60px" }}>+</h3>
+            <div className={styles.quizcaixa}>
+              <h3 className={styles.plus}>+</h3>
             </div>
-            </Link>
-
-
-          <div className={styles.quizcaixa}></div>
+          </Link>
         </div>
 
         {/* Histórico */}
@@ -37,11 +38,16 @@ function MeusQuizzes() {
 
         <div className={styles.cardsRow}>
           <div className={styles.quizcaixa}>
-            <h3>teste</h3>
+            <h3>Histórico 1</h3>
           </div>
 
-          <div className={styles.quizcaixa}></div>
-          <div className={styles.quizcaixa}></div>
+          <div className={styles.quizcaixa}>
+            <h3>Histórico 2</h3>
+          </div>
+
+          <div className={styles.quizcaixa}>
+            <h3>Histórico 3</h3>
+          </div>
         </div>
 
       </div>

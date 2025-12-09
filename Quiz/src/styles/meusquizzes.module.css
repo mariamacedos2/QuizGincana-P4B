@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&family=Ribeye&display=swap');
 
 /* ----------------------------- CONTAINER ----------------------------- */
-
 .loginContainer {
   position: fixed;
   top: 0;
@@ -32,7 +31,6 @@
 }
 
 /* ----------------------------- BOX CENTRAL ----------------------------- */
-
 .loginBox {
   position: relative;
   z-index: 2;
@@ -42,17 +40,16 @@
 
   border-radius: 60px;
 
-  width: 55%;
-  max-width: 950px;
+  width: 60%;
+  max-width: 1000px;
 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-
   text-align: center;
   backdrop-filter: blur(10px);
+  box-sizing: border-box;
 }
 
 /* ----------------------------- BOTÃO VOLTAR ----------------------------- */
-
 .btnVoltar {
   background-color: #e4459b;
   color: white;
@@ -70,7 +67,6 @@
 }
 
 /* ----------------------------- TÍTULOS ----------------------------- */
-
 .titulo {
   -webkit-text-stroke: 1.5px rgb(0, 0, 0);
   font-size: 35px;
@@ -81,69 +77,105 @@
 }
 
 /* ----------------------------- CARDS ----------------------------- */
-
-.quizzes {
-  margin-top: 25px;
-}
-
 .cardsRow {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 35px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap; /* evita quebrar tudo */
+  align-items: stretch;
   margin-top: 20px;
   margin-bottom: 30px;
 }
 
-/* ----------------------------- QUADRADOS ----------------------------- */
-
 .quizcaixa {
   background: #ffffff;
   border-radius: 40px;
-
   border: 4px solid #e4459b;
-  height: 180px;
+
   width: 260px;
+  height: 180px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
   font-size: 28px;
+  text-align: center;
 
   box-shadow:
     inset 0 0 10px rgba(255, 0, 140, 0.2),
     0 0 20px rgba(0, 0, 0, 0.2);
 
   transition: transform 0.2s;
+  flex-shrink: 0;
 }
 
 .quizcaixa:hover {
   transform: scale(1.03);
 }
+
 .quizLink {
   text-decoration: none;
 }
 
-
 /* ----------------------------- RESPONSIVIDADE ----------------------------- */
-
 @media (max-width: 900px) {
   .loginBox {
     width: 80%;
+    padding: 25px 15px;
   }
-}
 
-@media (max-width: 600px) {
-  .cardsRow {
-    flex-direction: column !important;
-    gap: 20px;
+  .titulo {
+    font-size: 30px;
   }
 
   .quizcaixa {
     width: 220px;
     height: 160px;
+    font-size: 24px;
+  }
+
+  .cardsRow {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .loginBox {
+    width: 90%;
+    padding: 20px 15px;
+  }
+
+  .titulo {
+    font-size: 26px;
+  }
+
+  .cardsRow {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .quizcaixa {
+    width: 180px;
+    height: 140px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .loginBox {
+    width: 95%;
+    padding: 15px 10px;
+  }
+
+  .titulo {
+    font-size: 22px;
+  }
+
+  .quizcaixa {
+    width: 160px;
+    height: 120px;
+    font-size: 18px;
   }
 }

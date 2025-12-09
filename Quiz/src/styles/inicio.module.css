@@ -1,21 +1,37 @@
-/* login.module.css */
+/* inicio.module.css */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
 
-h1{
- -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 60px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
-
- font-family: "Lobster", sans-serif;
- font-weight: 400;
- font-style: normal;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+  -webkit-text-stroke: 1.5px #fff;
+  font-size: clamp(28px, 6vw, 60px);
+  color: #e4459b;
+  text-shadow: 5px 8px 5px rgba(0, 0, 0, 0.5);
+  font-family: "Lobster", sans-serif;
+  font-weight: 400;
+  text-align: center;
+  word-wrap: break-word;
+  margin-top: 0;
+}
+
+/* ===== CONTAINER ===== */
 .loginContainer {
-  position: fixed;            /* imagem fixa na tela */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -24,56 +40,94 @@ h1{
   justify-content: center;
   align-items: center;
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
-  overflow: hidden;           /* remove scroll */
-  z-index: 0;
-  padding-right: 42px; 
+  overflow: hidden;
+  padding: 0 12px;
 }
 
 .loginContainer::before {
   content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  inset: 0;
   background-color: rgba(236, 232, 232, 0.58);
   z-index: 0;
 }
 
+/* ===== LOGIN BOX ===== */
 .loginBox {
   position: relative;
   z-index: 1;
-  background: rgba(251, 255, 215, 0.7); /* semi-transparente */
-  padding: 40px;
+  background: rgba(251, 255, 215, 0.7);
+  padding: clamp(60px, 8vw, 80px) clamp(20px, 5vw, 40px); 
   border-radius: 60px;
-  width: 700px;
-  max-width: 90%;
-  height: auto;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px;
   text-align: center;
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-.loginAvatar i {
-  font-size: 70px;
-  color: rgb(97, 97, 97);
+/* ===== USUÁRIO NO TOPO DIREITO ===== */
+.topoDireita {
+  position: absolute; /* relativo à loginBox */
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+  max-width: calc(100% - 32px); /* não ultrapassa padding da caixa */
+  overflow: hidden;
 }
 
-.loginTitle {
-  margin-top: 10px;
-  color: #b30074;
-  font-weight: 600;
-  border-bottom: 2px solid #b30074;
-  display: inline-block;
-  padding-bottom: 5px;
+.topoDireita .jogador,
+.topoDireita .btnVoltarMini {
+  flex-shrink: 1; /* permite encolher se necessário */
 }
 
-/* ------------ input digitar código ------------*/
+
+.jogador {
+  background: #fff;
+  border-radius: 20px;
+  padding: 7px 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #000;
+  cursor: pointer;
+  font-size: clamp(12px, 2.5vw, 14px);
+}
+
+.jogador:hover {
+  background: #dadadab0;
+}
+
+.jogadorNomeMini {
+  font-weight: bold;
+}
+
+.btnVoltarMini {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnVoltarMini:hover {
+  background-color: #c83787;
+}
+
+/* ===== INPUTS ===== */
 .inputGroup {
-  margin: 15px auto;
-  width: 80%;
+  width: 100%;
   max-width: 280px;
   text-align: left;
+  margin: 10px auto;
 }
 
 .inputGroup label {
@@ -81,7 +135,7 @@ h1{
   margin-bottom: 6px;
   font-weight: 500;
   color: #333;
-  font-size: 14px;
+  font-size: clamp(12px, 2.5vw, 14px);
 }
 
 .inputWrapper {
@@ -91,16 +145,16 @@ h1{
 }
 
 .inputWrapper input {
-  padding: 10px 40px 10px 40px; /* espaço para ícones */
+  width: 100%;
+  padding: 10px 40px 10px 40px;
   border-radius: 20px;
   border: 1px solid black;
-  background-color: #ffffff;
-  outline: none;
-  font-size: 14px;
+  background-color: #fff;
+  font-size: clamp(12px, 2.5vw, 14px);
   color: #333;
-  box-sizing: border-box;
+  outline: none;
   transition: 0.2s;
-  padding-right: 42px; 
+  box-sizing: border-box;
 }
 
 .inputWrapper input:focus {
@@ -113,98 +167,51 @@ h1{
   top: 50%;
   transform: translateY(-50%);
   color: #888;
-  font-size: 16px;
+  font-size: clamp(12px, 3vw, 16px);
   pointer-events: none;
 }
 
-/* ------------ botão entrar ------------*/
-.btnEntrar {
-  background-color: #e4459b;
-  color: white;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 15px;
+/* ===== BOTÕES ===== */
+.btnEntrar, .btnQuiz {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
   transition: 0.2s;
+  width: 60%;
+  max-width: 250px;
+  padding: 8px 12px;
   margin: 10px auto;
-  height: 25px;
-  width: 20%;
+  font-size: clamp(12px, 3vw, 14px);
+}
+
+.btnEntrar {
+  background-color: #e4459b;
+  color: #fff;
+  border: none;
 }
 
 .btnEntrar:hover {
   background-color: #c83787;
 }
 
-/* ------------ botão Criar Quiz e Meus Quizzes ------------*/
 .btnQuiz {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid black;
-  color: rgb(51, 51, 51);
-  padding: 8px 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  font-weight: bold;
-  width: 20%;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  transition: 0.2s;
-  margin: 10px auto;
+  color: #333;
 }
-  
+
 .btnQuiz:hover {
   background-color: #e4e4e4;
 }
 
-/*----------- texto abaixo ------------*/
-.cadastroText {
-  margin-top: 15px;
-  font-size: 14px;
-}
-
-.cadastroText a {
-  color: #b30074;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.titleContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-/* ------------ MODAL ------------ */
-.tituloModal{
-  -webkit-text-stroke: 1.5px rgb(255, 255, 255);
- font-size: 30px;
- color:#e4459b;/* #b30074*/
- text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
-
-  font-family: "Sigmar", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-
-  justify-content: center;
-  display: flex;
-}
-
+/* ===== MODAL ===== */
 .modalFundo {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
@@ -214,8 +221,9 @@ h1{
 
 .modalBox {
   background: white;
-  padding: 25px;
-  width: 330px;
+  padding: 20px;
+  width: 90%;
+  max-width: 330px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -223,6 +231,7 @@ h1{
 }
 
 .modalBox input {
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #aaa;
@@ -235,91 +244,74 @@ h1{
   margin-top: 15px;
 }
 
-.btnSalvar {
-  color: #4caf50;
-  background-color: white;
-  padding: 10px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px solid #4caf50;
-
-  height: 25px; /* mesma altura */
+.btnSalvar, .btnCancelar {
+  flex: 1;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btnSalvar {
+  color: #4caf50;
+  border: 2px solid #4caf50;
+  background-color: white;
 }
 .btnSalvar:hover {
-  color: #ffffff;
+  color: white;
   background-color: #8dc98e;
 }
 
 .btnCancelar {
-  background: white;
-  border: 2px solid #d9534f;
   color: #d9534f;
-  padding: 10px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-
-  height: 25px; /* mesma altura */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 2px solid #d9534f;
+  background-color: white;
 }
 .btnCancelar:hover{
   color: white;
   background-color: #d87f7b;
 }
 
-.erro {
-  color: red;
-  font-size: 14px;
+/* ===== ERRO/SUCESSO ===== */
+.erro { color: red; font-size: clamp(12px, 2.5vw, 14px); }
+.sucesso { color: green; font-size: clamp(12px, 2.5vw, 14px); }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+  .loginBox { 
+    padding: clamp(40px, 10vw, 60px) clamp(16px, 5vw, 24px); 
+  }
+  .loginAvatar i { font-size: 36px; }
+  .btnEntrar, .btnQuiz { width: 90%; font-size: 12px; }
+  .inputGroup { width: 95%; max-width: 240px; }
+  h1 { font-size: clamp(24px, 8vw, 36px); }
+  .topoDireita { top: 8px; right: 8px; }
 }
 
-.sucesso {
-  color: green;
-  font-size: 14px;
-}
+@media (max-width: 500px) {
+  .topoDireita {
+    top: 10px;
+    right: 10px;
+    gap: 4px;
+  }
 
-.jogador{
-  background: #fff;
-  border-radius: 20px;
-  padding: 7px 15px;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid #000;
-  cursor: pointer;
-}
-.jogador:hover{
-  background: #dadadab0;
-}
+  .btnVoltarMini, .jogador {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
 
-.topoDireita {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  .fa-circle-user {
+    font-size: 20px;
+  }
 
-  display: flex;
-  align-items: center;
-  gap: 6px; /* espaço entre voltar e jogador */
+  .jogadorNomeMini {
+    font-size: 12px;
+    white-space: nowrap; /* evita quebrar o nome */
+    overflow: hidden;
+    text-overflow: ellipsis; /* corta com "..." se necessário */
+  }
 }
-
-/* ------------ botão voltar ------------*/
-.btnVoltarMini {
-  background-color: #e4459b;
-  color: white;
-  border: none;
-  padding: 7px 10px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.btnVoltarMini:hover {
-  background-color: #c83787;
-}
-
-.jogadorNomeMini {
-  font-weight: bold;
-}
-
