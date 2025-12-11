@@ -1,26 +1,53 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import styles from "../styles/ranking.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Ranking() {
   const [ranking, setRanking] = useState([]);
-  const quizAtual = JSON.parse(localStorage.getItem("quizAtual") || "{}");
-  const quizId = quizAtual.id;
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function carregarRanking() {
-      const { data, error } = await supabase
-      .from("pontuacoes")
-      .select(`
-        pontos_totais,
-        user_id,
-        perfis:user_id ( username )
-      `)
-      .eq("quiz_id", quizId)
-      .order("pontos_totais", { ascending: false });
+      try {
+        const quizId = localStorage.getItem("quizId");
 
+        if (!quizId) return;
 
-      if (!error) setRanking(data);
+        // 1. Buscar pontuações do quiz atual
+        const { data: pontuacoes, error } = await supabase
+          .from("pontuacoes")
+          .select("pontos_totais, user_id")
+          .eq("quiz_id", quizId);
+
+        if (error) {
+          console.error("Erro ao buscar pontuações:", error);
+          return;
+        }
+
+        // 2. Para cada pontuação, pegar o nome do usuário
+        const rankingCompleto = [];
+
+        for (let p of pontuacoes) {
+          const { data: usuario } = await supabase
+            .from("usuarios")
+            .select("username")
+            .eq("id_autenticacao", p.user_id)
+            .single();
+
+          rankingCompleto.push({
+            username: usuario?.username || "Usuário",
+            pontos: p.pontos_totais,
+          });
+        }
+
+        // 3. Ordenar por pontuação decrescente
+        rankingCompleto.sort((a, b) => b.pontos - a.pontos);
+
+        setRanking(rankingCompleto);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     carregarRanking();
@@ -30,31 +57,39 @@ export default function Ranking() {
     <div className={styles.container}>
       <h1 className={styles.titulo}>Ranking</h1>
 
-      <div className={styles.grafico}>
-        {ranking.map((item, index) => (
+      <div className={styles.rankingBox}>
+        {ranking.slice(0, 4).map((item, index) => (
           <div key={index} className={styles.coluna}>
+            <div className={styles.nome}>{item.username}</div>
+
             <div
               className={styles.barra}
-              style={{
-                height: `${item.pontos_totais * 4}px`,
-                background:
-                  index === 0
-                    ? "#ffb3d9"
-                    : index === 1
-                    ? "#ff66cc"
-                    : index === 2
-                    ? "#cc33aa"
-                    : "#7f00d4ff"
-              }}
-            ></div>
+              style={{ height: `${40 + item.pontos * 2}px` }}
+            >
+              <div className={styles.pontos}>{item.pontos}</div>
+            </div>
 
-            <p className={styles.nome}>{item.perfis?.username}</p>
-            <p className={styles.posicao}>{index + 1}º</p>
+            <div
+              className={`${styles.posicao} ${
+                index === 0
+                  ? styles.ouro
+                  : index === 1
+                  ? styles.prata
+                  : index === 2
+                  ? styles.bronze
+                  : styles.quarto
+              }`}
+            >
+              {index + 1}º
+            </div>
           </div>
         ))}
       </div>
 
-      <button className={styles.btnDesempenho}>
+      <button
+        className={styles.botao}
+        onClick={() => navigate("/desempenho")}
+      >
         Visualizar Desempenho
       </button>
     </div>

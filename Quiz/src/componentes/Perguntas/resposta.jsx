@@ -8,11 +8,12 @@ export default function Resposta() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const indice = location.state?.indicePergunta;
+  const indicePergunta = location.state?.indicePergunta;
   const indiceEscolhido = location.state?.indiceEscolhido;
 
   const [question, setQuestion] = useState(null);
   const [quizInfo, setQuizInfo] = useState(null);
+  const [totalPerguntas, setTotalPerguntas] = useState(0);
 
   // Recupera quiz salvo
   useEffect(() => {
@@ -20,18 +21,13 @@ export default function Resposta() {
     setQuizInfo(quiz);
   }, []);
 
-  // Carrega pergunta correta
+  // Carregar pergunta + total de perguntas
   useEffect(() => {
     async function carregarPergunta() {
-      if (indice === undefined) return;
+      if (indicePergunta === undefined) return;
 
       const quizAtual = JSON.parse(localStorage.getItem("quizAtual") || "{}");
       const quizId = quizAtual?.id;
-
-      if (!quizId) {
-        alert("Erro: quizId não encontrado.");
-        return;
-      }
 
       const { data, error } = await supabase
         .from("perguntas")
@@ -39,16 +35,15 @@ export default function Resposta() {
         .eq("quiz_id", quizId)
         .order("id", { ascending: true });
 
-      if (error) {
-        console.error("Erro ao carregar pergunta:", error);
-        return;
+      if (!error) {
+        setQuestion(data[indicePergunta]);
+        setTotalPerguntas(data.length);
       }
-
-      setQuestion(data[indice]);
     }
 
     carregarPergunta();
-  }, [indice]);
+  }, [indicePergunta]);
+
 
   if (!question) return <h2>Carregando resposta...</h2>;
 
@@ -61,48 +56,63 @@ export default function Resposta() {
 
   const acertou = indiceEscolhido === Number(question.resposta_correta);
 
+  // Salva a pontuação da pergunta
   async function salvarPontuacao() {
     const { data: userData } = await supabase.auth.getUser();
     const userId = userData?.user?.id;
-
     if (!userId) return;
 
     const quizId = quizInfo?.id;
     if (!quizId) return;
 
-    const pontosGanhos = acertou ? Number(question.pontos) : 0;
+    const pontosDaPergunta = acertou ? Number(question.pontos) : 0;
 
-    // Procurar se já existe registro
+    // Verifica se já existe pontuação do usuário
     const { data: existente } = await supabase
       .from("pontuacoes")
       .select("*")
       .eq("user_id", userId)
       .eq("quiz_id", quizId);
 
-    // Se já existe → atualizar
     if (existente?.length > 0) {
-      const atual = existente[0];
       await supabase
         .from("pontuacoes")
         .update({
-          pontos_totais: atual.pontos_totais + pontosGanhos
+          pontos_totais: existente[0].pontos_totais + pontosDaPergunta
         })
-        .eq("id", atual.id);
+        .eq("id", existente[0].id);
+    } else {
+      await supabase.from("pontuacoes").insert({
+        user_id: userId,
+        quiz_id: quizId,
+        pontos_totais: pontosDaPergunta
+      });
+    }
+  }
+
+  // Botão "Próxima Questão"
+  async function proximaQuestao() {
+    await salvarPontuacao(); // ← SALVA AQUI
+
+    // Se acabou o quiz → ranking
+    if (indicePergunta + 1 >= totalPerguntas) {
+      const quizId = quizInfo?.id;
+      const salaId = quizInfo?.sala;
+
+      localStorage.setItem("quizId", quizId);
+
+      navigate("/ranking", {
+        state: { quizId, salaId }
+      });
       return;
     }
 
-    // Criar novo
-    await supabase.from("pontuacoes").insert({
-      user_id: userId,
-      quiz_id: quizId,
-      pontos_totais: pontosGanhos
+    // Senão → próxima
+    navigate("/salajogando", {
+      state: { indice: indicePergunta + 1 }
     });
   }
 
-  async function proximaQuestao() {
-    await salvarPontuacao();
-    navigate("/salajogando", { state: { indice: indice + 1 } });
-  }
 
   return (
     <div className={styles.container}>
@@ -111,26 +121,27 @@ export default function Resposta() {
         <h2 className={styles.materia}>{question.categoria}</h2>
 
         <div className={styles.questaoBox}>
-          <span className={styles.numero}>0{indice + 1} —</span>
+          <span className={styles.numero}>
+            {String(indicePergunta + 1).padStart(2, "0")} —
+          </span>
           <span className={styles.pontos}>{question.pontos} pontos</span>
 
           <p className={styles.enunciado}>{question.pergunta}</p>
 
           <ul className={styles.listaAlternativas}>
             {alternativas.map((alt, i) => (
-         <li
-         key={i}
-         className={
-          i === Number(question.resposta_correta)
-          ? styles.alternativaCorreta
-          : i === indiceEscolhido
-          ? styles.alternativaErrada
-          : ""
-          }
-          >
-            <strong>{["A", "B", "C", "D"][i]})</strong> {alt}
-            </li>
-
+              <li
+                key={i}
+                className={
+                  i === Number(question.resposta_correta)
+                    ? styles.alternativaCorreta
+                    : i === indiceEscolhido
+                    ? styles.alternativaErrada
+                    : ""
+                }
+              >
+                <strong>{["A", "B", "C", "D"][i]})</strong> {alt}
+              </li>
             ))}
           </ul>
         </div>
