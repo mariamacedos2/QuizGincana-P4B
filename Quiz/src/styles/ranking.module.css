@@ -1,262 +1,163 @@
-/* CONTAINER GERAL */
-.RankingContainer {
-  position: relative;
+/* =============================== */
+/*  FUNDO GERAL COM IMAGEM E OVERLAY */
+/* =============================== */
+.container {
   min-height: 100vh;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
+  position: relative;
 
   background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
   background-size: cover;
   background-position: center;
 }
 
-/* OVERLAY ROSA TRANSPARENTE */
-.RankingContainer::before {
+.container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(250, 246, 248, 0.45);
+  background: rgba(255, 245, 248, 0.45);
   z-index: 0;
 }
 
-/* BOTÃO SAIR — IGUAL AO FIGMA */
-.botaoSair {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-
-  background: #f8aed7;
-  border: none;
-
-  width: 70px;
-  height: 50px;
-
-  border-radius: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-  transition: 0.2s;
-  z-index: 10;
-}
-
-.botaoSair:hover {
-  filter: brightness(0.9);
-}
-
-.iconeSair {
-  width: 22px;      /* tamanho pequeno */
-  height: 22px;
-  filter: brightness(0) invert(1); /* deixa o ícone branco */
-}
-
-
-/* CARD PRINCIPAL */
-.quizContent {
+.container > * {
   position: relative;
   z-index: 1;
-  background: #FAFBD8;
-  width: 700px;
-  max-width: 100%;
-  padding: 45px 40px;
-  border-radius: 40px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  text-align: center;
 }
 
-/* TÍTULO */
+/* =============================== */
+/*            TÍTULO              */
+/* =============================== */
 .titulo {
-  font-size: 50px;
+  font-size: 55px;
   font-weight: 400;
-  color: #d63384;
-  text-shadow: 0px 2px 8px rgba(255, 130, 190, 0.7);
-  margin-bottom: 60px;
+  color: #e4459b;
+  text-shadow: 0px 3px 10px rgba(255, 120, 180, 0.6);
+  margin-bottom: 35px;
+  font-family: 'Lobster', cursive;
 }
 
-/* SUBTÍTULO */
-.infoText {
-  font-size: 16px;
-  color: #444;
-  margin-bottom: 8px;
-}
-
-/* CÓDIGO */
-.codigoBox {
-  background: #ffeef5;
-  border: 2px dashe #ff7fb3;
-  padding: 16px 20px;
-  border-radius: 25px;
-  font-size: 34px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  width: 280px;
-  margin: 0 auto 22px auto;
-  color: #333;
-}
-
-/* BOTÃO COPIAR */
-.btnCopiar {
-  background: #ff8db7;
-  color: white;
-  border: none;
-  padding: 12px 45px;
-  border-radius: 30px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-  margin-top: 10px;
-}
-
-.btnCopiar:hover {
-  background: #ff6aa5;
-}
-
-.container {
-  width: 100%;
-  height: 100vh;
-  padding: 40px;
-  background: #fbe6ff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.titulo {
-  font-size: 48px;
-  font-weight: bold;
-  color: #d62ca0;
-  margin-bottom: 40px;
-}
-
-.grafico {
-  display: flex;
-  gap: 50px;
-  align-items: flex-end;
-  margin-top: 40px;
-}
-
-.coluna {
-  text-align: center;
-}
-
-.barra {
-  width: 80px;
-  border-radius: 10px;
-  transition: .4s;
-}
-
-.nome {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-.posicao {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.btnDesempenho {
-  margin-top: 40px;
-  padding: 12px 30px;
-  background: #e77ed3;
-  border-radius: 20px;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  color: white;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px;
-}
-
-.titulo {
-  font-size: 34px;
-  font-weight: bold;
-  color: #121212;
-  margin-bottom: 20px;
-}
-
+/* =============================== */
+/*        BOX PRINCIPAL           */
+/* =============================== */
 .rankingBox {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 30px;
-  background: #ffffff;
-  border-radius: 20px;
+  align-items: flex-end;
+  gap: 45px;
+
+  background: #ffffffd8;
+  border-radius: 30px;
+  padding: 40px;
   width: 90%;
-  max-width: 850px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* =============================== */
+/*        COLUNAS DO RANKING      */
+/* =============================== */
 .coluna {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 22%;
 }
 
 .nome {
-  font-size: 16px;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #222;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333;
 }
 
+/* =============================== */
+/*        BARRAS DE PONTOS        */
+/* =============================== */
 .barra {
-  width: 55px;
-  background: linear-gradient(180deg, #4a90e2, #1c65b8);
-  border-radius: 15px;
+  width: 70px;
+  border-radius: 20px;
+
+  background: linear-gradient(180deg, #ff80c0, #d63384);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 5px;
+
+  padding-bottom: 6px;
   color: white;
   font-weight: bold;
-  transition: height 0.3s ease;
+  font-size: 15px;
+
+  transition: height 0.4s ease;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.25);
 }
 
-.pontos {
-  font-size: 14px;
-}
-
+/* =============================== */
+/*        POSIÇÃO (MEDALHAS)      */
+/* =============================== */
 .posicao {
-  margin-top: 10px;
-  font-size: 20px;
+  margin-top: 12px;
+  font-size: 22px;
   font-weight: bold;
 }
 
 .ouro {
-  color: #d4af37;
+  color: #f5c400;
 }
 .prata {
-  color: #c0c0c0;
+  color: #bfbfbf;
 }
 .bronze {
-  color: #cd7f32;
+  color: #c77b30;
 }
 .quarto {
   color: #666;
 }
 
+/* =============================== */
+/*        BOTÃO DE DESEMPENHO     */
+/* =============================== */
 .botao {
-  margin-top: 25px;
-  background: #4a90e2;
-  color: white;
-  padding: 12px 30px;
-  border-radius: 12px;
+  margin-top: 35px;
+  background: #e4459b;
   border: none;
-  font-size: 18px;
+  padding: 14px 32px;
+  border-radius: 20px;
+  color: white;
+  font-size: 20px;
   cursor: pointer;
   transition: 0.3s;
+  font-weight: 600;
 }
 
 .botao:hover {
-  background: #3976c6;
+  background: #c52f82;
+  transform: scale(1.05);
+}
+
+/* =============================== */
+/*           RESPONSIVIDADE       */
+/* =============================== */
+@media (max-width: 768px) {
+  .rankingBox {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .coluna {
+    width: 100%;
+  }
+
+  .barra {
+    width: 55px;
+  }
+
+  .titulo {
+    font-size: 45px;
+  }
 }
