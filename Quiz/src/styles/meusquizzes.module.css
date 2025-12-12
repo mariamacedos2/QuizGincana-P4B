@@ -79,40 +79,56 @@
 /* ----------------------------- CARDS ----------------------------- */
 .cardsRow {
   display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  justify-content: center;
-  align-items: stretch;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  flex-direction: row;    /* mantém as caixas lado a lado */
+  gap: 20px;              /* espaço entre elas */
+  overflow-x: auto;       /* ATIVA ROLAGEM HORIZONTAL */
+  overflow-y: hidden;
+  padding-bottom: 10px;   /* espaço extra para não colar na barra */
+  white-space: nowrap;    /* evita que quebrem para a linha de baixo */
+}
+/* Barra de rolagem horizontal fina */
+.cardsRow::-webkit-scrollbar {
+  height: 6px; /* altura da barra */
 }
 
+.cardsRow::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.cardsRow::-webkit-scrollbar-thumb {
+  background: #c44ab0;
+  border-radius: 10px;
+}
+
+.cardsRow::-webkit-scrollbar-thumb:hover {
+  background: #a33692;
+}
+
+
 .quizcaixa {
-  background: #ffffff;
-  border-radius: 40px;
-  border: 4px solid #e4459b;
-
-  width: 260px;
-  height: 180px;
-
+  flex: 0 0 auto;            /* evita quebra */
+  width: 170px;              /* antes era ~250px, agora menor */
+  height: 120px;             /* altura menor */
+  background: #fff;
+  border: 3px solid #ff6ec7;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  font-size: 28px;
-  text-align: center;
-
-  box-shadow:
-    inset 0 0 10px rgba(255, 0, 140, 0.2),
-    0 0 20px rgba(0, 0, 0, 0.2);
-
+  justify-content: center;
+  cursor: pointer;
   transition: transform 0.2s;
-  flex-shrink: 0;
 }
 
 .quizcaixa:hover {
   transform: scale(1.03);
 }
+.quizcaixa h3 {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
 
 .quizLink {
   text-decoration: none;

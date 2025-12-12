@@ -133,28 +133,29 @@ export default function CriarQuiz() {
 
         {/* ESQUERDA */}
         <div className={styles.formLeft}>
-          <h1 className={styles.titulo}>Doce Desafio</h1>
+          <h1 className={styles.titulo}>Criando Quiz</h1>
 
           {/* Nome da sala */}
-          <div className={styles.salaBox}>
-            <label>Digite o nome da sala:</label>
-            <input
-              value={sala}
-              onChange={(e) => setSala(e.target.value)}
-              placeholder="Digite o nome da sala..."
-            />
-          </div>
+          <div className={styles.inputWrapper}>
+          <span className={styles.inputIcon}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-pen-icon lucide-folder-pen"><path d="M2 11.5V5a2 2 0 0 1 2-2h3.9c.7 0 1.3.3 1.7.9l.8 1.2c.4.6 1 .9 1.7.9H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-9.5"/><path d="M11.378 13.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>
+          <input
+            className={styles.inputStyled}
+            value={sala}
+            onChange={(e) => setSala(e.target.value)}
+            placeholder="Digite o nome da sala..."
+          />
+        </div>
 
-          <div className={styles.perguntaBox}>
-            <label></label>
-            <div className={styles.formGroup}>
-              <input
-                value={pergunta}
-                onChange={(e) => setPergunta(e.target.value)}
-                placeholder="Comece a digitar a pergunta..."
-              />
-            </div>
-          </div>
+        <div className={styles.inputWrapper + " " + styles.perguntaBox}>
+        <span className={styles.inputIcon}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-question-mark-icon lucide-message-circle-question-mark"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
+        <input
+          className={styles.inputStyled}
+          value={pergunta}
+          onChange={(e) => setPergunta(e.target.value)}
+          placeholder="Digite a pergunta..."
+        />
+        </div>
+
 
           {/* Alternativas */}
           <div className={styles.alternativasBox}>

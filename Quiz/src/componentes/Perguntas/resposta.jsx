@@ -14,7 +14,7 @@ export default function Resposta() {
   const [quizInfo, setQuizInfo] = useState(null);
   const [totalPerguntas, setTotalPerguntas] = useState(0);
 
-  // Carregar quiz salvo
+  // Carregar quiz salvo no localStorage
   useEffect(() => {
     const quiz = JSON.parse(localStorage.getItem("quizAtual") || "{}");
     setQuizInfo(quiz);
@@ -29,13 +29,13 @@ export default function Resposta() {
       const quizId = quizAtual?.id;
       if (!quizId) return;
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("perguntas")
         .select("*")
         .eq("quiz_id", quizId)
         .order("id", { ascending: true });
 
-      if (data) {
+      if (!error && data) {
         setQuestion(data[indicePergunta]);
         setTotalPerguntas(data.length);
       }
@@ -55,7 +55,9 @@ export default function Resposta() {
 
   const acertou = indiceEscolhido === Number(question.resposta_correta);
 
-  // ---------- SALVAR RESPOSTA ----------
+  // ---------------------------------------------------------
+  // SALVAR RESPOSTA NO BANCO
+  // ---------------------------------------------------------
   async function salvarResposta() {
     const { data: userData } = await supabase.auth.getUser();
     const userId = userData?.user?.id;
@@ -72,19 +74,29 @@ export default function Resposta() {
     });
   }
 
-  // ---------- SALVAR PONTUAÇÃO ----------
+  // ---------------------------------------------------------
+  // SALVAR PONTUAÇÃO (VERSÃO FINAL 100% FUNCIONAL)
+  // ---------------------------------------------------------
   async function salvarPontuacao() {
     const { data: userData } = await supabase.auth.getUser();
     const userId = userData?.user?.id;
-    const username = userData?.user?.user_metadata?.username;
-
     if (!userId) return;
 
     const quizId = quizInfo?.id;
     if (!quizId) return;
 
-    const pontosDaPergunta = acertou ? Number(question?.pontos || 0) : 0;
+    const pontosDaPergunta = acertou ? Number(question.pontos) : 0;
 
+    // 🔥 Buscar username do perfil
+    const { data: perfil } = await supabase
+      .from("perfis")
+      .select("username")
+      .eq("id", userId)
+      .single();
+
+    const username = perfil?.username || null;
+
+    // 🔥 Verifica se já existe pontuação anterior
     const { data: existente } = await supabase
       .from("pontuacoes")
       .select("*")
@@ -92,6 +104,7 @@ export default function Resposta() {
       .eq("quiz_id", quizId);
 
     if (existente?.length > 0) {
+      // Atualiza com nova soma + username
       await supabase
         .from("pontuacoes")
         .update({
@@ -100,6 +113,7 @@ export default function Resposta() {
         })
         .eq("id", existente[0].id);
     } else {
+      // Cria pontuação nova
       await supabase.from("pontuacoes").insert({
         user_id: userId,
         quiz_id: quizId,
@@ -109,13 +123,14 @@ export default function Resposta() {
     }
   }
 
-  // ---------- PRÓXIMA QUESTÃO ----------
+  // ---------------------------------------------------------
+  // IR PARA A PRÓXIMA QUESTÃO OU RANKING
+  // ---------------------------------------------------------
   async function proximaQuestao() {
-    if (!question) return; // evita salvar antes da pergunta carregar
-
     await salvarResposta();
     await salvarPontuacao();
 
+    // Última pergunta → Ranking
     if (indicePergunta + 1 >= totalPerguntas) {
       const quizId = quizInfo?.id;
       const salaId = quizInfo?.sala;
@@ -123,11 +138,12 @@ export default function Resposta() {
       localStorage.setItem("quizId", quizId);
 
       navigate("/ranking", {
-        state: { quizId, salaId },
+        state: { quizId, salaId }
       });
       return;
     }
 
+    // Próxima pergunta
     navigate("/salajogando", {
       state: { indice: indicePergunta + 1 },
     });

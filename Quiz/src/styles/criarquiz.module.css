@@ -1,5 +1,5 @@
-/* criarquiz.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 /* RESET */
 * {
@@ -11,7 +11,8 @@
 html, body {
   width: 100%;
   min-height: 100%;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
+  background-color: #fefefe;
 }
 
 /* CONTAINER GERAL */
@@ -26,93 +27,126 @@ html, body {
   display: flex;
   flex: 1;
   width: 100%;
-  align-items: stretch; /* garante que colunas tenham mesma altura */
+  align-items: stretch;
 }
 
 /* ====================== */
 /*        ESQUERDA        */
 /* ====================== */
 .formLeft {
-  flex: 1; /* ocupa metade da tela */
-  background-color: rgba(251, 255, 215, 0.7);
-  padding: 16px;
+  flex: 1;
+  
+  background: rgba(251, 255, 215, 0.7);
+  padding: 28px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  border-right: 2px solid #f0dbe8;
 }
 
 /* TÍTULO */
 .titulo {
-  -webkit-text-stroke: 1px white;
-  font-size: 36px;
+  font-size: 48px;
   color: #e4459b;
-  text-shadow: 3px 5px 5px rgba(0,0,0,0.3);
+  text-shadow: 3px 5px 10px rgba(0,0,0,0.25);
   font-family: "Lobster", cursive;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 /* FORM GROUP */
 .formGroup {
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
 .formGroup label {
   display: block;
-  font-weight: 700;
-  margin-bottom: 4px;
-  color: #333;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #564d4a;
 }
 
 .formGroup input,
 .formGroup select,
 .formGroup textarea {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border-radius: 16px;
-  border: 1px solid #d9d9d9;
+  border: 2px solid #f3d8e8;
+  background-color: #ffffff;
   font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  border-color: #e4459b;
+  box-shadow: 0 0 8px rgba(228, 69, 155, 0.25);
   outline: none;
+}
+
+/* Inputs grandes */
+.salaBox input,
+.perguntaBox input,
+.alternativasBox input {
+  background: #fff;
 }
 
 /* BOTÕES */
 .botoes {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
   margin-top: auto;
 }
 
 button {
-  padding: 8px 14px;
-  border-radius: 16px;
-  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 20px;
+  font-weight: 600;
   cursor: pointer;
   border: none;
-  font-size: 13px;
+  font-size: 15px;
+  transition: 0.25s ease;
 }
 
+/* VOLTAR */
 .voltar {
-  background: #e6e6e6;
+  background: #eee;
+  color: #333;
 }
 
+.voltar:hover {
+  background: #d8d8d8;
+}
+
+/* PRÓXIMA */
 .salvar {
-  background: #bfe9b9;
-  color: #114f11;
+  background: #bdf2c8;
+  color: #115c11;
 }
 
+.salvar:hover {
+  background: #a6eab4;
+}
+
+/* FINALIZAR QUIZ */
 .salvarFull {
   width: 100%;
+  background: #f6b6d2;
+  color: #6d0d3d;
   margin-top: 8px;
-  justify-content: center;
+}
+
+.salvarFull:hover {
+  background: #f1a1c4;
 }
 
 /* ====================== */
 /*        DIREITA         */
 /* ====================== */
 .formRight {
-  flex: 1; /* ocupa metade da tela */
+  flex: 1;
   position: relative;
   text-align: center;
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg") center center / cover no-repeat;
@@ -120,14 +154,15 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: 24px;
 }
 
 .formRight::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(236, 232, 232, 0.58);
+  background-color: rgba(255, 245, 255, 0.6);
+  backdrop-filter: blur(3px);
   z-index: 1;
 }
 
@@ -138,52 +173,99 @@ button {
 
 .painelBox {
   width: 100%;
-  max-width: 400px;
-  background: rgba(244,238,247,0.98);
+  max-width: 420px;
+  background: rgba(255, 250, 255, 0.95);
   border-radius: 32px;
-  padding: 30px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   margin: 0 auto;
+  border: 2px solid #f3d8e8;
 }
 
 .painelBox input,
 .painelBox select {
   width: 100%;
-  padding: 10px 14px;
-  border-radius: 16px;
-  border: 1px solid #d2cfc1;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 2px solid #f0d5e3;
   font-size: 14px;
 }
 
-/* SALA / PERGUNTAS */
-.salaGroup, .salaBox, .perguntaBox, .alternativasBox {
-  width: 100%;
-  margin-bottom: 16px;
+.painelBox input:focus,
+.painelBox select:focus {
+  border-color: #d8438c;
+  box-shadow: 0 0 8px rgba(216, 67, 140, 0.3);
+}
+.perguntaBox {
+  position: relative;
+  margin-bottom: 40px; /* AQUI aumenta a distância! */
 }
 
-.salaBox input {
-  width: 100%;
+.perguntaIcon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #e4459b;
+  pointer-events: none;
 }
 
+.perguntaInput {
+  padding-left: 42px !important; /* espaço para o ícone */
+  height: 45px; /* mantém o mesmo tamanho da caixa */
+}
+
+/* ===== INPUT COM ÍCONE ===== */
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 28px; /* separação extra */
+}
+
+.inputIcon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #e4459b;
+  pointer-events: none;
+}
+
+.inputStyled {
+  width: 100%;
+  padding: 12px 16px;
+  padding-left: 48px; /* espaço para o ícone */
+  border-radius: 20px;
+  border: 1px solid #d9d9d9;
+  font-size: 15px;
+  outline: none;
+  background-color: white;
+  height: 48px; /* mantém o tamanho bonito e igual ao original */
+}
+
+/* Aumenta apenas o espaço entre pergunta e alternativas */
+.perguntaBox {
+  margin-bottom: 42px;
+}
+
+
+
 /* ====================== */
-/* RESPONSIVO PARA CELULAR */
+/* RESPONSIVO */
 /* ====================== */
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .criarquizCard {
-    flex-direction: row; /* mantém lado a lado */
-    align-items: stretch; /* garante mesma altura */
+    flex-direction: column;
   }
 
   .formLeft, .formRight {
-    flex: 1; /* cada coluna ocupa metade da tela */
-    padding: 12px;
+    flex: none;
+    width: 100%;
   }
 
   .titulo {
-    font-size: 28px;
-  }
-
-  .painelBox {
-    padding: 16px;
+    font-size: 38px;
   }
 }

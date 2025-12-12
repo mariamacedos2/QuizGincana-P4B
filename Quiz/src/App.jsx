@@ -26,7 +26,7 @@ function App() {
         <Route path="/resposta" element={<Resposta />} />
         <Route path="/meusquizzes" element={<MeusQuizzes />} />
         <Route path="/quizcodigo" element={<QuizCodigo />} />
-        <Route path="/ranking" element={<Ranking />} />
+        <Route path="/ranking/:quizId" element={<Ranking />} />
         <Route path="/desempenho" element={<Desempenho />} />
 
       </Routes>
