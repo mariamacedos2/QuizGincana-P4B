@@ -87,7 +87,7 @@ export default function Resposta() {
 
     const pontosDaPergunta = acertou ? Number(question.pontos) : 0;
 
-    // 🔥 Buscar username do perfil
+    // Buscar username do perfil
     const { data: perfil } = await supabase
       .from("perfis")
       .select("username")
@@ -96,7 +96,7 @@ export default function Resposta() {
 
     const username = perfil?.username || null;
 
-    // 🔥 Verifica se já existe pontuação anterior
+    // Verifica se já existe pontuação anterior
     const { data: existente } = await supabase
       .from("pontuacoes")
       .select("*")
@@ -123,9 +123,8 @@ export default function Resposta() {
     }
   }
 
-  // ---------------------------------------------------------
   // IR PARA A PRÓXIMA QUESTÃO OU RANKING
-  // ---------------------------------------------------------
+ 
   async function proximaQuestao() {
     await salvarResposta();
     await salvarPontuacao();
@@ -152,6 +151,12 @@ export default function Resposta() {
   return (
     <div className={styles.container}>
       <div className={styles.colunaEsquerda}>
+        <button
+                className={styles.btnVoltar}
+                onClick={() => navigate("/inicio")}
+              >
+                <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
+              </button>
         <h1 className={styles.tituloSala}>{quizInfo?.nome_sala}</h1>
         <h2 className={styles.materia}>{question.categoria}</h2>
 

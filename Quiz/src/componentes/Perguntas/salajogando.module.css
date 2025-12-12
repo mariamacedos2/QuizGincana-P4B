@@ -13,9 +13,7 @@
   z-index: 2;
 }
 
-/* ======================= */
-/* COLUNA ESQUERDA         */
-/* ======================= */
+/* COLUNA ESQUERDA   */
 .colunaEsquerda {
   flex: 1;
   padding: 40px;
@@ -49,7 +47,7 @@
 
 .enunciado {
   margin-top: 25px;
-  font-size: 28px;      /* maior */
+  font-size: 28px;      
   font-weight: 600;
   line-height: 1.4;
   max-width: 90%;
@@ -72,9 +70,8 @@
 }
 
 
-/* ======================= */
-/* COLUNA DIREITA          */
-/* ======================= */
+/*  COLUNA DIREITA    */
+
 .colunaDireita {
   width: 50%;
   background: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
@@ -101,9 +98,7 @@
   z-index: 2;
 }
 
-/* ======================= */
-/* CAIXA CENTRAL (CARD)    */
-/* ======================= */
+/* CAIXA CENTRAL (CARD) */
 .caixa {
   background-color: #fdfdfd;
   width: 75%;
@@ -121,10 +116,7 @@
   overflow-y: auto;
 }
 
-
-/* ======================= */
-/* TÍTULO ESCOLHA          */
-/* ======================= */
+/* TÍTULO ESCOLHA */
 .tituloResposta {
   font-size: 32px;
   font-family: "Sigmar", sans-serif;
@@ -135,9 +127,7 @@
   text-shadow: 4px 4px 3px rgba(0,0,0,0.45);
 }
 
-/* ======================= */
-/* BLOCO CINZA DOS BOTÕES  */
-/* ======================= */
+/*  BLOCO CINZA DOS BOTÕES  */
 .blocoCinza {
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
@@ -175,29 +165,24 @@
   cursor: default;
 }
 
-/* ======================= */
-/* BOTÃO VOLTAR            */
-/* ======================= */
+/* BOTÃO VOLTAR    */
 .btnVoltar {
-  position: absolute;
-  top: 25px;
-  left: 25px;
-  background: white;
+  background-color: #e4459b;
+  color: white;
   border: none;
-  padding: 12px;
-  border-radius: 50%;
+  padding: 7px 10px;
+  border-radius: 50px;
   cursor: pointer;
-  font-size: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  transition: 0.2s;
 }
 
 .btnVoltar:hover {
-  background: #ffe9f5;
+  background-color: #c83787;
 }
 
 .colunaEsquerda ul li {
   margin-top: 18px;
-  font-size: 24px;        /* antes 18 → ficou grande e legível */
+  font-size: 24px;        
   font-weight: 500;
 }
 

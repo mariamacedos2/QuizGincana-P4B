@@ -250,3 +250,17 @@ ul {
   font-weight: 600;
   margin-bottom: 20px;
 }
+
+.btnVoltar {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnVoltar:hover {
+  background-color: #c83787;
+}
