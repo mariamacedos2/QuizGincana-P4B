@@ -3,10 +3,14 @@
 /* ======================= */
 .container {
   display: flex;
+  background-color: rgba(251, 255, 215, 0.7);
   height: 100vh;
-  width: 100%;
   font-family: "Arial", sans-serif;
-  background: #fbffd7; /* fundo clarinho igual ao Figma */
+}
+/*--- Não permite q o fundo escuro da imagem sobreponha-lo --- */
+.container > *:not(.imagemContainer) {
+  position: relative;
+  z-index: 2;
 }
 
 /* ======================= */
@@ -15,7 +19,15 @@
 .colunaEsquerda {
   flex: 1;
   padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  
+  align-items: flex-start;
+
+  padding-top: 60px;  
 }
+
 
 .materia {
   margin-top: -10px;
@@ -36,9 +48,13 @@
 }
 
 .enunciado {
-  margin-top: 20px;
-  white-space: pre-line;
+  margin-top: 25px;
+  font-size: 28px;      /* maior */
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 90%;
 }
+
 
 .listaAlternativas li {
   margin-top: 10px;
@@ -89,18 +105,22 @@
 /* CAIXA CENTRAL (CARD)    */
 /* ======================= */
 .caixa {
-  width: 65%;
-  height: 70%;
-  background: #ffffff;
-  border-radius: 30px;
+  background-color: #fdfdfd;
+  width: 75%;
+  max-width: 550px;
+  min-height: 60%;
+  padding: 30px;
+  border-radius: 25px;
+  box-shadow: 0 0 30px 15px rgba(12, 12, 12, 0.25);
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
 }
+
 
 /* ======================= */
 /* TÍTULO ESCOLHA          */
@@ -119,15 +139,11 @@
 /* BLOCO CINZA DOS BOTÕES  */
 /* ======================= */
 .blocoCinza {
-  background: rgba(255,255,255,0.85);
-  margin-top: 25px;
-  padding: 35px;
-  width: 60%;
-  border-radius: 20px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 25px;
+  height: 20%;
+  width: 50%;
 }
 
 .grid {
@@ -137,20 +153,26 @@
   gap: 20px;
 }
 
-.btngeral {
-  border: 2px solid #e4459b;
-  background: #fff1f9;
-  border-radius: 12px;
-  padding: 18px 0;
-  font-size: 26px;
-  font-weight: bold;
+.btngeral,
+.btngeralOculto {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  border: none;
   cursor: pointer;
-  transition: 0.2s ease;
-  font-family: "Arial", sans-serif;
+}
+
+.btngeral {
+  background-color: #c7bdc1;
 }
 
 .btngeral:hover {
-  background: #ffd9ec;
+  background-color: #d7dfe4;
+}
+
+.btngeralOculto {
+  background-color: #ececec;
+  cursor: default;
 }
 
 /* ======================= */
@@ -173,7 +195,19 @@
   background: #ffe9f5;
 }
 
-.colunaEsquerda ul {
-  list-style: none;
-  padding-left: 0;
+.colunaEsquerda ul li {
+  margin-top: 18px;
+  font-size: 24px;        /* antes 18 → ficou grande e legível */
+  font-weight: 500;
+}
+
+.colunaEsquerda h1 {
+  font-size: 46px;
+  margin-bottom: 8px;
+}
+
+.colunaEsquerda h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }

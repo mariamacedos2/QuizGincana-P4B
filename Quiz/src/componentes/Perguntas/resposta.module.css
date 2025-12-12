@@ -28,7 +28,15 @@ font-family: "Lobster", sans-serif;
 .colunaEsquerda {
   flex: 1;
   padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* sobe o conteúdo */
+  align-items: flex-start;
+
+  padding-top: 60px;  /* ajuste fino — quer mais pra cima? posso aumentar */
 }
+
 
 .materia {
   margin-top: -10px;
@@ -49,9 +57,13 @@ font-family: "Lobster", sans-serif;
 }
 
 .enunciado {
-  margin-top: 20px;
-  white-space: pre-line;
+  margin-top: 25px;
+  font-size: 28px;      /* maior */
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 90%;
 }
+
 
 .listaAlternativas li {
   margin-top: 10px;
@@ -151,7 +163,6 @@ font-family: "Lobster", sans-serif;
   background-color: #bdc3c7;
 }
 
-
 .msg {
   margin-top: 20px;
   font-size: 18px;
@@ -216,4 +227,26 @@ font-family: "Lobster", sans-serif;
 ul {
   list-style: none !important;
   padding-left: 0 !important;
+}
+
+.colunaEsquerda ul li {
+  margin-top: 18px;
+  font-size: 24px;        /* antes 18 → ficou grande e legível */
+  font-weight: 500;
+}
+.colunaEsquerda ul {
+  margin-top: 25px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.colunaEsquerda h1 {
+  font-size: 46px;
+  margin-bottom: 8px;
+}
+
+.colunaEsquerda h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
