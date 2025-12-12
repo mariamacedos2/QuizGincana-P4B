@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import styles from "../styles/ranking.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Ranking() {
   const [minhaPosicao, setMinhaPosicao] = useState(null);
@@ -75,6 +75,11 @@ export default function Ranking() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
+         <Link to="/inicio">
+            <button className={styles.btnVoltar}>
+              <i className="fa-solid fa-right-from-bracket fa-flip-both fa-sm"></i>
+            </button>
+          </Link>
         <h1 className={styles.titulo}>Seu Resultado</h1>
 
         <div className={styles.resultadoBox}>

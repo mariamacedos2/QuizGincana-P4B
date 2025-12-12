@@ -44,3 +44,25 @@
   backdrop-filter: blur(10px);
 }
 
+.graficoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.btnVoltar {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnVoltar:hover {
+  background-color: #c83787;
+}
+

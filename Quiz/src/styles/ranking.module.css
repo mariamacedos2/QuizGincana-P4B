@@ -35,8 +35,8 @@
   text-align: center;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(10px);
+  position: relative; /* necessário para o botão ficar dentro do card */
 }
-
 /* ======== TÍTULO ======== */
 .titulo {
   font-size: 55px;
@@ -241,4 +241,23 @@
   margin-top: 2px;
   font-size: 13px;
   opacity: 0.8;
+}
+
+.btnVoltar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  z-index: 10; /* garante que fique na frente */
+}
+
+.btnVoltar:hover {
+  background-color: #c83787;
 }

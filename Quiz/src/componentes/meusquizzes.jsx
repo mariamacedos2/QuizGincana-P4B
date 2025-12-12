@@ -13,7 +13,7 @@ function MeusQuizzes() {
       const userId = userData?.user?.id;
       if (!userId) return;
 
-      // Quizzes criados
+      // Quizzes criados pelo usuário
       const { data: quizzesCriados } = await supabase
         .from("quizzes")
         .select("id, nome_sala")
@@ -21,7 +21,7 @@ function MeusQuizzes() {
 
       setMeusQuizzes(quizzesCriados || []);
 
-      // Histórico
+      // Histórico de quizzes jogados
       const { data: historicoData } = await supabase
         .from("pontuacoes")
         .select("quiz_id, quizzes ( nome_sala )")
@@ -43,7 +43,7 @@ function MeusQuizzes() {
       <div className={styles.loginBox}>
         <Link to="/inicio">
           <button className={styles.btnVoltar}>
-            <i className="fa-solid fa-right-from-bracket"></i>
+            <i className="fa-solid fa-right-from-bracket fa-flip-both"></i>
           </button>
         </Link>
 
@@ -60,6 +60,7 @@ function MeusQuizzes() {
             </div>
           ))}
 
+          {/* Botão de criar novo quiz */}
           <Link to="/criarquiz" className={styles.quizLink}>
             <div className={styles.quizcaixa}>
               <h3 className={styles.plus}>+</h3>

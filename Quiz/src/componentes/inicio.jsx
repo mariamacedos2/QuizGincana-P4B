@@ -81,7 +81,7 @@ function Inicio() {
     localStorage.setItem("quizAtual", JSON.stringify(quiz));
     localStorage.setItem("quizId", quiz.id);
 
-    navigate("/salaquiz");
+    navigate("/salajogando");
   };
 
   return (

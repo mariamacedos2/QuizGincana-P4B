@@ -73,6 +73,7 @@ export default function Desempenho() {
           </Link>
             <h1 className={styles.titulo}>Seu desempenho no quiz</h1>
 
+      <div className={styles.graficoWrapper}>
       <PieChart width={500} height={400}>
         <Pie
           data={dados}
@@ -90,6 +91,8 @@ export default function Desempenho() {
 
         <Legend />
       </PieChart>
+</div>
+
         </div>
     </div>
   );

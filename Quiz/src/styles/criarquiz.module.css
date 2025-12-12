@@ -59,6 +59,20 @@ html, body {
   margin-bottom: 18px;
 }
 
+.btnVoltarMini {
+  background-color: #e4459b;
+  color: white;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btnVoltarMini:hover {
+  background-color: #c83787;
+}
+
 .formGroup label {
   display: block;
   font-weight: 600;

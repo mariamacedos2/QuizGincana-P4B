@@ -37,9 +37,7 @@
 
   background: #fbffd796;
   padding: 30px 20px;
-
   border-radius: 60px;
-
   width: 60%;
   max-width: 1000px;
 
@@ -79,16 +77,16 @@
 /* ----------------------------- CARDS ----------------------------- */
 .cardsRow {
   display: flex;
-  flex-direction: row;    /* mantém as caixas lado a lado */
-  gap: 20px;              /* espaço entre elas */
-  overflow-x: auto;       /* ATIVA ROLAGEM HORIZONTAL */
+  flex-direction: row;
+  gap: 20px;
+  overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 10px;   /* espaço extra para não colar na barra */
-  white-space: nowrap;    /* evita que quebrem para a linha de baixo */
+  padding-bottom: 10px;
+  white-space: nowrap;
 }
-/* Barra de rolagem horizontal fina */
+
 .cardsRow::-webkit-scrollbar {
-  height: 6px; /* altura da barra */
+  height: 6px;
 }
 
 .cardsRow::-webkit-scrollbar-track {
@@ -105,11 +103,10 @@
   background: #a33692;
 }
 
-
 .quizcaixa {
-  flex: 0 0 auto;            /* evita quebra */
-  width: 170px;              /* antes era ~250px, agora menor */
-  height: 120px;             /* altura menor */
+  flex: 0 0 auto;
+  width: 170px;
+  height: 120px;
   background: #fff;
   border: 3px solid #ff6ec7;
   border-radius: 20px;
@@ -124,11 +121,11 @@
 .quizcaixa:hover {
   transform: scale(1.03);
 }
+
 .quizcaixa h3 {
   font-size: 1.2rem;
   text-align: center;
 }
-
 
 .quizLink {
   text-decoration: none;
@@ -149,10 +146,6 @@
     width: 220px;
     height: 160px;
     font-size: 24px;
-  }
-
-  .cardsRow {
-    gap: 20px;
   }
 }
 
