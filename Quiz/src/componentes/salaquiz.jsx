@@ -177,7 +177,10 @@ function SalaQuiz() {
                 alert("Você precisa selecionar pelo menos 20 perguntas!");
                 return;
               }
-              navigate("/salajogando");
+              navigate("/salajogando", {
+                state: { indice: 0 }
+              });
+
             }}
           >
             Iniciar Quiz

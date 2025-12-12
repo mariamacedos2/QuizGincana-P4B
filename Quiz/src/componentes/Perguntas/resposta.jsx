@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./resposta.module.css";
 import { supabase } from "../../supabaseClient";
-
 import { useEffect, useState } from "react";
 
 export default function Resposta() {
@@ -15,27 +14,28 @@ export default function Resposta() {
   const [quizInfo, setQuizInfo] = useState(null);
   const [totalPerguntas, setTotalPerguntas] = useState(0);
 
-  // Recupera quiz salvo
+  // Carregar quiz salvo
   useEffect(() => {
     const quiz = JSON.parse(localStorage.getItem("quizAtual") || "{}");
     setQuizInfo(quiz);
   }, []);
 
-  // Carregar pergunta + total de perguntas
+  // Carregar pergunta do Supabase
   useEffect(() => {
     async function carregarPergunta() {
       if (indicePergunta === undefined) return;
 
       const quizAtual = JSON.parse(localStorage.getItem("quizAtual") || "{}");
       const quizId = quizAtual?.id;
+      if (!quizId) return;
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("perguntas")
         .select("*")
         .eq("quiz_id", quizId)
         .order("id", { ascending: true });
 
-      if (!error) {
+      if (data) {
         setQuestion(data[indicePergunta]);
         setTotalPerguntas(data.length);
       }
@@ -44,20 +44,19 @@ export default function Resposta() {
     carregarPergunta();
   }, [indicePergunta]);
 
-
   if (!question) return <h2>Carregando resposta...</h2>;
 
   const alternativas = [
     question.alternativa_a,
     question.alternativa_b,
     question.alternativa_c,
-    question.alternativa_d
+    question.alternativa_d,
   ];
 
   const acertou = indiceEscolhido === Number(question.resposta_correta);
 
-  // Salva a pontuação da pergunta
-  async function salvarPontuacao() {
+  // ---------- SALVAR RESPOSTA ----------
+  async function salvarResposta() {
     const { data: userData } = await supabase.auth.getUser();
     const userId = userData?.user?.id;
     if (!userId) return;
@@ -65,9 +64,27 @@ export default function Resposta() {
     const quizId = quizInfo?.id;
     if (!quizId) return;
 
-    const pontosDaPergunta = acertou ? Number(question.pontos) : 0;
+    await supabase.from("respostas").insert({
+      user_id: userId,
+      quiz_id: quizId,
+      pergunta_id: question.id,
+      acertou: acertou,
+    });
+  }
 
-    // Verifica se já existe pontuação do usuário
+  // ---------- SALVAR PONTUAÇÃO ----------
+  async function salvarPontuacao() {
+    const { data: userData } = await supabase.auth.getUser();
+    const userId = userData?.user?.id;
+    const username = userData?.user?.user_metadata?.username;
+
+    if (!userId) return;
+
+    const quizId = quizInfo?.id;
+    if (!quizId) return;
+
+    const pontosDaPergunta = acertou ? Number(question?.pontos || 0) : 0;
+
     const { data: existente } = await supabase
       .from("pontuacoes")
       .select("*")
@@ -78,23 +95,27 @@ export default function Resposta() {
       await supabase
         .from("pontuacoes")
         .update({
-          pontos_totais: existente[0].pontos_totais + pontosDaPergunta
+          pontos_totais: existente[0].pontos_totais + pontosDaPergunta,
+          username: username,
         })
         .eq("id", existente[0].id);
     } else {
       await supabase.from("pontuacoes").insert({
         user_id: userId,
         quiz_id: quizId,
-        pontos_totais: pontosDaPergunta
+        pontos_totais: pontosDaPergunta,
+        username: username,
       });
     }
   }
 
-  // Botão "Próxima Questão"
+  // ---------- PRÓXIMA QUESTÃO ----------
   async function proximaQuestao() {
-    await salvarPontuacao(); // ← SALVA AQUI
+    if (!question) return; // evita salvar antes da pergunta carregar
 
-    // Se acabou o quiz → ranking
+    await salvarResposta();
+    await salvarPontuacao();
+
     if (indicePergunta + 1 >= totalPerguntas) {
       const quizId = quizInfo?.id;
       const salaId = quizInfo?.sala;
@@ -102,17 +123,15 @@ export default function Resposta() {
       localStorage.setItem("quizId", quizId);
 
       navigate("/ranking", {
-        state: { quizId, salaId }
+        state: { quizId, salaId },
       });
       return;
     }
 
-    // Senão → próxima
     navigate("/salajogando", {
-      state: { indice: indicePergunta + 1 }
+      state: { indice: indicePergunta + 1 },
     });
   }
-
 
   return (
     <div className={styles.container}>

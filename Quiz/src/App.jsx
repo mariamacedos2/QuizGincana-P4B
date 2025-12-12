@@ -8,6 +8,7 @@ import Resposta from "./componentes/Perguntas/resposta.jsx"
 import MeusQuizzes from "./componentes/meusquizzes.jsx"
 import QuizCodigo from "./componentes/quizcodigo.jsx"
 import Ranking from "./componentes/ranking.jsx"
+import Desempenho from "./componentes/desempenho.jsx";
 
 import "./App.css";
 import SalaJogando from "./componentes/Perguntas/salajogando.jsx";
@@ -25,7 +26,8 @@ function App() {
         <Route path="/resposta" element={<Resposta />} />
         <Route path="/meusquizzes" element={<MeusQuizzes />} />
         <Route path="/quizcodigo" element={<QuizCodigo />} />
-         <Route path="/ranking" element={<Ranking />} />
+        <Route path="/ranking" element={<Ranking />} />
+        <Route path="/desempenho" element={<Desempenho />} />
 
       </Routes>
     </Router>

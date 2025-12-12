@@ -1,163 +1,136 @@
-/* =============================== */
-/*  FUNDO GERAL COM IMAGEM E OVERLAY */
-/* =============================== */
+/* ======== FUNDO ======== */
 .container {
   min-height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 40px;
-  position: relative;
+  padding: 30px;
 
   background-image: url("https://img.freepik.com/vetores-premium/padrao-de-educacao-com-icones-cor-rosa-material-escolar-para-promocao-de-decoracao-escola-fundo-super-venda-banner-compras-vetor-ilustracao-10-eps_824631-3765.jpg");
   background-size: cover;
   background-position: center;
+  position: relative;
 }
 
 .container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 245, 248, 0.45);
+  background: rgba(255, 255, 255, 0.45);
   z-index: 0;
 }
 
 .container > * {
-  position: relative;
   z-index: 1;
 }
 
-/* =============================== */
-/*            TÍTULO              */
-/* =============================== */
+/* ======== CARD PRINCIPAL ======== */
+.card {
+  background: rgba(251, 255, 215, 0.7);
+  width: 90%;
+  max-width: 950px;
+  padding: 40px;
+  border-radius: 35px;
+  text-align: center;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+/* ======== TÍTULO ======== */
 .titulo {
   font-size: 55px;
-  font-weight: 400;
-  color: #e4459b;
-  text-shadow: 0px 3px 10px rgba(255, 120, 180, 0.6);
-  margin-bottom: 35px;
   font-family: 'Lobster', cursive;
+  color: #e4459b;
+  margin-bottom: 25px;
 }
 
-/* =============================== */
-/*        BOX PRINCIPAL           */
-/* =============================== */
-.rankingBox {
+/* ======== ÁREA COM LISTA + BARRAS ======== */
+.linha {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   gap: 45px;
-
-  background: #ffffffd8;
-  border-radius: 30px;
-  padding: 40px;
-  width: 90%;
-  max-width: 900px;
-
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
 }
 
-/* =============================== */
-/*        COLUNAS DO RANKING      */
-/* =============================== */
+/* ======== LISTA DE POSIÇÕES ======== */
+.listaPosicoes {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 35px;
+}
+
+.itemPosicao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icone {
+  font-size: 28px;
+}
+
+.posTexto {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* ======== BARRAS ======== */
+.barras {
+  display: flex;
+  gap: 35px;
+}
+
 .coluna {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 22%;
 }
 
 .nome {
   font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #333;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-/* =============================== */
-/*        BARRAS DE PONTOS        */
-/* =============================== */
 .barra {
-  width: 70px;
-  border-radius: 20px;
-
-  background: linear-gradient(180deg, #ff80c0, #d63384);
+  width: 65px;
+  border-radius: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  padding-bottom: 5px;
 
-  padding-bottom: 6px;
   color: white;
+  font-size: 16px;
   font-weight: bold;
-  font-size: 15px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 
   transition: height 0.4s ease;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.25);
 }
 
-/* =============================== */
-/*        POSIÇÃO (MEDALHAS)      */
-/* =============================== */
 .posicao {
-  margin-top: 12px;
   font-size: 22px;
   font-weight: bold;
+  margin-top: 8px;
 }
 
-.ouro {
-  color: #f5c400;
-}
-.prata {
-  color: #bfbfbf;
-}
-.bronze {
-  color: #c77b30;
-}
-.quarto {
-  color: #666;
-}
-
-/* =============================== */
-/*        BOTÃO DE DESEMPENHO     */
-/* =============================== */
+/* ======== BOTÃO ======== */
 .botao {
-  margin-top: 35px;
+  margin-top: 25px;
   background: #e4459b;
   border: none;
-  padding: 14px 32px;
-  border-radius: 20px;
+  padding: 12px 32px;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: bold;
   transition: 0.3s;
-  font-weight: 600;
 }
 
 .botao:hover {
-  background: #c52f82;
+  background: #c22e7d;
   transform: scale(1.05);
-}
-
-/* =============================== */
-/*           RESPONSIVIDADE       */
-/* =============================== */
-@media (max-width: 768px) {
-  .rankingBox {
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
-  }
-
-  .coluna {
-    width: 100%;
-  }
-
-  .barra {
-    width: 55px;
-  }
-
-  .titulo {
-    font-size: 45px;
-  }
 }
